@@ -1,0 +1,100 @@
+# 配置BASE_DIR和模板文件的路径
+import os
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+TEMPLATE_FOLDER = os.path.join(BASE_DIR, 'frontend/dist')
+STATIC_FOLDER = os.path.join(BASE_DIR, 'frontend/dist/static')
+
+
+# 将json格式的数据库参数转化为标准的数据库URI
+def parse_db_uri(db_info):
+    engine = db_info.get('ENGINE') or 'mysql'
+    driver = db_info.get('DRIVER') or 'pymysql'
+    user = db_info.get('USER') or 'root'
+    password = db_info.get('PASSWORD') or 'root'
+    host = db_info.get('HOST') or 'localhost'
+    port = db_info.get('PORT') or '3306'
+    name = db_info.get('NAME') or 'test'
+    return '{}+{}://{}:{}@{}:{}/{}'.format(engine, driver, user, password, host, port, name)
+
+
+# 基础参数配置
+class Config:
+    DEBUG = False
+
+    TESTING = False
+
+    SECRET_KEY = 'o5\x8f\xf5TI\x8e0\xd2\x9b\xff|\x8d\x01\x03\xf3\xc4\xfa+\x87\xa0\x98\r\x86'
+
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
+
+    # JSON_AS_ASCII = False
+
+
+# 开发环境参数配置
+class DevelopConfig(Config):
+    DEBUG = True
+    SQLALCHEMY_ECHO = True  # 回显sql语句
+    # 注意：不同环境下的数据库名称NAME应该不一样
+    DATABASE = {
+        'ENGINE': 'mysql',
+        'DRIVER': 'pymysql',
+        'USER': 'root',
+        'PASSWORD': '123456',
+        'HOST': 'localhost',
+        'PORT': '3306',
+        'NAME': 'OldManInfoFlask'
+    }
+    SQLALCHEMY_DATABASE_URI = parse_db_uri(DATABASE)
+
+
+# 测试环境参数配置
+class TestingConfig(Config):
+    TESTING = True
+    DATABASE = {
+        'ENGINE': 'mysql',
+        'DRIVER': 'pymysql',
+        'USER': 'root',
+        'PASSWORD': '123456',
+        'HOST': 'localhost',
+        'PORT': '3306',
+        'NAME': 'OldManInfoFlaskTesting'
+    }
+    SQLALCHEMY_DATABASE_URI = parse_db_uri(DATABASE)
+
+
+# 演示环境参数配置
+class StagingConfig(Config):
+    DATABASE = {
+        'ENGINE': 'mysql',
+        'DRIVER': 'pymysql',
+        'USER': 'root',
+        'PASSWORD': '123456',
+        'HOST': 'localhost',
+        'PORT': '3306',
+        'NAME': 'OldManInfoFlaskStaging'
+    }
+    SQLALCHEMY_DATABASE_URI = parse_db_uri(DATABASE)
+
+
+# 演示环境参数配置
+class ProductConfig(Config):
+    DATABASE = {
+        'ENGINE': 'mysql',
+        'DRIVER': 'pymysql',
+        'USER': 'root',
+        'PASSWORD': '123456',
+        'HOST': 'localhost',
+        'PORT': '3306',
+        'NAME': 'OldManInfoFlaskProduct'
+    }
+    SQLALCHEMY_DATABASE_URI = parse_db_uri(DATABASE)
+
+
+envs = {
+    'develop': DevelopConfig,
+    'testing': TestingConfig,
+    'staging': StagingConfig,
+    'product': ProductConfig,
+}
