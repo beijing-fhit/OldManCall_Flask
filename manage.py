@@ -1,12 +1,12 @@
-from flask_script import Manager
+from flask_script import Manager, Shell
 from flask_migrate import MigrateCommand
 
 import App
 
 app = App.create_app()
 
-manage = Manager(app)
-manage.add_command('db', MigrateCommand)
-
+manager = Manager(app)
+manager.add_command('db', MigrateCommand)
+manager.add_command('create_user',lambda  :print('username:'))
 if __name__ == '__main__':
-    manage.run()
+    manager.run()

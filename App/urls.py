@@ -7,7 +7,7 @@ from .ext import api
 
 def init_urls(app: Flask):
     addResource(api)
-    api.init_app(app)
+    api.init_app(app)# init_app只能在add_resource方法后才能有效
 
 
 version = 'v1'

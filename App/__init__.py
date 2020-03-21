@@ -2,7 +2,6 @@ from flask import Flask
 
 from App import settings, ext, views
 from .urls import init_urls
-
 def create_app():
     # 创建flask对象
     app = Flask(__name__, static_folder=settings.STATIC_FOLDER, template_folder=settings.TEMPLATE_FOLDER)
