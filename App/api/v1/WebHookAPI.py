@@ -3,5 +3,5 @@ from flask_restful import Resource
 
 
 class WebHook(Resource):
-    def get(self):
+    def post(self):# github中会使用post方法来请求
         return  request.data
