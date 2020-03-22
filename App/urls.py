@@ -16,7 +16,7 @@ version = 'v1'
 
 # 全局路由
 def addResource(api: Api):
-    api.add_resource(WebHook,'/github/webhook/',endpoint='/github/webhook')
+    api.add_resource(WebHook,'/github/webhook/',endpoint='github_webhook')
     api.add_resource(Index, '/', endpoint='index')
     api.add_resource(Code, '/code', endpoint='code')
     api.add_resource(OpenId, '/openid', endpoint='openid')
