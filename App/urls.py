@@ -3,6 +3,7 @@ from flask_restful import Api
 from App.api.v1.IndexView import Index
 from App.api.v1.ServiceApi import OpenIdFromSession, QRCodeInfo
 from App.api.v1.WechatApi import Code, OpenId
+from .api.v1.WebHookAPI import WebHook
 from .ext import api
 
 def init_urls(app: Flask):
@@ -15,6 +16,7 @@ version = 'v1'
 
 # 全局路由
 def addResource(api: Api):
+    api.add_resource(WebHook,'/github/webhook',endpoint='/github/webhook')
     api.add_resource(Index, '/', endpoint='index')
     api.add_resource(Code, '/code', endpoint='code')
     api.add_resource(OpenId, '/openid', endpoint='openid')
