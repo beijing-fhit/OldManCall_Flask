@@ -23,7 +23,7 @@ class WebHook(Resource):
             # print('Repository updated with commit {}'.format(commit))
             # 使用shell来执行提交命令
             depoly()
-            return jsonify({}), 200
+            return "params accepted successfully!", 200
 
 def depoly():
     import os
