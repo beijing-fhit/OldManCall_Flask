@@ -91,7 +91,7 @@ class ProductConfig(Config):
         'ENGINE': 'mysql',
         'DRIVER': 'pymysql',
         'USER': 'root',
-        'PASSWORD': '123456',
+        'PASSWORD': 'Licai19941022800',
         'HOST': 'localhost',
         'PORT': '3306',
         'NAME': 'OldManInfoFlaskProduct'
