@@ -1,7 +1,7 @@
 import hmac
+import os
 from flask import request
 from flask_restful import Resource
-
 from App import settings
 
 
@@ -28,7 +28,7 @@ class WebHook(Resource):
                 return "出现错误"
 def depoly():
     try:
-        import os
+
         '''首先下本地需要执行pip freeze > requirements.txt然后在远端将这里面的包安装'''
         # 1.启动python虚拟环境并切换到仓库目录
         os.system('/bin/bash --rcfile /home/OldManInfo_env/bin/activate')
@@ -46,15 +46,15 @@ def depoly():
         cmd="&&".join([cmd0,cmd1,cmd2])+("&& %s"%cmd3 if settings.Config.INIT_DB else "")\
         +("&& %s && %s"%(cmd4,cmd5) if settings.Config.MIGRATE_DB else "")
         # 写入文件
-        with open('flask.log','w') as f:
-            f.write('\ncommand is :%s'%cmd)
-            f.close()
+        # with open('flask.log','w') as f:
+        #     f.write('\ncommand is :%s'%cmd)
+        #     f.close()
         os.system(cmd)
         return True
     except Exception as e:
-        print('exception:',e)
+        # print('exception:',e)
         # 写入文件
-        with open('flask.log', 'w') as f:
-            f.write('\nexception is :',  e)
-            f.close()
+        # with open('flask.log', 'w') as f:
+        #     f.write('\nexception is :',  e)
+        #     f.close()
         return False
