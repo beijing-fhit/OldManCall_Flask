@@ -47,15 +47,15 @@ def depoly():
         cmd="&&".join([cmd0,cmd1,cmd2])+("&& %s"%cmd3 if settings.Config.INIT_DB else "")\
         +("&& %s && %s"%(cmd4,cmd5) if settings.Config.MIGRATE_DB else "")
         # 写入文件
-        with open('flask.log','w') as f:
-            f.write('\ncommand is :%s'%cmd)
-            f.close()
+        # with open('flask.log','w') as f:
+        #     f.write('\ncommand is :%s'%cmd)
+        #     f.close()
         os.system(cmd)
         return True
     except Exception as e:
         # print('exception:',e)
         # 写入文件
-        with open('flask.log', 'w') as f:
-            f.write('\nexception is :',  e)
-            f.close()
+        # with open('flask.log', 'w') as f:
+        #     f.write('\nexception is :',  e)
+        #     f.close()
         return False
