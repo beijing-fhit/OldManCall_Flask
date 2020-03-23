@@ -49,4 +49,5 @@ def depoly():
         +("&& %s && %s"%(cmd4,cmd5) if settings.Config.MIGRATE_DB else "")
         os.system(cmd)
     except Exception as e:
+        print('exception:',e)
         app.logger.info("github webhook exception:",e)
