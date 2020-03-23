@@ -1,7 +1,11 @@
+import logging
+
 from flask import Flask
 
-from App import settings, ext, views
-from .urls import init_urls
+from App import settings, ext, views,log,urls
+from App.api.v1 import WebHookAPI
+
+
 def create_app():
     # 创建flask对象
     app = Flask(__name__, static_folder=settings.STATIC_FOLDER, template_folder=settings.TEMPLATE_FOLDER)
@@ -15,5 +19,8 @@ def create_app():
 
     # 使用flask-restful初始化蓝图
     # 初始化路由
-    init_urls(app)
+    urls.init_urls(app)
+    # 初始化日志系统
+    log.init_log(app)
+    WebHookAPI.init_webhook(app)
     return app
