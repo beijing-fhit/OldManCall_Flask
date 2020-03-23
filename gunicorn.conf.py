@@ -19,3 +19,5 @@ accesslog = '/var/log/gunicorn_acess.log'
 errorlog = '/var/log/gunicorn_error.log'
 # 设置日志记录水平
 loglevel = 'warning'
+# 代码改动时，重启gunicorn
+reload = True

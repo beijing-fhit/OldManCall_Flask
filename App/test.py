@@ -9,11 +9,11 @@
 # r = requests.get('http://127.0.0.1:5000/test',params={'token':token} )
 # print(r.text)
 
-import os
-print(__file__)
-print(os.path.dirname(__file__))
-print(os.path.abspath(__file__))
-print(os.path.dirname(os.path.abspath(__file__)))
-print(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+# import os
+# print(__file__)
+# print(os.path.dirname(__file__))
+# print(os.path.abspath(__file__))
+# print(os.path.dirname(os.path.abspath(__file__)))
+# print(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 
