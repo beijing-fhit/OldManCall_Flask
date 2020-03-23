@@ -41,6 +41,6 @@ def depoly():
     cmd4='python manage.py db migrate'
     cmd5='python manage.py db upgrade'
     # 5.重启gunicorn服务器（如果在gunicorn.conf.py中配置了reload参数，则会自动重启）
-    cmd="&&".join(cmd0,cmd1,cmd2)+("&& %s"%cmd3 if settings.Config.INIT_DB else "")\
+    cmd="&&".join([cmd0,cmd1,cmd2])+("&& %s"%cmd3 if settings.Config.INIT_DB else "")\
     +("&& %s && %s"%(cmd4,cmd5) if settings.Config.MIGRATE_DB else "")
     os.system(cmd)
