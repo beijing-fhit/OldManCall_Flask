@@ -9,7 +9,7 @@ def create_app():
     # 创建flask对象
     app = Flask(__name__, static_folder=settings.STATIC_FOLDER, template_folder=settings.TEMPLATE_FOLDER)
     # 加载settings配置文件
-    app.config.from_object(settings.envs.get('product'))  # 开发环境
+    app.config.from_object(settings.envs.get('develop'))  # 开发环境
     # app.config.from_object(settings.envs.get('product')) # 线上环境
     # 初始化第三方插件
     ext.init_ext(app)
