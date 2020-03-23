@@ -25,9 +25,10 @@ class WebHook(Resource):
             # commit = request.json['after'][0:6]
             # print('Repository updated with commit {}'.format(commit))
             # 使用shell来执行提交命令
-            depoly()
-            return "params accepted successfully!", 200
-
+            if depoly():
+                return "params accepted successfully!", 200
+            else:
+                return "出现错误",200
 def depoly():
     try:
         import os
@@ -47,7 +48,10 @@ def depoly():
         # 5.重启gunicorn服务器（如果在gunicorn.conf.py中配置了reload参数，则会自动重启）
         cmd="&&".join([cmd0,cmd1,cmd2])+("&& %s"%cmd3 if settings.Config.INIT_DB else "")\
         +("&& %s && %s"%(cmd4,cmd5) if settings.Config.MIGRATE_DB else "")
+        app.logger.info("command is :", cmd)
         os.system(cmd)
+        return True
     except Exception as e:
         print('exception:',e)
         app.logger.info("github webhook exception:",e)
+        return False
