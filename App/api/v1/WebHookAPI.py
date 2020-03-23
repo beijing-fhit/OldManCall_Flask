@@ -1,12 +1,9 @@
 import hmac
-from flask import request, Flask
+from flask import request
 from flask_restful import Resource
 
 from App import settings
-app:Flask=None
 
-def init_webhook(app):
-    app=app
 
 class WebHook(Resource):
     def post(self):# github中会使用post方法来请求
@@ -48,10 +45,16 @@ def depoly():
         # 5.重启gunicorn服务器（如果在gunicorn.conf.py中配置了reload参数，则会自动重启）
         cmd="&&".join([cmd0,cmd1,cmd2])+("&& %s"%cmd3 if settings.Config.INIT_DB else "")\
         +("&& %s && %s"%(cmd4,cmd5) if settings.Config.MIGRATE_DB else "")
-        app.logger.info("command is :", cmd)
+        # 写入文件
+        with open('flask.log','w') as f:
+            f.write('\ncommand is :%s'%cmd)
+            f.close()
         os.system(cmd)
         return True
     except Exception as e:
         print('exception:',e)
-        app.logger.info("github webhook exception:",e)
+        # 写入文件
+        with open('flask.log', 'w') as f:
+            f.write('\nexception is :',  e)
+            f.close()
         return False

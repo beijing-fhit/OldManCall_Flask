@@ -1,9 +1,8 @@
-import logging
+
 
 from flask import Flask
 
 from App import settings, ext, views,log,urls
-from App.api.v1 import WebHookAPI
 
 
 def create_app():
@@ -20,7 +19,4 @@ def create_app():
     # 使用flask-restful初始化蓝图
     # 初始化路由
     urls.init_urls(app)
-    # 初始化日志系统
-    log.init_log(app)
-    WebHookAPI.init_webhook(app)
     return app
