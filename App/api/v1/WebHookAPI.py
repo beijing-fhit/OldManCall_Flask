@@ -23,9 +23,9 @@ class WebHook(Resource):
             # print('Repository updated with commit {}'.format(commit))
             # 使用shell来执行提交命令
             if depoly():
-                return "params accepted successfully!", 200
+                return "params accepted successfully!"
             else:
-                return "出现错误",200
+                return "出现错误"
 def depoly():
     try:
         import os
