@@ -15,7 +15,6 @@ def create_app():
     ext.init_ext(app)
     # 初始化蓝图
     # views.init_blue(app)
-
     # 使用flask-restful初始化蓝图
     # 初始化路由
     urls.init_urls(app)
