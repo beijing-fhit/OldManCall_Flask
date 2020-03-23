@@ -39,6 +39,7 @@ def depoly():
         # 3.从requirements.txt中安装最新的库
         cmd2='pip install -r requirements.txt'
         # 4.数据库迁移（一般只是在第一次中使用，故可省略）
+        # 需要在远端服务器上创建这个数据库
         cmd3='python manage.py db init'
         cmd4='python manage.py db migrate'
         cmd5='python manage.py db upgrade'
