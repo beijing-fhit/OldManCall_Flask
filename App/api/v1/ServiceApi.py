@@ -59,7 +59,7 @@ class QRCodeInfo(Resource):
     def post(self):
         dict = request.data
         with open('flask.log', 'w') as f:
-            f.write('\nrequest data is :%s | %s'%( request.data,request.get_data()))
+            f.write('\nrequest data is :%s | %s'%( request,request.get_data()))
             f.close()
         data = json.loads(dict)
 
