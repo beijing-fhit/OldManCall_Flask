@@ -236,7 +236,6 @@ export default {
       api.saveInfo(qrCodeId, info, phoneNumber).then(res => {
         // 保存信息成功
         // console.log('保存信息成功:', res)
-        this.$toast(res)
         if (res.data.status_code === 0) {
           // console.log('二维码激活状态:', sessionStorage.getItem('isQrCodeActive'))
           if (sessionStorage.getItem('isQrCodeActive') === 0 || sessionStorage.getItem('isQrCodeActive') === '0') { // 未激活
