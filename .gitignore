@@ -2,3 +2,4 @@ __pycache__/
 .idea/
 migrations/
 local_deploy.py
+flask.log
