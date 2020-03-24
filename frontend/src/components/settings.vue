@@ -261,12 +261,12 @@ export default {
             this.$router.push('/call')
           }
         } else {
-          this.$toast('保存信息失败1:', res)
+          this.$toast('保存信息失败1:'.append(res))
         }
       }).catch(err => {
         // 保存信息失败
         // console.log('保存信息失败:', err)
-        this.$toast('保存信息失败2:', err)
+        this.$toast('保存信息失败2:'.append(err))
       })
     }
   }
