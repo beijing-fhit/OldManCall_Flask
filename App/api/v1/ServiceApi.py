@@ -122,13 +122,13 @@ class QRCodeInfo(Resource):
 
             res={
                 'status_code':0,
-                'message':'保存信息成功'
+                'message':'信息保存成功'
             }
             return res
         except Exception as e:
             print("创建PhoneNumber失败:", e)
             res = {
                 'status_code': -1,
-                'message': '保存信息失败'
+                'message': '信息保存失败'
             }
             return res

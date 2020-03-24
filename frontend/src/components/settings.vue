@@ -238,7 +238,6 @@ export default {
         // console.log('保存信息成功:', res)
         this.$toast(res)
         if (res.data.status_code === 0) {
-          this.$toast(res.message)
           // console.log('二维码激活状态:', sessionStorage.getItem('isQrCodeActive'))
           if (sessionStorage.getItem('isQrCodeActive') === 0 || sessionStorage.getItem('isQrCodeActive') === '0') { // 未激活
             // 激活二维码
@@ -262,12 +261,12 @@ export default {
             this.$router.push('/call')
           }
         } else {
-          this.$toast('保存信息失败')
+          this.$toast('保存信息失败' + res)
         }
       }).catch(err => {
         // 保存信息失败
         // console.log('保存信息失败:', err)
-        this.$toast('保存信息失败')
+        this.$toast('保存信息失败' + err)
       })
     }
   }
