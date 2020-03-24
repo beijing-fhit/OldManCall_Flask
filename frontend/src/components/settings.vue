@@ -266,7 +266,7 @@ export default {
       }).catch(err => {
         // 保存信息失败
         // console.log('保存信息失败:', err)
-        this.$toast('保存信息失败2:' + err.toString())
+        this.$toast(err)
       })
     }
   }
