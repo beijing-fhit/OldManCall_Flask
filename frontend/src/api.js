@@ -50,6 +50,7 @@ const verifyNumber = (openId, number, verifyNumber) => {
 }
 
 const getInfo = (qrCodeId) => {
+  this.$toast('获取数据信息成功:', service.qrCodeInfo)
   return get(service.qrCodeInfo, {qrcodeid: qrCodeId})
 }
 /**
@@ -59,6 +60,7 @@ const getInfo = (qrCodeId) => {
  * @param phone_number 联系人，类型：[]
  */
 const saveInfo = (qrCodeId, oldManInfo, phoneNnumber) => {
+  this.$toast('保存信息地址:', service.qrCodeInfo)
   return post(service.qrCodeInfo, {
     qr_code_id: qrCodeId,
     old_man_info: oldManInfo,

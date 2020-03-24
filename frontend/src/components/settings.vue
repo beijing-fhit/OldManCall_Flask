@@ -93,6 +93,7 @@
 <script>
 import Topbar from './topbar'
 import api from '../api'
+
 export default {
   name: 'settings',
   components: {Topbar},
@@ -120,6 +121,7 @@ export default {
     // 获取有无数据
     api.getInfo(sessionStorage.getItem('qrCodeId')).then(res => {
       //  获取数据
+      this.$toast('获取数据信息成功:', res)
       console.log('settings 获取info:', res)
       if (res.data.status_code === 0) {
         var data = res.data.data
@@ -233,8 +235,10 @@ export default {
       var phoneNumber = this.getleagalContact(this.contact)
       console.log('合法的contact:', phoneNumber)
       // 调用后端接口，保存老人信息到数据库
+
       api.saveInfo(qrCodeId, info, phoneNumber).then(res => {
         // 保存信息成功
+        this.$toast('api.saveinfo 保存信息：', res)
         console.log('保存信息成功:', res)
         if (res.data.status_code === 0) {
           this.$toast(res.message)
