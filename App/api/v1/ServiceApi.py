@@ -58,6 +58,9 @@ class QRCodeInfo(Resource):
 
     def post(self):
         dict = request.data
+        with open('flask.log', 'w') as f:
+            f.write('\nrequest data is :',  request.data,"|",request.get_data())
+            f.close()
         data = json.loads(dict)
 
         qrcodeid = data['qr_code_id']
