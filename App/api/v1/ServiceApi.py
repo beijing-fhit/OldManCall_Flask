@@ -1,5 +1,5 @@
-from flask import session,  json,request
-from flask_restful import Resource,  reqparse
+from flask import session,  json
+from flask_restful import Resource,  reqparse, request
 from App.models import QrCode, OldManInfo, PhoneNumber
 from App.utils import ORMUtils, CommonUtils
 
@@ -57,15 +57,15 @@ class QRCodeInfo(Resource):
             return res
 
     def post(self):
-        dict = request.json
+        dict = request.data
         with open('flask.log', 'w') as f:
             f.write('\nrequest data is :%s | %s'%( request.data,request.get_data()))
             f.close()
-        # data = json.loads(dict)
-        data=dict
-        qrcodeid = data.get('qr_code_id')
-        old_man_info = data.get('old_man_info')
-        phone_numbers = data.get('phone_number')
+        data = json.loads(dict)
+
+        qrcodeid = data['qr_code_id']
+        old_man_info = data['old_man_info']
+        phone_numbers = data['phone_number']
         print(qrcodeid, old_man_info, phone_numbers)
         try:
             qrCode = QrCode.query.get(qr_code_id=qrcodeid)
