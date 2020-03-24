@@ -120,7 +120,7 @@ export default {
     // 获取有无数据
     api.getInfo(sessionStorage.getItem('qrCodeId')).then(res => {
       //  获取数据
-      console.log('settings 获取info:', res)
+      // console.log('settings 获取info:', res)
       if (res.data.status_code === 0) {
         var data = res.data.data
         this.manInfo.name = data.old_man_info.name
@@ -138,7 +138,7 @@ export default {
         }
         sessionStorage.setItem('contact', this.generatePhoneStr(data.phone_number))
         // sessionStorage.setItem('contact', data.phone_number)
-        console.log('generateStr:', data.phone_number)
+        // console.log('generateStr:', data.phone_number)
         this.contact = this.getContact()
       }
     })
@@ -191,7 +191,7 @@ export default {
             // this.text2 = contact[2]
             break
         }
-        console.log('contact:', contact)
+        // console.log('contact:', contact)
         return contact
       }
       return []
@@ -231,14 +231,15 @@ export default {
       var qrCodeId = sessionStorage.getItem('qrCodeId')
       var info = this.manInfo
       var phoneNumber = this.getleagalContact(this.contact)
-      console.log('合法的contact:', phoneNumber)
+      // console.log('合法的contact:', phoneNumber)
       // 调用后端接口，保存老人信息到数据库
       api.saveInfo(qrCodeId, info, phoneNumber).then(res => {
         // 保存信息成功
-        console.log('保存信息成功:', res)
+        // console.log('保存信息成功:', res)
+        this.$toast(res)
         if (res.data.status_code === 0) {
           this.$toast(res.message)
-          console.log('二维码激活状态:', sessionStorage.getItem('isQrCodeActive'))
+          // console.log('二维码激活状态:', sessionStorage.getItem('isQrCodeActive'))
           if (sessionStorage.getItem('isQrCodeActive') === 0 || sessionStorage.getItem('isQrCodeActive') === '0') { // 未激活
             // 激活二维码
             api.activateQrCode(sessionStorage.getItem('openId'), qrCodeId, sessionStorage.getItem('UcallFreeId'))
@@ -246,15 +247,15 @@ export default {
                 if (res.data.Code === 0) {
                   this.$toast('激活二维码成功')
                   this.$router.push('/call')
-                  console.log('激活二维码成功:', res)
+                  // console.log('激活二维码成功:', res)
                 } else {
                   this.$toast('激活二维码失败')
-                  console.log('激活二维码失败:', res)
+                  // console.log('激活二维码失败:', res)
                 }
               })
               .catch(err => {
                 this.$toast('激活二维码失败')
-                console.log('激活二维码失败:', err)
+                // console.log('激活二维码失败:', err)
               })
           } else {
             this.$toast('保存信息成功')
@@ -265,7 +266,7 @@ export default {
         }
       }).catch(err => {
         // 保存信息失败
-        console.log('保存信息失败:', err)
+        // console.log('保存信息失败:', err)
         this.$toast('保存信息失败')
       })
     }
