@@ -79,7 +79,7 @@ class QRCodeInfo(Resource):
                 "blood_type":old_man_info['blood_type'],
                 "drugs":old_man_info['drugs'],
                 "treatment":old_man_info['treatment']
-            })
+            }).commit()
 
 
         except Exception as e:
