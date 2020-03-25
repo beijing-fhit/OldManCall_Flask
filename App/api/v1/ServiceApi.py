@@ -69,7 +69,7 @@ class QRCodeInfo(Resource):
         try:
             qrCode = QrCode.query.get(qrcodeid)
             # 更新数据
-            db.session.query(OldManInfo).filter(id=qrCode.old_man_info) \
+            db.session.query(OldManInfo).filter(OldManInfo.id==qrCode.old_man_info) \
                 .update({
                 "name": old_man_info['name'],
                 "address": old_man_info['address'],
