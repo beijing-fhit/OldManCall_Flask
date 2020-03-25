@@ -1,5 +1,4 @@
 var apiHost = 'https://ucallfree-tecent.ucallclub.com'
-var webHost = 'http://mustberich.cn'
 var service = {
   enterpriseid: 107,
   yhServiceno: '2010660101',

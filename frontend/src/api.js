@@ -63,6 +63,8 @@ const saveInfo = (qrCodeId, oldManInfo, phoneNnumber) => {
     qr_code_id: qrCodeId,
     old_man_info: oldManInfo,
     phone_number: phoneNnumber
+  }, {
+    'Content-Type': 'application/json'
   })
 }
 const weChatCalling = (openId, phoneNumbers, qrcodeid) => {
