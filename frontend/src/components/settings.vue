@@ -233,7 +233,7 @@ export default {
       var phoneNumber = this.getleagalContact(this.contact)
       // console.log('合法的contact:', phoneNumber)
       // 调用后端接口，保存老人信息到数据库
-      this.$toast(info)
+      // this.$toast(info)
       // this.$toast(phoneNumber)
       api.saveInfo(qrCodeId, info, phoneNumber).then(res => {
         // 保存信息成功
