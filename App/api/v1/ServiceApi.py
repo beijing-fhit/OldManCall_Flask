@@ -82,7 +82,10 @@ class QRCodeInfo(Resource):
             )
 
 
-        except:
+        except Exception as e:
+            with open('flask.log', 'w') as f:
+                f.write('\nupdate OldManInfo exception :%s' % (e))
+                f.close()
             # 创建数据
             try:
 
@@ -101,6 +104,9 @@ class QRCodeInfo(Resource):
                 qrCode = QrCode(qr_code_id=qrcodeid, old_man_info=oldManInfo.id)
                 qrCode.save()
             except Exception as e:
+                with open('flask.log', 'w') as f:
+                    f.write('\nupdate OldManInfo exception :%s' % (e))
+                    f.close()
                 print("创建QrCode失败：", e)
                 res = {
                     'status_code': -1,
