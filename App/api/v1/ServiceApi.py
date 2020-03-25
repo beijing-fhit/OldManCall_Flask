@@ -67,7 +67,7 @@ class QRCodeInfo(Resource):
         phone_numbers = data['phone_number']
         print(qrcodeid, old_man_info, phone_numbers)
         try:
-            qrCode = QrCode.query.get(qr_code_id=qrcodeid)
+            qrCode = QrCode.query.get(qrcodeid)
             # 更新数据
             OldManInfo.query.filter_by(id=qrCode.old_man_info.id) \
                 .update(
