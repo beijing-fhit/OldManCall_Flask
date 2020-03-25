@@ -70,16 +70,16 @@ class QRCodeInfo(Resource):
             qrCode = QrCode.query.get(qrcodeid)
             # 更新数据
             OldManInfo.query.filter_by(id=qrCode.old_man_info) \
-                .update(
-                name=old_man_info['name'],
-                address=old_man_info['address'],
-                age=old_man_info['age'],
-                medical_history=old_man_info['medical_history'],
-                allergy=old_man_info['allergy'],
-                blood_type=old_man_info['blood_type'],
-                drugs=old_man_info['drugs'],
-                treatment=old_man_info['treatment']
-            )
+                .update({
+                "name":old_man_info['name'],
+                "address":old_man_info['address'],
+                "age":old_man_info['age'],
+                "medical_history":old_man_info['medical_history'],
+                "allergy":old_man_info['allergy'],
+                "blood_type":old_man_info['blood_type'],
+                "drugs":old_man_info['drugs'],
+                "treatment":old_man_info['treatment']
+            })
 
 
         except Exception as e:
