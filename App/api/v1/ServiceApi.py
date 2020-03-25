@@ -1,6 +1,6 @@
 from flask import session, json
 from flask_restful import Resource, reqparse, request
-from App.models import QrCode, OldManInfo, PhoneNumber
+from App.models import QrCode, OldManInfo, PhoneNumber,db
 from App.utils import ORMUtils, CommonUtils
 
 
@@ -65,24 +65,37 @@ class QRCodeInfo(Resource):
         qrcodeid = data['qr_code_id']
         old_man_info = data['old_man_info']
         phone_numbers = data['phone_number']
-        print(qrcodeid, old_man_info, phone_numbers)
+        # print(qrcodeid, old_man_info, phone_numbers)
         try:
             qrCode = QrCode.query.get(qrcodeid)
             # 更新数据
-            OldManInfo.query.filter_by(id=qrCode.old_man_info) \
+            db.session.query(OldManInfo).filter(id=qrCode.old_man_info) \
                 .update({
-                "name":old_man_info['name'],
-                "address":old_man_info['address'],
-                "age":old_man_info['age'],
-                "medical_history":old_man_info['medical_history'],
-                "allergy":old_man_info['allergy'],
-                "blood_type":old_man_info['blood_type'],
-                "drugs":old_man_info['drugs'],
-                "treatment":old_man_info['treatment']
-            }).commit()
+                "name": old_man_info['name'],
+                "address": old_man_info['address'],
+                "age": old_man_info['age'],
+                "medical_history": old_man_info['medical_history'],
+                "allergy": old_man_info['allergy'],
+                "blood_type": old_man_info['blood_type'],
+                "drugs": old_man_info['drugs'],
+                "treatment": old_man_info['treatment']
+            })
+            db.session.commit()
+            # OldManInfo.query.filter_by(id=qrCode.old_man_info) \
+            #     .update({
+            #     "name":old_man_info['name'],
+            #     "address":old_man_info['address'],
+            #     "age":old_man_info['age'],
+            #     "medical_history":old_man_info['medical_history'],
+            #     "allergy":old_man_info['allergy'],
+            #     "blood_type":old_man_info['blood_type'],
+            #     "drugs":old_man_info['drugs'],
+            #     "treatment":old_man_info['treatment']
+            # })
 
 
         except Exception as e:
+            db.session.rollback() # 回退数据
             with open('flask.log', 'w') as f:
                 f.write('\nupdate OldManInfo exception :%s' % (e))
                 f.close()
