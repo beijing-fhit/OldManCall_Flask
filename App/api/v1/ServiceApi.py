@@ -60,7 +60,7 @@ class QRCodeInfo(Resource):
         d = request.data
         data = json.loads(d)
         with open('flask.log', 'w') as f:
-            f.write('\nrequest data is :%s' % (request.data()))
+            f.write('\nrequest data is :%s' % (request.data))
             f.close()
         qrcodeid = data['qr_code_id']
         old_man_info = data['old_man_info']
