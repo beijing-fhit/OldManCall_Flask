@@ -1,5 +1,5 @@
-from flask import session,  json
-from flask_restful import Resource,  reqparse, request
+from flask import session, json
+from flask_restful import Resource, reqparse, request
 from App.models import QrCode, OldManInfo, PhoneNumber
 from App.utils import ORMUtils, CommonUtils
 
@@ -57,12 +57,11 @@ class QRCodeInfo(Resource):
             return res
 
     def post(self):
-        dict = request.data
+        d = request.data
         with open('flask.log', 'w') as f:
-            f.write('\nrequest data is :%s | %s'%( request.json(),request.get_data()))
+            f.write('\nrequest data is :%s | %s | %s' % (request, request.get_data(), request.headers))
             f.close()
-        # data = json.loads(dict)
-        data = request.json()
+        data = json.loads(d)
         qrcodeid = data['qr_code_id']
         old_man_info = data['old_man_info']
         phone_numbers = data['phone_number']
@@ -89,13 +88,13 @@ class QRCodeInfo(Resource):
 
                 # 创建QrCode对象
                 oldManInfo = OldManInfo(name=old_man_info['name'],
-                                                       address=old_man_info['address'],
-                                                       age=old_man_info['age'],
-                                                       medical_history=old_man_info['medical_history'],
-                                                       allergy=old_man_info['allergy'],
-                                                       blood_type=old_man_info['blood_type'],
-                                                       drugs=old_man_info['drugs'],
-                                                       treatment=old_man_info['treatment'])
+                                        address=old_man_info['address'],
+                                        age=old_man_info['age'],
+                                        medical_history=old_man_info['medical_history'],
+                                        allergy=old_man_info['allergy'],
+                                        blood_type=old_man_info['blood_type'],
+                                        drugs=old_man_info['drugs'],
+                                        treatment=old_man_info['treatment'])
                 # print("*"*100)
                 oldManInfo.save()
                 # print("oldManInfo:",oldManInfo)
@@ -103,9 +102,9 @@ class QRCodeInfo(Resource):
                 qrCode.save()
             except Exception as e:
                 print("创建QrCode失败：", e)
-                res={
-                    'status_code':-1,
-                    'message':'绑定信息失败'
+                res = {
+                    'status_code': -1,
+                    'message': '绑定信息失败'
                 }
                 return res
         try:
@@ -113,19 +112,19 @@ class QRCodeInfo(Resource):
             # phoneNumbers = phone_numbers.split(',')
             # 对比数据库里的和传进来的电话号码，数据库里多余的要删除，参数里面有不一样的要添加
             # oldNumbers = qrCode.phone_number # 注意在flask中使用一对多关系，获取到的是一个对象集合，需要获取到具体的值，才能用来做数值比较，否则就是对象之间作比较了，则永远捕不会相等，所以采用下面的写法
-            qrCode = QrCode.query.filter_by(qr_code_id=qrcodeid).first()#这重新查询一次
+            qrCode = QrCode.query.filter_by(qr_code_id=qrcodeid).first()  # 这重新查询一次
             oldNumbers = [p.phone_number for p in qrCode.phone_number.all()]
-            print("电话号码old :",qrCode,qrCode.phone_number.all())
+            print("电话号码old :", qrCode, qrCode.phone_number.all())
             delete, add = CommonUtils.compareArrays(oldNumbers, phone_numbers)
-            print('电话号码：',delete,",",add)
+            print('电话号码：', delete, ",", add)
             for d in delete:
-                PhoneNumber.query.filter_by(phone_number=d,q_id=qrcodeid).delete()
+                PhoneNumber.query.filter_by(phone_number=d, q_id=qrcodeid).delete()
             for a in add:
-                PhoneNumber(phone_number=a,q_id=qrcodeid).save()
+                PhoneNumber(phone_number=a, q_id=qrcodeid).save()
 
-            res={
-                'status_code':0,
-                'message':'信息保存成功'
+            res = {
+                'status_code': 0,
+                'message': '信息保存成功'
             }
             return res
         except Exception as e:
