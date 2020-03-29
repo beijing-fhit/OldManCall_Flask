@@ -3,3 +3,4 @@ __pycache__/
 migrations/
 local_deploy.py
 flask.log
+.git/
