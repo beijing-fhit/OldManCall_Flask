@@ -14,7 +14,7 @@ parser.add_argument('code',  required=True, help='请先获取code')
 class Code(Resource):
     def get(self):
         url = 'https://agency.ucallclub.com/wechart/Oauth2?'
-        redirect_url = 'http://mustberich.cn/openid'
+        redirect_url = 'https://mustberich.cn/openid'
         # redirect_url = 'http://127.0.0.1:5000/openid'
         a = {'redirect_uri': redirect_url}
         encode_url = parse.urlencode(a)
