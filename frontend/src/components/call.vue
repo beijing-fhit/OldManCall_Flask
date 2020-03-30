@@ -9,6 +9,7 @@
 <script>
 import OldManInfo from './oldManInfo'
 import api from '../api'
+import wx from 'weixin-js-sdk'
 export default {
   name: 'call',
   components: {OldManInfo},
@@ -28,6 +29,26 @@ export default {
       phone_number: []
     }
   },
+  mounted () {
+    console.log('created---')
+    wx.ready(function () {
+      console.log('ready-----')
+    })
+    wx.error(function (res) {
+      console.log('error-----')
+    })
+    api.wxConfig().then(config => {
+      console.log('config', config.data)
+      wx.config({
+        debug: false,
+        appId: config.data.appId,
+        timestamp: config.data.timestamp,
+        nonceStr: config.data.nonceStr,
+        signature: config.data.signature,
+        jsApiList: ['getLocation']
+      })
+    })
+  },
   created: function () {
     var that = this
     api.getInfo(sessionStorage.getItem('qrCodeId'))
@@ -45,6 +66,8 @@ export default {
   },
   methods: {
     startCall: function () {
+      // 获取地理位置发送通知
+      this.getLocation()
       api.weChatCalling(sessionStorage.getItem('openId'), this.phone_number, sessionStorage.getItem('qrCodeId'))
         .then(res => {
           console.log('呼叫成功:', res)
@@ -55,6 +78,18 @@ export default {
         .catch(err => {
           console.log('呼叫失败:', err)
         })
+    },
+    getLocation: function () {
+      wx.getLocation({
+        type: 'wgs84', // 默认为wgs84的gps坐标，如果要返回直接给openLocation用的火星坐标，可传入'gcj02'
+        success: function (res) {
+          var latitude = res.latitude // 纬度，浮点数，范围为90 ~ -90
+          var longitude = res.longitude // 经度，浮点数，范围为180 ~ -180。
+          var speed = res.speed // 速度，以米/每秒计
+          var accuracy = res.accuracy // 位置精度
+          console.log('地理位置:{0},{1},{2},{3}'.format(latitude, longitude, speed, accuracy))
+        }
+      })
     }
   }
 }
