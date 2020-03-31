@@ -49,9 +49,9 @@ export default {
       // this.$router.push('/ScanSuccess')
       this.startScan()
       // 已激活二维码
-      // this.handleScanResult('http://wechatcall.ucallclub.com/ucall/call?type=1&eqrcodeid=da887208fe9a414b81da578b52102012')
+      // this.handleScanResult('http://wechatcall.ucallclub.com/web/elderlycard?qrcodeid=da887208fe9a414b81da578b52102012')
       // 未激活二维码
-      // this.handleScanResult('http://wechatcall.ucallclub.com/ucall/call?type=1&eqrcodeid=2de95313459d4064a67a295fab195642')
+      // this.handleScanResult('http://wechatcall.ucallclub.com/web/elderlycard?qrcodeid=2de95313459d4064a67a295fab195642')
     },
     startScan: function () {
       var that = this
@@ -71,10 +71,10 @@ export default {
     },
     handleScanResult: function (content) {
       var that = this
-      if (content.indexOf('eqrcodeid') !== -1) { // 注意，这里判断了二维码内容里面的url包含eqrcodeid
+      if (content.indexOf('qrcodeid') !== -1) { // 注意，这里判断了二维码内容里面的url包含qrcodeid
         var substr = content.split('?')[1]
         // var params = substr.split('&')
-        var qrcodeid = this.getQueryValue(substr, 'eqrcodeid')
+        var qrcodeid = this.getQueryValue(substr, 'qrcodeid')
         console.log('传入的qrcode是:' + qrcodeid)
         sessionStorage.setItem('qrCodeId', qrcodeid)
         api.verifyQrCodeActive(qrcodeid).then(res => {
