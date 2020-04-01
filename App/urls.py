@@ -1,6 +1,6 @@
 from flask import Flask
 from flask_restful import Api
-from App.api.v1.IndexView import Index
+# from App.api.v1.IndexView import Index, UrlFrom
 from App.api.v1.ServiceApi import OpenIdFromSession, QRCodeInfo
 from App.api.v1.WechatApi import Code, OpenId
 from .api.v1.WebHookAPI import WebHook
@@ -17,7 +17,8 @@ version = 'v1'
 # 全局路由
 def addResource(api: Api):
     api.add_resource(WebHook,'/github/webhook',endpoint='github_webhook')
-    api.add_resource(Index, '/', endpoint='index')
+    # api.add_resource(Index, '/', endpoint='index')
+    # api.add_resource(UrlFrom, '/getUrlFrom', endpoint='getUrlFrom')
     api.add_resource(Code, '/code', endpoint='code')
     api.add_resource(OpenId, '/openid', endpoint='openid')
     api.add_resource(OpenIdFromSession,'/getopenid',endpoint='getopenid')

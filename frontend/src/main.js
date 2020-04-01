@@ -25,6 +25,7 @@ router.beforeEach((to, from, next) => {
   if (to.meta.title) {
     document.title = to.meta.title
   }
+  console.log('获取到session1,', sessionStorage.getItem('fromWXMP'))
   next()
 })
 // var onPlusReady = function (callback, context = this) {

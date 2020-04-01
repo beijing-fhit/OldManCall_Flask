@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
 import scan from '@/components/scan'
 import ScanSuccess from '@/components/ScanSuccess'
 import alreadyBindInfo from '@/components/alreadyBindInfo'
@@ -8,17 +7,18 @@ import addContact from '@/components/addContact'
 import settings from '@/components/settings'
 import updateNumber from '@/components/updateNumber'
 import call from '@/components/call'
+import InfoDisplay from '../components/InfoDisplay'
 
 Vue.use(Router)
 
 export default new Router({
   routes: [
     {
-      path: '/Hello',
-      name: 'HelloWorld',
-      component: HelloWorld,
+      path: '/info',
+      name: 'InfoDisplay',
+      component: InfoDisplay,
       meta: {
-        title: 'hello world'
+        title: '提示'
       }
     },
     {

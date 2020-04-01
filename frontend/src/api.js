@@ -12,7 +12,6 @@ const getHeader = function (openId) {
 }
 
 const getOpenId = () => {
-  console.log('api---getOpenId url:' + service.getOpenId)
   return get(service.getOpenId)
 }
 const weChatState = (openId, nickName = '', serviceno = '') => {
@@ -84,6 +83,14 @@ const weChatCalling = (openId, phoneNumbers, qrcodeid) => {
     Eqrcode: qrcodeid
   }, getHeader(openId))
 }
+
+// const getURLFrom = () => {
+//   return get(service.getURLFrom)
+// }
+const initWebAPI = () => {
+  return get(service.getCode)
+}
+
 export default {
   wxConfig,
   getOpenId,
@@ -94,5 +101,7 @@ export default {
   verifyNumber,
   getInfo,
   saveInfo,
-  weChatCalling
+  weChatCalling,
+  // getURLFrom,
+  initWebAPI
 }
