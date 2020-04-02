@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import scan from '@/components/scan'
+import auth from '@/components/auth'
 import ScanSuccess from '@/components/ScanSuccess'
 import alreadyBindInfo from '@/components/alreadyBindInfo'
 import addContact from '@/components/addContact'
@@ -12,6 +13,7 @@ import InfoDisplay from '../components/InfoDisplay'
 Vue.use(Router)
 
 export default new Router({
+  mode: 'history',
   routes: [
     {
       path: '/info',
@@ -23,6 +25,14 @@ export default new Router({
     },
     {
       path: '/',
+      name: 'auth',
+      component: auth,
+      meta: {
+        title: '授权'
+      }
+    },
+    {
+      path: '/scan',
       name: 'scan',
       component: scan,
       meta: {

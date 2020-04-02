@@ -7,7 +7,7 @@ var service = {
   apiHost,
   webHost,
   wxConfig: `https://agency.ucallclub.com/Common/JsApiConfig`,
-  getOpenId: `${webHost}/getopenid`,
+  getOpenId: `${webHost}/openid`,
   verifyQrCodeActive: `${apiHost}/api/v2/active`,
   weChatState: `${apiHost}/api/v1/wechatstate`, // 请求用户状态
   verifyCode: `${apiHost}/api/v1/verifycode`, // 根据电话号码获取验证码

@@ -30,17 +30,25 @@ class OpenId(Resource):
             request_openid_url = 'https://agency.ucallclub.com/wechart/Access_token?code='
             args = parser.parse_args()
             code = args['code']
-            # if code is None:
-            #     return '请先获取code'
-            # if code == '':
-            #     return '请先获取code'
             resp = requests.get(request_openid_url + code)
             if resp.status_code == 200:
                 # 获取到openid
                 openid = resp.json()['openid']
                 session['openid'] = openid
-                return make_response('获取openID成功',200)
+                return {
+                    'status_code': 0,
+                    'data': openid,
+                    'message': '获取信息成功'
+                }
             # return make_response(render_template('index.html'))
-            return make_response('获取openID失败',200)
+            return  {
+                'status_code': -1,
+                'data': None,
+                'message': '获取openid失败'
+            }
         except Exception as e:
-            return make_response('获取openID失败:%s'%e,200)
+            return   {
+                'status_code': 0,
+                'data': None,
+                'message': '获取openid失败,%s' % e
+            }
