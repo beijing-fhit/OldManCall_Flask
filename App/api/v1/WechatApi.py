@@ -18,9 +18,9 @@ class Code(Resource):
         # redirect_url = 'http://127.0.0.1:5000/openid'
         a = {'redirect_uri': redirect_url}
         encode_url = parse.urlencode(a)
-        response=make_response(redirect(url + encode_url))
+        # response=make_response(redirect(url + encode_url))
         # response.headers['Access-Control-Allow-Origin']="*"
-        return response
+        return redirect(url + encode_url)
 
 
 class OpenId(Resource):
