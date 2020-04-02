@@ -8,6 +8,10 @@ import api from '../api'
 
 export default {
   name: 'auth',
+  data () {
+    return {
+    }
+  },
   created () {
     this.init()
   },
@@ -19,7 +23,7 @@ export default {
       var openid = getUrlParam('openid')
       var ucallfreeid = getUrlParam('ucallfreeid')
       var qrcodeid = getUrlParam('qrcodeid')
-      console.log('参数：', openid, ucallfreeid, qrcodeid)
+      // console.log('参数：', openid, ucallfreeid, qrcodeid)
       if (openid && ucallfreeid && qrcodeid) {
         // 来自小程序，则不用请求参数,跳转到call页面
         this.$router.push('/call')
@@ -41,7 +45,7 @@ export default {
     },
     getOpenId: function (code) {
       api.getOpenId(code).then(res => {
-        console.log('在app.vue中获取openid成功:', res)
+        // console.log('在app.vue中获取openid成功:', res)
         if (res.data.status_code === 0) {
           let openId = res.data.data
           sessionStorage.setItem('openId', openId)

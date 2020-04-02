@@ -1,8 +1,13 @@
 export function getUrlParam (name) { // 获取url 参数
-  return decodeURIComponent(
-    (new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.href) || [, ''])[1].replace(/\+/g, '%20')) || null
+  // return decodeURIComponent(
+  //   (new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.href) || [, ''])[1].replace(/\+/g, '%20')) || null
+  let reg = `(^|&)${name}=([^&]*)(&|$)`
+  let r = window.location.search.substr(1).match(reg)
+  if (r != null) {
+    return unescape(r[2])
+  }
+  return null
 }
-
 // // 截取code
 // export function getUrlParam (paramName) {
 //   /// 获取地址栏指定参数的值

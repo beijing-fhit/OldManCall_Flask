@@ -13,9 +13,9 @@ var service = {
   verifyCode: `${apiHost}/api/v1/verifycode`, // 根据电话号码获取验证码
   verify: `${apiHost}/api/v4/VerifyCodeOnly`, // 根据手机号和验证码验证
   qrCodeInfo: `${webHost}/qr_code_info`, // qrcode绑定的信息
-  weChatCalling: `${apiHost}/api/v4/wechatcalling`,
+  weChatCalling: `${apiHost}/api/v4/wechatcalling`
   // getURLFrom: `${webHost}/getUrlFrom`,
-  getCode: `${webHost}/code`
+  // getCode: `${webHost}/code`
 }
 export {
   service
