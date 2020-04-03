@@ -26,6 +26,9 @@ export default {
       // console.log('参数：', openid, ucallfreeid, qrcodeid)
       if (openid && ucallfreeid && qrcodeid) {
         // 来自小程序，则不用请求参数,跳转到call页面
+        sessionStorage.setItem('openId', openid)
+        sessionStorage.setItem('UcallFreeId', ucallfreeid)
+        sessionStorage.setItem('qrcodeid', qrcodeid)
         this.$router.push('/call')
       } else {
         // 来自网页
