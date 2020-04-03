@@ -1,6 +1,6 @@
 <template>
   <div class="display-info-container">
-    <i class="el-icon-error success-img big-font-size color-green"></i>
+    <i class="el-icon-error success-img big-font-size color-red"></i>
     <div class="status-container">
       <span class="normal-tip">{{message}}</span>
     </div>
@@ -37,8 +37,8 @@ export default {
     font-size: 8rem;
     font-family: "PingFang SC";
   }
-  .color-green {
-    color: #1aad19;
+  .color-red {
+    color: red;
   }
   .status-container{
     margin-top: 1rem;

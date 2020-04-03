@@ -235,6 +235,7 @@ export default {
       // 调用后端接口，保存老人信息到数据库
       // this.$toast(info)
       // this.$toast(phoneNumber)
+
       api.saveInfo(qrCodeId, info, phoneNumber).then(res => {
         // 保存信息成功
         // console.log('保存信息成功:', res)
@@ -311,7 +312,7 @@ export default {
     background-color: #FFFFFF;
     display: flex;
     flex-direction: column;
-    align-items: left;
+    align-items: flex-start;
     justify-content: center;
     padding-left: 3vw;
   }
@@ -365,7 +366,7 @@ export default {
     background-color: #FFFFFF;
     display: flex;
     flex-direction: column;
-    align-items: left;
+    align-items: flex-start;
     justify-content: center;
     /*padding-left: 3vw;*/
   }
