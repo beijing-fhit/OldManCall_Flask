@@ -29,7 +29,20 @@ export default {
         sessionStorage.setItem('openId', openid)
         sessionStorage.setItem('UcallFreeId', ucallfreeid)
         sessionStorage.setItem('qrCodeId', qrcodeid)
-        this.$router.push('/call')
+        api.verifyQrCodeActive(qrcodeid).then(res => {
+          if (res.data.Code === 0) {
+            if (res.data.ActiveState === 0) {
+              // 未激活
+              // 跳转到infodisplay页面，展示提示信息
+              this.$router.push({path: '/info', query: {message: '二维码未激活，请前往公众号激活!'}})
+            } else {
+              // 已激活
+              this.$router.push('/call')
+            }
+          }
+        }).catch(err => {
+          this.$router.push({path: '/info', query: {message: err}})
+        })
       } else {
         // 来自网页
         var code = getUrlParam('code')
