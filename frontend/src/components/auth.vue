@@ -28,7 +28,7 @@ export default {
         // 来自小程序，则不用请求参数,跳转到call页面
         sessionStorage.setItem('openId', openid)
         sessionStorage.setItem('UcallFreeId', ucallfreeid)
-        sessionStorage.setItem('qrcodeid', qrcodeid)
+        sessionStorage.setItem('qrCodeId', qrcodeid)
         this.$router.push('/call')
       } else {
         // 来自网页
