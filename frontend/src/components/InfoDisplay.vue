@@ -34,7 +34,7 @@ export default {
     height: 8rem;
   }
   .big-font-size{
-    font-size: 5rem;
+    font-size: 8rem;
     font-family: "PingFang SC";
   }
   .color-green {
