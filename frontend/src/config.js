@@ -18,7 +18,7 @@ var service = {
   // getURLFrom: `${webHost}/getUrlFrom`,
   // getCode: `${webHost}/code`
 }
-export {
+export default {
   service,
   webHost
 }
