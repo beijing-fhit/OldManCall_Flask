@@ -19,5 +19,6 @@ var service = {
   // getCode: `${webHost}/code`
 }
 export {
-  service
+  service,
+  webHost
 }
