@@ -205,6 +205,8 @@ export default {
       console.log('添加下一位')
       this.centerDialogVisible = false
       this.isClearInterval = true // 重置interval
+      this.number = ''
+      this.verifyNumber = ''
     }
   }
 }

@@ -2,15 +2,14 @@
 from urllib import parse
 
 import requests
-from flask import redirect, render_template, session, make_response
+from flask import redirect, session
 
 from flask_restful import Resource, reqparse
-
 
 parser = reqparse.RequestParser()
 parser.add_argument('code',  required=True, help='请先获取code')
 
-
+# 这个方法已经没有用了，现在是前后分离项目，直接在前端重定向
 class Code(Resource):
     def get(self):
         url = 'https://agency.ucallclub.com/wechart/Oauth2?'
