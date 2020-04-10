@@ -50,6 +50,7 @@ export default {
       verifyBtnContent: '获取验证码',
       isVerifyBtnClickable: true,
       centerDialogVisible: false,
+      isClearInterval: false,
       contact: sessionStorage.getItem('contact') === null ? '' : sessionStorage.getItem('contact'),
       modifyIndex: 1
 
@@ -179,7 +180,7 @@ export default {
         that.verifyBtnContent = count + 's后重新发送'
         count--
         // console.log('倒计时:', count)
-        if (count <= 0) {
+        if (count <= 0 || that.isClearInterval) {
           window.clearInterval(cd)
           that.isVerifyBtnClickable = true
           that.verifyBtnContent = '获取验证码'
@@ -199,6 +200,7 @@ export default {
     dialogAddMore: function () {
       console.log('添加下一位')
       this.centerDialogVisible = false
+      this.isClearInterval = true // 重置interval
     }
   }
 }

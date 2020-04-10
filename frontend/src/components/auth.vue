@@ -5,7 +5,7 @@
 <script>
 import {getUrlParam} from '../utils'
 import api from '../api'
-import config from '../config'
+import {service} from '../config'
 
 export default {
   name: 'auth',
@@ -54,7 +54,7 @@ export default {
           // 若没有参数，则先获取code，回掉地址填本地址
           var url = 'https://agency.ucallclub.com/wechart/Oauth2?'
           // var redirectUrl = 'https://mustberich.cn'
-          var redirectUrl = config.webHost
+          var redirectUrl = service.webHost
           var a = 'redirect_uri='
           var encodeUrl = encodeURI(redirectUrl)
           window.location.href = url + a + encodeUrl
