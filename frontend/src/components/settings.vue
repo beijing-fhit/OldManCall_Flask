@@ -111,9 +111,9 @@ export default {
       },
       text1: '请输入手机号码',
       text2: '请输入手机号码',
-      contact: this.getContact(),
       showContact2Delete: false,
-      showContact3Delete: false
+      showContact3Delete: false,
+      contact: this.getContact()
     }
   },
   created: function () {
