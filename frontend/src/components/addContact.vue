@@ -74,6 +74,7 @@ export default {
   },
   methods: {
     getVerifyCode: function () {
+      this.isClearInterval = false // 重置interval
       if (this.number.length === 0) {
         this.$toast('号码不能为空！')
         return
@@ -126,10 +127,10 @@ export default {
               var index = this.$route.query.index
               if (index === null | index === '' | index === undefined) {
                 this.contact += this.number + ','
-                if (this.contact.length >= 3) {
-                  // 最后一个去掉逗号
-                  this.contact = this.contact.substr(0, this.contact.length - 1)
-                }
+                // if (this.contact.length >= 3) {
+                //   // 最后一个去掉逗号
+                //   this.contact = this.contact.substr(0, this.contact.length - 1)
+                // }
                 sessionStorage.setItem('contact', this.contact)
               } else {
                 // 从settings页面跳转而来
@@ -189,6 +190,9 @@ export default {
     },
     dialogSkip: function () {
       // this.centerDialogVisible = false
+      // 去掉最后一个逗号
+      this.contact = this.contact.substr(0, this.contact.length - 1)
+      sessionStorage.setItem('contact', this.contact)
       console.log('跳过')
       this.$router.push({
         path: '/settings',
