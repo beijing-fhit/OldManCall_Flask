@@ -7,6 +7,7 @@ from flask import redirect, session
 from flask_restful import Resource, reqparse
 
 from App import settings
+from App.utils import Constants
 
 parser = reqparse.RequestParser()
 parser.add_argument('code',  required=True, help='请先获取code')
@@ -66,9 +67,9 @@ class LocationDesc(Resource):
             lat = args['lat']
             lon = args['lon']
             a = lat + ',' + lon
-            resp = requests.post(settings.TENCENT_MAP_URL,
+            resp = requests.post(Constants.TENCENT_MAP_URL,
                                  {"location": a,
-                                  "key": settings.TENCENT_MAP_KEY
+                                  "key": Constants.TENCENT_MAP_KEY
                                   })
             if resp.status_code == 200:
                 return resp.json()

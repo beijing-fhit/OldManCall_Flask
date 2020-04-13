@@ -94,8 +94,21 @@ const weChatCalling = (openId, phoneNumbers, qrcodeid) => {
 const getLocationDesc = (lat, lon) => {
   // var d = [lat, lon].join(',')
   return get(service.locationDesc, {
-    "lat": lat,
-    "lon": lon
+    'lat': lat,
+    'lon': lon
+  })
+}
+/**
+ * 发送短信通知
+ * @param orgid 企业id
+ * @param password 密码
+ * @param mobile 手机号
+ * @param content 短信内容
+ */
+const sendMsgNotification = (mobile, content) => {
+  return post(service.msgNotification, {
+    'mobile': mobile,
+    'content': content
   })
 }
 
@@ -110,5 +123,6 @@ export default {
   getInfo,
   saveInfo,
   weChatCalling,
-  getLocationDesc
+  getLocationDesc,
+  sendMsgNotification
 }

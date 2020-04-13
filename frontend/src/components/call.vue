@@ -84,15 +84,17 @@ export default {
     getLocation: function () {
       wx.getLocation({
         type: 'wgs84', // 默认为wgs84的gps坐标，如果要返回直接给openLocation用的火星坐标，可传入'gcj02'
-        success: function (res) {
+        success: async function (res) {
           var latitude = res.latitude // 纬度，浮点数，范围为90 ~ -90
           var longitude = res.longitude // 经度，浮点数，范围为180 ~ -180。
-          // 下面的key为腾讯地图的key
-          api.getLocationDesc(latitude, longitude)
-            .then((result) => {
-              console.log('地址：{0}'.format(result))
+          let {result} = await api.getLocationDesc(latitude, longitude)
+          var address = result.data.result.address
+          console.log('address:%s', address)
+          api.sendMsgNotification(this.phone_number, address)
+            .then((res) => {
+              console.log('发送成功,', res)
             }).catch((err) => {
-            console.log('获取地址错误:', err)
+            console.log('发送短信失败,', err)
           })
         }
       })

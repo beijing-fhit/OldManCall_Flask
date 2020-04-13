@@ -1,7 +1,8 @@
+import requests
 from flask import session, json
 from flask_restful import Resource, reqparse, request
 from App.models import QrCode, OldManInfo, PhoneNumber,db
-from App.utils import ORMUtils, CommonUtils
+from App.utils import ORMUtils, CommonUtils, Constants
 
 
 class OpenIdFromSession(Resource):
@@ -9,6 +10,24 @@ class OpenIdFromSession(Resource):
         return session.get('openid')
 
 
+class MsgNotification(Resource):
+    def post(self):
+       try:
+        d = request.data
+        data = json.loads(d)
+        mobile = data['mobile']
+        address = data['address']
+        mobiles = str(mobile).split(',')
+        for m in mobiles:
+            requests.post(Constants.MSG_NOTIFICATION_SEND_URL, {
+                  "orgid":123,
+                  "password":123,
+                  "mobile":m,
+                  "content":"【北京峰华】您的验证码是: 110 "+address
+            })
+        return '发送短信成功'
+       except Exception as e:
+           return '发送短信失败'
 # data_resource_fields = {
 #     'qr_code_id': fields.String(attribute='qr_code_id'),
 #     'old_man_info': fields.String(attribute='old_man_info'),

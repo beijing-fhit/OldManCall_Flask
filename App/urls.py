@@ -1,7 +1,7 @@
 from flask import Flask
 from flask_restful import Api
 # from App.api.v1.IndexView import Index, UrlFrom
-from App.api.v1.ServiceApi import OpenIdFromSession, QRCodeInfo
+from App.api.v1.ServiceApi import OpenIdFromSession, QRCodeInfo, MsgNotification
 from App.api.v1.WechatApi import Code, OpenId, LocationDesc
 from .api.v1.WebHookAPI import WebHook
 from .ext import api
@@ -23,5 +23,6 @@ def addResource(api: Api):
     # api.add_resource(Code, '/code', endpoint='code')
     api.add_resource(OpenId, '/openid', endpoint='openid')
     api.add_resource(LocationDesc, '/locationDesc', endpoint='location_desc')
+    api.add_resource(MsgNotification, '/msgNotification', endpoint='msg_notification')
     api.add_resource(OpenIdFromSession,'/getopenid',endpoint='getopenid')
     api.add_resource(QRCodeInfo,'/qr_code_info',endpoint='qr_code_info')
