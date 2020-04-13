@@ -91,11 +91,11 @@ const weChatCalling = (openId, phoneNumbers, qrcodeid) => {
  * @param lon 精度
  * @param key 腾讯地图的key
  */
-const getLocationDesc = (lat, lon, key) => {
-  var d = [lat, lon].join(',')
-  return post(service.locationDesc, {
-    "location": d,
-    "key": key
+const getLocationDesc = (lat, lon) => {
+  // var d = [lat, lon].join(',')
+  return get(service.locationDesc, {
+    "lat": lat,
+    "lon": lon
   })
 }
 

@@ -6,6 +6,8 @@ from flask import redirect, session
 
 from flask_restful import Resource, reqparse
 
+from App import settings
+
 parser = reqparse.RequestParser()
 parser.add_argument('code',  required=True, help='请先获取code')
 
@@ -51,3 +53,26 @@ class OpenId(Resource):
                 'data': None,
                 'message': '获取openid失败,%s' % e
             }
+
+parser = reqparse.RequestParser()
+parser.add_argument('lat', required=True, help='lat(纬度)参数不能为空，{error_msg}')
+parser.add_argument('lon', required=True, help='lon(经度)参数不能为空，{error_msg}')
+
+
+class LocationDesc(Resource):
+    def get(self):
+        try:
+            args = parser.parse_args()
+            lat = args['lat']
+            lon = args['lon']
+            a = lat + ',' + lon
+            resp = requests.post(settings.TENCENT_MAP_URL,
+                                 {"location": a,
+                                  "key": settings.TENCENT_MAP_KEY
+                                  })
+            if resp.status_code == 200:
+                return resp.json()
+            else:
+                return '无法获取地址'
+        except Exception as e:
+            return '获取地址失败，%s' % e

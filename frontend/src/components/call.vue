@@ -88,7 +88,7 @@ export default {
           var latitude = res.latitude // 纬度，浮点数，范围为90 ~ -90
           var longitude = res.longitude // 经度，浮点数，范围为180 ~ -180。
           // 下面的key为腾讯地图的key
-          api.getLocationDesc(latitude, longitude, 'ZBLBZ-INS34-TGOUK-DM6IH-LQMVE-QUFU3')
+          api.getLocationDesc(latitude, longitude)
             .then((result) => {
               console.log('地址：{0}'.format(result))
             }).catch((err) => {

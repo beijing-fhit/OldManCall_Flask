@@ -5,6 +5,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 TEMPLATE_FOLDER = os.path.join(BASE_DIR, 'frontend/dist')
 STATIC_FOLDER = os.path.join(BASE_DIR, 'frontend/dist/static')
+TENCENT_MAP_URL = 'https://apis.map.qq.com/ws/geocoder/v1'
+TENCENT_MAP_KEY = 'ZBLBZ-INS34-TGOUK-DM6IH-LQMVE-QUFU3'
 
 
 # 将json格式的数据库参数转化为标准的数据库URI
