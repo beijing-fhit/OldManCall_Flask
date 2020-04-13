@@ -85,6 +85,19 @@ const weChatCalling = (openId, phoneNumbers, qrcodeid) => {
     Eqrcode: qrcodeid
   }, getHeader(openId))
 }
+/**
+ * 根据经纬度获取地理位置的描述信息
+ * @param lat 维度
+ * @param lon 精度
+ * @param key 腾讯地图的key
+ */
+const getLocationDesc = (lat, lon, key) => {
+  var d = [lat, lon].join(',')
+  return post(service.locationDesc, {
+    "location": d,
+    "key": key
+  })
+}
 
 export default {
   wxConfig,
@@ -96,5 +109,6 @@ export default {
   verifyNumber,
   getInfo,
   saveInfo,
-  weChatCalling
+  weChatCalling,
+  getLocationDesc
 }

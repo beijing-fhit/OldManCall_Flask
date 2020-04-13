@@ -87,9 +87,9 @@ export default {
         success: function (res) {
           var latitude = res.latitude // 纬度，浮点数，范围为90 ~ -90
           var longitude = res.longitude // 经度，浮点数，范围为180 ~ -180。
-          var speed = res.speed // 速度，以米/每秒计
-          var accuracy = res.accuracy // 位置精度
-          console.log('地理位置:{0},{1},{2},{3}'.format(latitude, longitude, speed, accuracy))
+          // 下面的key为腾讯地图的key
+          let {result} = api.getLocationDesc(latitude, longitude, 'ZBLBZ-INS34-TGOUK-DM6IH-LQMVE-QUFU3')
+          console.log("地址：{0}".format(result))
         }
       })
     }
