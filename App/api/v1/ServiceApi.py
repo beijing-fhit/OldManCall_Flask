@@ -1,5 +1,6 @@
 import requests
-from flask import session, json
+from flask import session
+import json
 from flask_restful import Resource, reqparse, request
 from App.models import QrCode, OldManInfo, PhoneNumber, db
 from App.utils import ORMUtils, CommonUtils, Constants
