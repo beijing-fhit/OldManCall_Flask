@@ -22,16 +22,17 @@ class MsgNotification(Resource):
                 f.write('\nsend notification data is :%s' % (mobile))
                 f.close()
             for m in mobile:
-                resp = requests.post(Constants.MSG_NOTIFICATION_SEND_URL,
-                                     json={
-                                         "orgid": "123",
-                                         "password": "123",
-                                         "mobile": m,
-                                         "content": "【北京峰华】您的验证码是: 1234 " + content
-                                     })
-                # with open('flask.log', 'w') as f:
-                #     f.write('\nsend notification data is :%s' % (m))
-                #     f.close()
+                msg = {
+                    "orgid": "123",
+                    "password": "123",
+                    "mobile": m,
+                    "content": "【北京峰华】您的验证码是: 1234 " + content
+                }
+                data_json = json.dumps(msg, ensure_ascii=False)
+                data_json = data_json.encode('utf-8')
+                headers = {'Content-Type': 'application/json'}
+                resp = requests.post(Constants.MSG_NOTIFICATION_SEND_URL, data=data_json, headers=headers)
+
                 if resp.status_code != 200:
                     return '发送短信失败1'
             return '发送短信成功'
@@ -149,7 +150,6 @@ class QRCodeInfo(Resource):
                 with open('flask.log', 'w') as f:
                     f.write('\ncreate OldManInfo exception :%s' % (e))
                     f.close()
-                print("创建QrCode失败：", e)
                 res = {
                     'status_code': -1,
                     'message': '绑定信息失败'
@@ -162,14 +162,11 @@ class QRCodeInfo(Resource):
             # oldNumbers = qrCode.phone_number # 注意在flask中使用一对多关系，获取到的是一个对象集合，需要获取到具体的值，才能用来做数值比较，否则就是对象之间作比较了，则永远捕不会相等，所以采用下面的写法
             qrCode = QrCode.query.filter_by(qr_code_id=qrcodeid).first()  # 这重新查询一次
             oldNumbers = [p.phone_number for p in qrCode.phone_number.all()]
-            print("电话号码old :", qrCode, qrCode.phone_number.all())
             delete, add = CommonUtils.compareArrays(oldNumbers, phone_numbers)
-            print('电话号码：', delete, ",", add)
             for d in delete:
                 PhoneNumber.query.filter_by(phone_number=d, q_id=qrcodeid).delete()
             for a in add:
                 PhoneNumber(phone_number=a, q_id=qrcodeid).save()
-
             res = {
                 'status_code': 0,
                 'message': '信息保存成功'

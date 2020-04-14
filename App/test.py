@@ -1,4 +1,4 @@
-# # coding=utf-8
+# coding=utf-8
 # import requests
 # # 请求登录接口
 # # r = requests.get('http://127.0.0.1:5000/login', auth=('levine', '123456'))
@@ -23,11 +23,12 @@ data = {
         'orgid': '123',
         'password': '123',
         'mobile': '13550217062',
-        'content': '【北京峰华】您的验证码是: 1102 sfsdf'
+        'content': '【北京峰华】您的验证码是: 1239'
         }
-# data_json = json.dumps(data)
-# headers = {'Content-type': 'application/json'}
-resp = requests.post(Constants.MSG_NOTIFICATION_SEND_URL,json=data)
+data_json = json.dumps(data,ensure_ascii=False)
+data_json=data_json.encode('utf-8')
+headers = {'Content-Type': 'application/json'}
+resp = requests.post(Constants.MSG_NOTIFICATION_SEND_URL,data=data_json,headers=headers)
 print(resp.text)
 
 
