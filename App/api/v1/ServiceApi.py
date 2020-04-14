@@ -17,11 +17,11 @@ class MsgNotification(Resource):
             data = json.loads(d)
             mobile = data['mobile']
             content = data['content']
-            mobiles = str(mobile).split(',')
+            # mobiles = str(mobile).split(',')
             with open('flask.log', 'w') as f:
                 f.write('\nsend notification data is :%s' % (data))
                 f.close()
-            for m in mobiles:
+            for m in mobile:
                 resp = requests.post(Constants.MSG_NOTIFICATION_SEND_URL,
                                      json={
                                          "orgid": "123",
