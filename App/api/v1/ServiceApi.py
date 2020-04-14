@@ -19,21 +19,20 @@ class MsgNotification(Resource):
             mobile = data['mobile']
             content = data['content']
             # mobiles = str(mobile).split(',')
-            with open('flask.log', 'w') as f:
-                f.write('\nsend notification data is :%s' % (mobile))
-                f.close()
             for m in mobile:
                 msg = {
                     "orgid": "123",
                     "password": "123",
-                    "mobile": m,
+                    "mobile": str(m),
                     "content": "【北京峰华】您的验证码是: 1234 " + content
                 }
                 data_json = json.dumps(msg, ensure_ascii=False)
                 data_json = data_json.encode('utf-8')
                 headers = {'Content-Type': 'application/json'}
                 resp = requests.post(Constants.MSG_NOTIFICATION_SEND_URL, data=data_json, headers=headers)
-
+                with open('flask.log', 'w') as f:
+                    f.write('\nsend notification data is :%s' % (resp.text))
+                    f.close()
                 if resp.status_code != 200:
                     return '发送短信失败1'
             return '发送短信成功'

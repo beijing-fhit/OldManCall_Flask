@@ -22,13 +22,14 @@ from App.utils import Constants
 data = {
         'orgid': '123',
         'password': '123',
-        'mobile': '13550217062',
+        'mobile': '18910300884',
         'content': '【北京峰华】您的验证码是: 1234 '+"北京市"
         }
 data_json = json.dumps(data,ensure_ascii=False)
 data_json=data_json.encode('utf-8')
 headers = {'Content-Type': 'application/json'}
 resp = requests.post(Constants.MSG_NOTIFICATION_SEND_URL,data=data_json,headers=headers)
+print(resp.status_code)
 print(resp.text)
 
 
