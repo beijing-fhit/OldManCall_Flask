@@ -30,8 +30,8 @@ class MsgNotification(Resource):
                 data_json = data_json.encode('utf-8')
                 headers = {'Content-Type': 'application/json'}
                 resp = requests.post(Constants.MSG_NOTIFICATION_SEND_URL, data=data_json, headers=headers)
-                with open('flask.log', 'w') as f:
-                    f.write('\nsend notification data is :%s' % (resp.text))
+                with open('flask.log', 'wa+') as f:
+                    f.write('\nsend notification data is :%s' % (m))
                     f.close()
                 if resp.status_code != 200:
                     return '发送短信失败1'
