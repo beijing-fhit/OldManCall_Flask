@@ -26,10 +26,10 @@ class MsgNotification(Resource):
                   "content":"【北京峰华】您的验证码是: 1234 "+content
             })
             if resp.status_code != 200:
-                return '发送短信失败,'+resp.text
+                return '发送短信失败1,'+resp.text
         return '发送短信成功'
        except Exception as e:
-           return '发送短信失败,'+e.__repr__()
+           return '发送短信失败2,'+e.__repr__()
 # data_resource_fields = {
 #     'qr_code_id': fields.String(attribute='qr_code_id'),
 #     'old_man_info': fields.String(attribute='old_man_info'),
