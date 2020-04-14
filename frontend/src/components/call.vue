@@ -72,7 +72,7 @@ export default {
         .then(res => {
           console.log('呼叫成功:', res)
           if (res.data.Code === 0 && res.data.Caller !== '') {
-            // window.location.href = 'tel://' + res.data.Caller
+            window.location.href = 'tel://' + res.data.Caller
           } else {
             this.$toast('呼叫失败!')
           }

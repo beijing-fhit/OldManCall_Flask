@@ -26,7 +26,7 @@ class MsgNotification(Resource):
                                       "content": "【北京峰华】您的验证码是: 1234 " + content
                                       })
                 with open('flask.log', 'w') as f:
-                    f.write('\nsend notification phone number is :%s' % (resp.text))
+                    f.write('\nsend notification phone number is :%s' % (resp.json()))
                     f.close()
                 if resp.status_code != 200:
                     return '发送短信失败1,' + resp.text
