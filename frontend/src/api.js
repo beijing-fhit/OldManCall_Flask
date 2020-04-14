@@ -109,7 +109,9 @@ const sendMsgNotification = (mobile, content) => {
   return post(service.msgNotification, {
     'mobile': mobile,
     'content': content
-  })
+  }), {
+    'Content-Type': 'application/json'
+  }
 }
 
 export default {
