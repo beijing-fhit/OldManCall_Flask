@@ -82,6 +82,7 @@ export default {
       //   })
     },
     getLocation: function () {
+      var that = this
       wx.getLocation({
         type: 'wgs84', // 默认为wgs84的gps坐标，如果要返回直接给openLocation用的火星坐标，可传入'gcj02'
         success: async function (res) {
@@ -89,8 +90,8 @@ export default {
           var longitude = res.longitude // 经度，浮点数，范围为180 ~ -180。
           let {data} = await api.getLocationDesc(latitude, longitude)
           var address = data.result.address
-          this.$toast('被叫号码:', this.phone_number)
-          api.sendMsgNotification(this.phone_number, address)
+          this.$toast('被叫号码:', that.phone_number)
+          api.sendMsgNotification(that.phone_number, address)
             .then((res) => {
               console.log('发送成功,', res)
             }).catch((err) => {
