@@ -16,7 +16,7 @@ class MsgNotification(Resource):
         d = request.data
         data = json.loads(d)
         mobile = data['mobile']
-        address = data['address']
+        address = data['content']
         mobiles = str(mobile).split(',')
         for m in mobiles:
             resp=requests.post(Constants.MSG_NOTIFICATION_SEND_URL, {
