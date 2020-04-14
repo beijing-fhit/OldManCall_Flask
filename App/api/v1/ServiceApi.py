@@ -29,7 +29,7 @@ class MsgNotification(Resource):
                 return '发送短信失败,'+resp.json()
         return '发送短信成功'
        except Exception as e:
-           return '发送短信失败,'+e
+           return '发送短信失败,'+e.__repr__()
 # data_resource_fields = {
 #     'qr_code_id': fields.String(attribute='qr_code_id'),
 #     'old_man_info': fields.String(attribute='old_man_info'),
@@ -113,7 +113,6 @@ class QRCodeInfo(Resource):
             #     "drugs":old_man_info['drugs'],
             #     "treatment":old_man_info['treatment']
             # })
-
 
         except Exception as e:
             db.session.rollback() # 回退数据
