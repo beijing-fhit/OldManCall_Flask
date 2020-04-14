@@ -19,15 +19,17 @@ class MsgNotification(Resource):
         address = data['address']
         mobiles = str(mobile).split(',')
         for m in mobiles:
-            requests.post(Constants.MSG_NOTIFICATION_SEND_URL, {
+            resp=requests.post(Constants.MSG_NOTIFICATION_SEND_URL, {
                   "orgid":123,
                   "password":123,
                   "mobile":m,
-                  "content":"【北京峰华】您的验证码是: 110 "+address
+                  "content":"【北京峰华】您的验证码是: 1234 "+address
             })
+            if resp.status_code != 200:
+                return '发送短信失败,'+resp.json()
         return '发送短信成功'
        except Exception as e:
-           return '发送短信失败'
+           return '发送短信失败,'+e
 # data_resource_fields = {
 #     'qr_code_id': fields.String(attribute='qr_code_id'),
 #     'old_man_info': fields.String(attribute='old_man_info'),
