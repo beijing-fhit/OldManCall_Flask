@@ -5,8 +5,6 @@ import requests
 from flask import redirect, session
 
 from flask_restful import Resource, reqparse
-
-from App import settings
 from App.utils import Constants
 
 parser = reqparse.RequestParser()

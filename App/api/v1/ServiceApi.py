@@ -1,7 +1,7 @@
 import requests
 from flask import session, json
 from flask_restful import Resource, reqparse, request
-from App.models import QrCode, OldManInfo, PhoneNumber,db
+from App.models import QrCode, OldManInfo, PhoneNumber, db
 from App.utils import ORMUtils, CommonUtils, Constants
 
 
@@ -12,24 +12,29 @@ class OpenIdFromSession(Resource):
 
 class MsgNotification(Resource):
     def post(self):
-       try:
-        d = request.data
-        data = json.loads(d)
-        mobile = data['mobile']
-        content = data['content']
-        mobiles = str(mobile).split(',')
-        for m in mobiles:
-            resp=requests.post(Constants.MSG_NOTIFICATION_SEND_URL, {
-                  "orgid":123,
-                  "password":123,
-                  "mobile":m,
-                  "content":"【北京峰华】您的验证码是: 1234 "+content
-            })
-            if resp.status_code != 200:
-                return '发送短信失败1,'+resp.text
-        return '发送短信成功'
-       except Exception as e:
-           return '发送短信失败2,'+e.__repr__()
+        try:
+            d = request.data
+            data = json.loads(d)
+            with open('flask.log', 'w') as f:
+                f.write('\nrequest data is :%s' % (data))
+                f.close()
+            mobile = data['mobile']
+            content = data['content']
+            mobiles = str(mobile).split(',')
+            for m in mobiles:
+                resp = requests.post(Constants.MSG_NOTIFICATION_SEND_URL,
+                                     {"orgid": 123,
+                                      "password": 123,
+                                      "mobile": m,
+                                      "content": "【北京峰华】您的验证码是: 1234 " + content
+                                      })
+                if resp.status_code != 200:
+                    return '发送短信失败1,' + resp.text
+            return '发送短信成功'
+        except Exception as e:
+            return '发送短信失败2,' + e.__repr__()
+
+
 # data_resource_fields = {
 #     'qr_code_id': fields.String(attribute='qr_code_id'),
 #     'old_man_info': fields.String(attribute='old_man_info'),
@@ -90,7 +95,7 @@ class QRCodeInfo(Resource):
         try:
             qrCode = QrCode.query.get(qrcodeid)
             # 更新数据
-            db.session.query(OldManInfo).filter(OldManInfo.id==qrCode.old_man_info) \
+            db.session.query(OldManInfo).filter(OldManInfo.id == qrCode.old_man_info) \
                 .update({
                 "name": old_man_info['name'],
                 "address": old_man_info['address'],
@@ -115,7 +120,7 @@ class QRCodeInfo(Resource):
             # })
 
         except Exception as e:
-            db.session.rollback() # 回退数据
+            db.session.rollback()  # 回退数据
             with open('flask.log', 'w') as f:
                 f.write('\nupdate OldManInfo exception :%s' % (e))
                 f.close()
