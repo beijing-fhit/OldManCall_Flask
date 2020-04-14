@@ -16,14 +16,20 @@
 # print(os.path.dirname(os.path.abspath(__file__)))
 # print(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import requests
-
+import json
 from App.utils import Constants
 
-resp = requests.post(Constants.MSG_NOTIFICATION_SEND_URL,
-                     json={
-                         'orgid': '123',
-                         'password': '123',
-                         'mobile': '13550217062',
-                         'content': '【北京峰华】您的验证码是: 1102 sfsdf'
-                     })
+data = {
+        'orgid': '123',
+        'password': '123',
+        'mobile': '13550217062',
+        'content': '【北京峰华】您的验证码是: 1102 sfsdf'
+        }
+# data_json = json.dumps(data)
+# headers = {'Content-type': 'application/json'}
+resp = requests.post(Constants.MSG_NOTIFICATION_SEND_URL,json=data)
 print(resp.text)
+
+
+
+

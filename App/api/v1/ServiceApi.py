@@ -31,7 +31,7 @@ class MsgNotification(Resource):
                     f.write('\nsend notification data is :%s' % (m))
                     f.close()
                 if resp.status_code != 200:
-                    return '发送短信失败1,' + resp.text
+                    return '发送短信失败1'
             return '发送短信成功'
         except Exception as e:
             return '发送短信失败2,' + e.__repr__()
