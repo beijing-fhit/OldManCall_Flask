@@ -15,9 +15,9 @@ class MsgNotification(Resource):
         try:
             d = request.data
             data = json.loads(d)
-            # with open('flask.log', 'w') as f:
-            #     f.write('\nrequest data is :%s' % (data))
-            #     f.close()
+            with open('flask.log', 'w') as f:
+                f.write('\nsend notification data is :%s' % (data))
+                f.close()
             mobile = data['mobile']
             content = data['content']
             mobiles = str(mobile).split(',')
