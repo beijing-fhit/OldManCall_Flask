@@ -68,18 +68,18 @@ export default {
     startCall: function () {
       // 获取地理位置发送通知
       this.getLocation()
-      api.weChatCalling(sessionStorage.getItem('openId'), this.phone_number, sessionStorage.getItem('qrCodeId'))
-        .then(res => {
-          console.log('呼叫成功:', res)
-          if (res.data.Code === 0 && res.data.Caller !== '') {
-            window.location.href = 'tel://' + res.data.Caller
-          } else {
-            this.$toast('呼叫失败!')
-          }
-        })
-        .catch(err => {
-          console.log('呼叫失败:', err)
-        })
+      // api.weChatCalling(sessionStorage.getItem('openId'), this.phone_number, sessionStorage.getItem('qrCodeId'))
+      //   .then(res => {
+      //     console.log('呼叫成功:', res)
+      //     if (res.data.Code === 0 && res.data.Caller !== '') {
+      //       window.location.href = 'tel://' + res.data.Caller
+      //     } else {
+      //       this.$toast('呼叫失败!')
+      //     }
+      //   })
+      //   .catch(err => {
+      //     console.log('呼叫失败:', err)
+      //   })
     },
     getLocation: function () {
       wx.getLocation({
