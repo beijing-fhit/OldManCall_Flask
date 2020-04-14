@@ -23,8 +23,8 @@ class MsgNotification(Resource):
                 msg = {
                     "orgid": "123",
                     "password": "123",
-                    "mobile": str(m),
-                    "content": "【北京峰华】您的验证码是: 1234 " + content
+                    "mobile": m,
+                    "content": Constants.MSG_TEMPLATE_STRING + content
                 }
                 data_json = json.dumps(msg, ensure_ascii=False)
                 data_json = data_json.encode('utf-8')
