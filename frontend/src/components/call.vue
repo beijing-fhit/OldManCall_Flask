@@ -88,10 +88,7 @@ export default {
           var latitude = res.latitude // 纬度，浮点数，范围为90 ~ -90
           var longitude = res.longitude // 经度，浮点数，范围为180 ~ -180。
           let {data} = await api.getLocationDesc(latitude, longitude)
-          console.log('result:', data)
-          // var address = result.data.result.address
-          var address = 'hahah'
-          // console.log('address:%s', address)
+          var address = data.result.address
           api.sendMsgNotification(this.phone_number, address)
             .then((res) => {
               console.log('发送成功,', res)
