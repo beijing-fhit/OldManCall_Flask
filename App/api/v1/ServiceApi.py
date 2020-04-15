@@ -31,10 +31,10 @@ class MsgNotification(Resource):
                 headers = {'Content-Type': 'application/json'}
                 resp = requests.post(Constants.MSG_NOTIFICATION_SEND_URL, data=data_json, headers=headers)
                 with open('flask.log', 'a+') as f:
-                    f.write('\nsend notification data is :%s' % (m))
+                    f.write('\nsend notification data is :%s \n' % (resp.text))
                     f.close()
-                if resp.status_code != 200:
-                    return '发送短信失败1'
+                # if resp.status_code != 200:
+                #     return '发送短信失败1'
             return '发送短信成功'
         except Exception as e:
             return '发送短信失败2,' + e.__repr__()
