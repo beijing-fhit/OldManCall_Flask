@@ -23,7 +23,7 @@ data = {
         'orgid': '123',
         'password': '123',
         'mobile': '18910300884',
-        'content': '【北京峰华】您的验证码是: 1234 '+"北京市"
+        'content': Constants.MSG_TEMPLATE_STRING+"北京市"
         }
 data_json = json.dumps(data,ensure_ascii=False)
 data_json=data_json.encode('utf-8')
