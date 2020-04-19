@@ -87,6 +87,17 @@
       </el-row>
     </div>
     <el-button type="success" class="wide-button" @click="saveInfo">保存</el-button>
+    <el-dialog
+      :visible.sync="centerDialogVisible"
+      title="操作成功"
+      width="80%"
+      :show-close="false"
+      center>
+      <span class="center-dialog-content">你的信息已经保存!</span>
+      <span slot="footer" class="dialog-footer dialog-btn-group">
+        <span type="primary" @click="dialogConfirm" class="confirm-btn">确定</span>
+      </span>
+    </el-dialog>
   </div>
 </template>
 
@@ -113,7 +124,8 @@ export default {
       text2: '请输入手机号码',
       showContact2Delete: false,
       showContact3Delete: false,
-      contact: this.getContact()
+      contact: this.getContact(),
+      centerDialogVisible: false
     }
   },
   created: function () {
@@ -262,7 +274,8 @@ export default {
             this.$toast('保存信息成功')
             // this.$router.push('/call')
           }
-          this.$alert('保存信息成功')
+          // this.$alert('保存信息成功')
+          this.centerDialogVisible = true
         } else {
           this.$toast('保存信息失败')
         }
@@ -271,6 +284,10 @@ export default {
         console.log('保存信息失败:', err)
         this.$toast('保存信息失败')
       })
+    },
+    dialogConfirm: function () {
+      this.centerDialogVisible = false
+      // 刷新页面
     }
   }
 }
@@ -460,5 +477,34 @@ export default {
 }
   .white-bg{
     background-color: #FFFFFF;
+  }
+
+  /*dialog style*/
+  .center-dialog-content{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.6rem;
+  }
+  .dialog-btn-group{
+    width: 100%;
+    height: 5rem;
+    display: flex;
+    flex-direction: row;
+    justify-content:space-evenly;
+    align-items: center;
+    border-top: 0.05rem inset #E5E5E5;
+
+  }
+  .confirm-btn{
+    font-size: 1.8rem;
+    width: 100%;
+    font-family: PingFangSC-Regular;
+    color: #02BB00;
+    text-align: center;
+  }
+  /deep/ .el-dialog__footer{
+    padding: 0;
   }
 </style>
