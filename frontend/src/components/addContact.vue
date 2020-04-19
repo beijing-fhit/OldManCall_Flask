@@ -127,6 +127,7 @@ export default {
               var index = this.$route.query.index
               if (index === null | index === '' | index === undefined) {
                 this.contact += this.number + ','
+                this.index = index
                 sessionStorage.setItem('contact', this.contact)
                 this.$router.push({
                   path: '/settings',

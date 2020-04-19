@@ -11,7 +11,7 @@ def create_app():
     # 加载settings配置文件
     # app.config.from_object(settings.envs.get('develop'))  # 开发环境
     # app.config.from_object(settings.envs.get('testing'))  # 测试环境
-    app.config.from_object(settings.envs.get('product')) # 线上环境
+    app.config.from_object(settings.envs.get('product')) # 线上环境(自己的服务器环境)
     # app.config.from_object(settings.envs.get('docker')) # docker环境
     # 初始化第三方插件
     ext.init_ext(app)

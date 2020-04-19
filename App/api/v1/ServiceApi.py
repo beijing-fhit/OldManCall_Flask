@@ -1,3 +1,5 @@
+import time
+
 import requests
 from flask import session
 import json
@@ -58,7 +60,6 @@ class MsgNotification(Resource):
 parser = reqparse.RequestParser()
 parser.add_argument('qrcodeid', required=True, help='qrcodeid参数不能为空，{error_msg}')
 
-
 class QRCodeInfo(Resource):
     def get(self):
         args = parser.parse_args()
@@ -91,7 +92,7 @@ class QRCodeInfo(Resource):
         d = request.data
         data = json.loads(d)
         with open('flask.log', 'w') as f:
-            f.write('\nrequest data is :%s' % (request.data))
+            f.write('\n[%s] request data is :%s' % (time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time())),request.data))
             f.close()
         qrcodeid = data['qr_code_id']
         old_man_info = data['old_man_info']

@@ -37,14 +37,17 @@ from App.utils import Constants
 # 'code':'0618TFp22gyjyU05GCr226KDp228TFpY'
 # })
 
-resp=requests.get("http://127.0.0.1:5000/openid")
-# resp=requests.get("https://agency.ucallclub.com/wechart/Access_token?code=0618TFp22gyjyU05GCr226KDp228TFpY")
-print(resp.text)
+# resp=requests.get("http://127.0.0.1:5000/openid")
+# # resp=requests.get("https://agency.ucallclub.com/wechart/Access_token?code=0618TFp22gyjyU05GCr226KDp228TFpY")
+# print(resp.text)
 
 # resp=requests.get("http://127.0.0.1:5000/locationDesc?lat=39.1021&lon=120.3243")
 # # resp=requests.get("https://agency.ucallclub.com/wechart/Access_token?code=0618TFp22gyjyU05GCr226KDp228TFpY")
 # print(resp.text)
 
 
+resp=requests.get("http://127.0.0.1:5000/qr_code_info")
+# resp=requests.get("https://agency.ucallclub.com/wechart/Access_token?code=0618TFp22gyjyU05GCr226KDp228TFpY")
+print(resp.text)
 
 
