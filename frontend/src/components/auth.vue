@@ -63,7 +63,7 @@ export default {
     },
     getOpenId: function (code) {
       api.getOpenId(code).then(res => {
-        // console.log('在app.vue中获取openid成功:', res)
+        console.log('在app.vue中获取openid成功:', res)
         if (res.data.status_code === 0) {
           let openId = res.data.data
           sessionStorage.setItem('openId', openId)

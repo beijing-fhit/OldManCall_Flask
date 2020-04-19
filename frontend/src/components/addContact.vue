@@ -9,7 +9,7 @@
     <div class="contact-panel">
       <el-row class="first-item">
         <i class="el-icon-star-on red-star margin-horizontal"></i>
-        <span class="title-name">联系人1</span>
+        <span class="title-name">联系人{{this.index+1}}</span>
         <span class="title-tip">(必填)</span>
       </el-row>
       <el-row class="first-input-container bottom-border">
@@ -52,8 +52,8 @@ export default {
       centerDialogVisible: false,
       isClearInterval: false,
       contact: sessionStorage.getItem('contact') === null ? '' : sessionStorage.getItem('contact'),
-      modifyIndex: 1
-
+      modifyIndex: 1,
+      index:0
     }
   },
   mounted: function () {
@@ -121,17 +121,19 @@ export default {
           if (res.data.Code === 0) {
             // console.log('验证成功:', res)
             this.$toast('验证成功')
-            this.centerDialogVisible = true
-            console.log('验证成功contact:', this.contact)
+            // this.centerDialogVisible = true
+            // console.log('验证成功contact:', this.contact)
             if (this.contact.indexOf(this.number, 0) === -1) {
               var index = this.$route.query.index
               if (index === null | index === '' | index === undefined) {
                 this.contact += this.number + ','
-                // if (this.contact.length >= 3) {
-                //   // 最后一个去掉逗号
-                //   this.contact = this.contact.substr(0, this.contact.length - 1)
-                // }
                 sessionStorage.setItem('contact', this.contact)
+                this.$router.push({
+                  path: '/settings',
+                  query: {
+                    getPhoneNumberFromNet: false
+                  }
+                })
               } else {
                 // 从settings页面跳转而来
                 var temp = this.contact.split(',')

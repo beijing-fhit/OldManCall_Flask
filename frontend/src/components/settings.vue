@@ -247,7 +247,7 @@ export default {
               .then(res => {
                 if (res.data.Code === 0) {
                   this.$toast('激活二维码成功')
-                  this.$router.push('/call')
+                  // this.$router.push('/call')
                   // console.log('激活二维码成功:', res)
                 } else {
                   this.$toast('激活二维码失败')
@@ -260,8 +260,9 @@ export default {
               })
           } else {
             this.$toast('保存信息成功')
-            this.$router.push('/call')
+            // this.$router.push('/call')
           }
+          this.$alert('保存信息成功')
         } else {
           this.$toast('保存信息失败')
         }

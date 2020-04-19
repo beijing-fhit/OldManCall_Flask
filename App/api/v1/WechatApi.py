@@ -2,13 +2,10 @@
 from urllib import parse
 
 import requests
-from flask import redirect, session
+from flask import redirect, session, request
 
 from flask_restful import Resource, reqparse
 from App.utils import Constants
-
-parser = reqparse.RequestParser()
-parser.add_argument('code',  required=True, help='请先获取code')
 
 # 这个方法已经没有用了，现在是前后分离项目，直接在前端重定向
 class Code(Resource):
@@ -23,12 +20,13 @@ class Code(Resource):
         return redirect(url + encode_url)
 
 
+parser1 = reqparse.RequestParser()
+parser1.add_argument('code',required=True, help='请先获取code',location='args')
 class OpenId(Resource):
-
     def get(self):
         try:
             request_openid_url = 'https://agency.ucallclub.com/wechart/Access_token?code='
-            args = parser.parse_args()
+            args = parser1.parse_args()
             code = args['code']
             resp = requests.get(request_openid_url + code)
             if resp.status_code == 200:
@@ -48,20 +46,20 @@ class OpenId(Resource):
             }
         except Exception as e:
             return   {
-                'status_code': 0,
+                'status_code': -2,
                 'data': None,
-                'message': '获取openid失败,%s' % e
+                'message': '获取openid失败,%s,%s' % (e,'请检查参数是否为空，或者格式是否正确')
             }
 
-parser = reqparse.RequestParser()
-parser.add_argument('lat', required=True, help='lat(纬度)参数不能为空，{error_msg}')
-parser.add_argument('lon', required=True, help='lon(经度)参数不能为空，{error_msg}')
+parser2 = reqparse.RequestParser()
+parser2.add_argument('lat', required=True, help='lat(纬度)参数不能为空，{error_msg}')
+parser2.add_argument('lon', required=True, help='lon(经度)参数不能为空，{error_msg}')
 
 
 class LocationDesc(Resource):
     def get(self):
         try:
-            args = parser.parse_args()
+            args = parser2.parse_args()
             lat = args['lat']
             lon = args['lon']
             a = lat + ',' + lon

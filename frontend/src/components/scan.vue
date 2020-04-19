@@ -33,9 +33,11 @@ export default {
       console.log('error-----')
     })
     api.wxConfig().then(config => {
-      console.log('config', config.data)
+      // this.$alert(window.location)
+      // this.$alert('config:' + JSON.stringify(config.data))
+      // this.$toast('config:' + config.data)
       wx.config({
-        debug: false,
+        debug: true,
         appId: config.data.appId,
         timestamp: config.data.timestamp,
         nonceStr: config.data.nonceStr,
@@ -46,12 +48,11 @@ export default {
   },
   methods: {
     routeToScanSuccess: function () {
-      // this.$router.push('/ScanSuccess')
-      this.startScan()
-      // 已激活二维码
-      // this.handleScanResult('http://wechatcall.ucallclub.com/web/elderlycard?qrcodeid=da887208fe9a414b81da578b52102012')
-      // 未激活二维码
-      // this.handleScanResult('http://wechatcall.ucallclub.com/web/elderlycard?qrcodeid=2de95313459d4064a67a295fab195642')
+      try {
+        this.startScan()
+      } catch (e) {
+        this.$toast('点击错误,' + e)
+      }
     },
     startScan: function () {
       var that = this

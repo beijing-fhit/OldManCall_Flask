@@ -19,18 +19,31 @@ import requests
 import json
 from App.utils import Constants
 
-data = {
-        'orgid': '123',
-        'password': '123',
-        'mobile': '18910300884',
-        'content': Constants.MSG_TEMPLATE_STRING+"北京市"
-        }
-data_json = json.dumps(data,ensure_ascii=False)
-data_json=data_json.encode('utf-8')
-headers = {'Content-Type': 'application/json'}
-resp = requests.post(Constants.MSG_NOTIFICATION_SEND_URL,data=data_json,headers=headers)
-print(resp.status_code)
+# data = {
+#         'orgid': '123',
+#         'password': '123',
+#         'mobile': '18910300884',
+#         'content': Constants.MSG_TEMPLATE_STRING+"北京市"
+#         }
+# data_json = json.dumps(data,ensure_ascii=False)
+# data_json=data_json.encode('utf-8')
+# headers = {'Content-Type': 'application/json'}
+# resp = requests.post(Constants.MSG_NOTIFICATION_SEND_URL,data=data_json,headers=headers)
+# print(resp.status_code)
+# print(resp.text)
+
+
+# resp=requests.get("https://oldmancard.ucallclub.com/api/openid",{
+# 'code':'0618TFp22gyjyU05GCr226KDp228TFpY'
+# })
+
+resp=requests.get("http://127.0.0.1:5000/openid")
+# resp=requests.get("https://agency.ucallclub.com/wechart/Access_token?code=0618TFp22gyjyU05GCr226KDp228TFpY")
 print(resp.text)
+
+# resp=requests.get("http://127.0.0.1:5000/locationDesc?lat=39.1021&lon=120.3243")
+# # resp=requests.get("https://agency.ucallclub.com/wechart/Access_token?code=0618TFp22gyjyU05GCr226KDp228TFpY")
+# print(resp.text)
 
 
 
