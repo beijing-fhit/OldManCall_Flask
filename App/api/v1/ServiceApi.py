@@ -108,7 +108,7 @@ class QRCodeInfo(Resource):
                 .update({
                 "name": old_man_info['name'],
                 "address": old_man_info['address'],
-                "age": old_man_info['age'],
+                "age": old_man_info['age'] if old_man_info['age'] else 0,
                 "medical_history": old_man_info['medical_history'],
                 "allergy": old_man_info['allergy'],
                 "blood_type": old_man_info['blood_type'],
@@ -138,7 +138,7 @@ class QRCodeInfo(Resource):
                 # 创建QrCode对象
                 oldManInfo = OldManInfo(name=old_man_info['name'],
                                         address=old_man_info['address'],
-                                        age=old_man_info['age'],
+                                        age=old_man_info['age'] if old_man_info['age'] else 0,
                                         medical_history=old_man_info['medical_history'],
                                         allergy=old_man_info['allergy'],
                                         blood_type=old_man_info['blood_type'],
