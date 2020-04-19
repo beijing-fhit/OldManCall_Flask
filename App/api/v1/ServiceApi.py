@@ -147,6 +147,9 @@ class QRCodeInfo(Resource):
                 # print("*"*100)
                 oldManInfo.save()
                 # print("oldManInfo:",oldManInfo)
+                with open('flask.log', 'a+') as f:
+                    f.write('\ncreate OldManInfo info :%s' % (oldManInfo))
+                    f.close()
                 qrCode = QrCode(qr_code_id=qrcodeid, old_man_info=oldManInfo.id)
                 qrCode.save()
             except Exception as e:
