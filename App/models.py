@@ -9,7 +9,9 @@ class Base:
             db.session.add(self)  # self实例化对象代表就是u对象
             db.session.commit()
         except Exception as e:
-            print("name:%s,exception:$s"%self.__repr__(),e)
+            with open('flask.log', 'a+') as f:
+                f.write('\nsave model exception :%s' % (e))
+                f.close()
             db.session.rollback()
 
     # 定义静态类方法接收List参数

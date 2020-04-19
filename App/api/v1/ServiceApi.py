@@ -97,7 +97,7 @@ class QRCodeInfo(Resource):
         qrcodeid = data['qr_code_id']
         old_man_info = data['old_man_info']
         phone_numbers = data['phone_number']
-        with open('flask.log', 'w') as f:
+        with open('flask.log', 'a+') as f:
             f.write('\n[%s] request data is :%s,%s,%s' % (time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time())),qrcodeid,old_man_info,phone_numbers))
             f.close()
         # print(qrcodeid, old_man_info, phone_numbers)
@@ -130,7 +130,7 @@ class QRCodeInfo(Resource):
 
         except Exception as e:
             db.session.rollback()  # 回退数据
-            with open('flask.log', 'w') as f:
+            with open('flask.log', 'a+') as f:
                 f.write('\nupdate OldManInfo exception :%s' % (e))
                 f.close()
             # 创建数据
@@ -150,7 +150,7 @@ class QRCodeInfo(Resource):
                 qrCode = QrCode(qr_code_id=qrcodeid, old_man_info=oldManInfo.id)
                 qrCode.save()
             except Exception as e:
-                with open('flask.log', 'w') as f:
+                with open('flask.log', 'a+') as f:
                     f.write('\ncreate OldManInfo exception :%s' % (e))
                     f.close()
                 res = {
