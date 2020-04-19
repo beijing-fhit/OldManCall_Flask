@@ -53,7 +53,7 @@ export default {
       isClearInterval: false,
       contact: sessionStorage.getItem('contact') === null ? '' : sessionStorage.getItem('contact'),
       modifyIndex: 1,
-      index:0
+      index: this.$route.query.index ? this.$route.query.index : 0
     }
   },
   mounted: function () {
@@ -127,7 +127,6 @@ export default {
               var index = this.$route.query.index
               if (index === null | index === '' | index === undefined) {
                 this.contact += this.number + ','
-                this.index = index
                 sessionStorage.setItem('contact', this.contact)
                 this.$router.push({
                   path: '/settings',
