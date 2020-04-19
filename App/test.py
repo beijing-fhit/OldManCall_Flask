@@ -45,9 +45,27 @@ from App.utils import Constants
 # # resp=requests.get("https://agency.ucallclub.com/wechart/Access_token?code=0618TFp22gyjyU05GCr226KDp228TFpY")
 # print(resp.text)
 
-
-resp=requests.get("http://127.0.0.1:5000/qr_code_info")
-# resp=requests.get("https://agency.ucallclub.com/wechart/Access_token?code=0618TFp22gyjyU05GCr226KDp228TFpY")
+data = {
+    "old_man_info": {
+        "name": "fhit1",
+        "address": "北京市通州区",
+        "age": 23,
+        "medical_history": "sss",
+        "allergy": None,
+        "blood_type": None,
+        "drugs": None,
+        "treatment": None
+    },
+    "phone_number": [
+        "17700000002",
+        "17700000003"
+    ],
+    "qr_code_id": "d77fe14214714943adde82691a1e4b05"
+}
+data_json = json.dumps(data,ensure_ascii=False)
+data_json=data_json.encode('utf-8')
+headers = {'Content-Type': 'application/json'}
+resp=requests.post("https://mustberich.cn/api/qr_code_info", data=data_json,headers=headers)
 print(resp.text)
 
 
