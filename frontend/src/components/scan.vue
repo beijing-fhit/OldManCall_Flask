@@ -33,7 +33,7 @@ export default {
     wx.error(function (res) {
       console.log('error-----')
     })
-    api.wxConfig().then(config => {
+    api.wxConfigWithUrl(window.location.href).then(config => {
       // this.$alert('config:' + JSON.stringify(config.data))
       // this.$toast('config:' + config.data)
       wx.config({

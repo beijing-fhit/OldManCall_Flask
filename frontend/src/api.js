@@ -4,6 +4,11 @@ import {service} from './config'
 const wxConfig = () => {
   return get(service.wxConfig)
 }
+const wxConfigWithUrl = (url) => {
+  return get(service.wxConfig,{
+    url:url
+  })
+}
 const getHeader = function (openId) {
   return {
     'content-type': 'application/json',
@@ -116,6 +121,7 @@ const sendMsgNotification = (mobile, content) => {
 
 export default {
   wxConfig,
+  wxConfigWithUrl,
   getOpenId,
   weChatState,
   verifyQrCodeActive,
