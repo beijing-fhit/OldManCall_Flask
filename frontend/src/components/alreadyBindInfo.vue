@@ -31,7 +31,7 @@ export default {
   },
   created: function () {
     var that = this
-    api.getInfo(sessionStorage.getItem('qrCodeId'))
+    api.getInfo(localStorage.getItem('qrCodeId'))
       .then(res => {
         console.log('获取信息成功', res)
         var data = res.data

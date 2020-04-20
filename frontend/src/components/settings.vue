@@ -128,22 +128,23 @@ export default {
       centerDialogVisible: false
     }
   },
-  created: function () {
+  mounted: function () {
     // 如果从addContact页面跳转过来的，则不使用网络上获取到的号码,加载本地缓存
     if (this.$route.query.getPhoneNumberFromNet !== null && this.$route.query.getPhoneNumberFromNet === false) {
-      var old_man_info = JSON.parse(sessionStorage.getItem('manInfo'))
-      this.manInfo.name = old_man_info.name
-      this.manInfo.age = old_man_info.age
-      this.manInfo.address = old_man_info.address
-      this.manInfo.medical_history = old_man_info.medical_history
-      this.manInfo.allergy = old_man_info.allergy
-      this.manInfo.blood_type = old_man_info.blood_type
-      this.manInfo.drugs = old_man_info.drugs
-      this.manInfo.treatment = old_man_info.treatment
+      var oldManInfo = JSON.parse(localStorage.getItem('manInfo'))
+      this.$alert('获取localStorage中的数据:' + oldManInfo + ',contact:' + this.contact)
+      this.manInfo.name = oldManInfo.name
+      this.manInfo.age = oldManInfo.age
+      this.manInfo.address = oldManInfo.address
+      this.manInfo.medical_history = oldManInfo.medical_history
+      this.manInfo.allergy = oldManInfo.allergy
+      this.manInfo.blood_type = oldManInfo.blood_type
+      this.manInfo.drugs = oldManInfo.drugs
+      this.manInfo.treatment = oldManInfo.treatment
       return
     }
     // 获取有无数据
-    api.getInfo(sessionStorage.getItem('qrCodeId')).then(res => {
+    api.getInfo(localStorage.getItem('qrCodeId')).then(res => {
       //  获取数据
       // console.log('settings 获取info:', res)
       if (res.data.status_code === 0) {
@@ -157,9 +158,9 @@ export default {
         this.manInfo.drugs = data.old_man_info.drugs
         this.manInfo.treatment = data.old_man_info.treatment
         // this.contact = data.phone_number
-        sessionStorage.setItem('manInfo', JSON.stringify(this.manInfo))
-        sessionStorage.setItem('contact', this.generatePhoneStr(data.phone_number))
-        // sessionStorage.setItem('contact', data.phone_number)
+        localStorage.setItem('manInfo', JSON.stringify(this.manInfo))
+        localStorage.setItem('contact', this.generatePhoneStr(data.phone_number))
+        // localStorage.setItem('contact', data.phone_number)
         // console.log('generateStr:', data.phone_number)
         this.contact = this.getContact()
       }
@@ -191,8 +192,8 @@ export default {
       return c
     },
     getContact: function () {
-      if (sessionStorage.getItem('contact') !== null) {
-        var contact = sessionStorage.getItem('contact').split(',')
+      if (localStorage.getItem('contact') !== null) {
+        var contact = localStorage.getItem('contact').split(',')
         switch (contact.length) {
           case 1:
             // this.text1 = '请输入手机号码'
@@ -225,7 +226,7 @@ export default {
           return
         }
       }
-      sessionStorage.setItem('manInfo', JSON.stringify(this.manInfo))
+      localStorage.setItem('manInfo', JSON.stringify(this.manInfo))
       // var mode = 0 // 0代表修改，1代表新增
       this.$router.push({
         path: '/addContact',
@@ -238,7 +239,7 @@ export default {
     },
     deleteContact: function (index) {
       this.contact[index] = ''
-      sessionStorage.setItem('contact', this.generatePhoneStr(this.contact))
+      localStorage.setItem('contact', this.generatePhoneStr(this.contact))
       this.contact = this.getContact()
       this.reload()
     },
@@ -251,7 +252,7 @@ export default {
         return
       }
       // qrCodeId, oldManInfo, phone_number
-      var qrCodeId = sessionStorage.getItem('qrCodeId')
+      var qrCodeId = localStorage.getItem('qrCodeId')
       var info = this.manInfo
       var phoneNumber = this.getleagalContact(this.contact)
       // console.log('合法的contact:', phoneNumber)
@@ -263,10 +264,10 @@ export default {
         // 保存信息成功
         // console.log('保存信息成功:', res)
         if (res.data.status_code === 0) {
-          // console.log('二维码激活状态:', sessionStorage.getItem('isQrCodeActive'))
-          if (sessionStorage.getItem('isQrCodeActive') === 0 || sessionStorage.getItem('isQrCodeActive') === '0') { // 未激活
+          // console.log('二维码激活状态:', localStorage.getItem('isQrCodeActive'))
+          if (localStorage.getItem('isQrCodeActive') === 0 || localStorage.getItem('isQrCodeActive') === '0') { // 未激活
             // 激活二维码
-            api.activateQrCode(sessionStorage.getItem('openId'), qrCodeId, sessionStorage.getItem('UcallFreeId'))
+            api.activateQrCode(localStorage.getItem('openId'), qrCodeId, localStorage.getItem('UcallFreeId'))
               .then(res => {
                 if (res.data.Code === 0) {
                   this.$toast('激活二维码成功')

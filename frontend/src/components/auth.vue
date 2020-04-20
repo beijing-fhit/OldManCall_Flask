@@ -27,9 +27,9 @@ export default {
       // console.log('参数：', openid, ucallfreeid, qrcodeid)
       if (openid && ucallfreeid && qrcodeid) {
         // 来自小程序，则不用请求参数,跳转到call页面
-        sessionStorage.setItem('openId', openid)
-        sessionStorage.setItem('UcallFreeId', ucallfreeid)
-        sessionStorage.setItem('qrCodeId', qrcodeid)
+        localStorage.setItem('openId', openid)
+        localStorage.setItem('UcallFreeId', ucallfreeid)
+        localStorage.setItem('qrCodeId', qrcodeid)
         api.verifyQrCodeActive(qrcodeid).then(res => {
           if (res.data.Code === 0) {
             if (res.data.ActiveState === 0) {
@@ -66,12 +66,12 @@ export default {
         console.log('在app.vue中获取openid成功:', res)
         if (res.data.status_code === 0) {
           let openId = res.data.data
-          sessionStorage.setItem('openId', openId)
+          localStorage.setItem('openId', openId)
           // 获取用户状态，保存其中的ucallfreeid
           api.weChatState(openId).then(res => {
             // console.log('weChatState', res)
-            sessionStorage.setItem('UcallFreeId', res.data.UcallFreeId)
-            sessionStorage.setItem('Tel', res.data.Tel[0])
+            localStorage.setItem('UcallFreeId', res.data.UcallFreeId)
+            localStorage.setItem('Tel', res.data.Tel[0])
             this.$router.push('/scan')
           }).catch(res => {
             console.log('webChatState error', res)

@@ -51,7 +51,7 @@ export default {
       isVerifyBtnClickable: true,
       centerDialogVisible: false,
       isClearInterval: false,
-      contact: sessionStorage.getItem('contact') === null ? '' : sessionStorage.getItem('contact'),
+      contact: localStorage.getItem('contact') === null ? '' : localStorage.getItem('contact'),
       modifyIndex: 1,
       index: this.$route.query.index ? this.$route.query.index : 0
     }
@@ -88,7 +88,7 @@ export default {
         return
       }
       var that = this
-      api.getVerifyCode(sessionStorage.getItem('openId'), this.number).then(res => {
+      api.getVerifyCode(localStorage.getItem('openId'), this.number).then(res => {
         console.log('获取号码', res)
         if (res.data.Code !== 0) {
           if (res.data.Code === -3) {
@@ -115,7 +115,7 @@ export default {
         this.$toast('验证码不能为空！')
         return
       }
-      api.verifyNumber(sessionStorage.getItem('openId'), this.number, this.verifyNumber)
+      api.verifyNumber(localStorage.getItem('openId'), this.number, this.verifyNumber)
         .then(res => {
           console.log('验证成功:', res)
           if (res.data.Code === 0) {
@@ -127,7 +127,7 @@ export default {
               var index = this.$route.query.index
               if (index === null | index === '' | index === undefined) {
                 this.contact += this.number + ','
-                sessionStorage.setItem('contact', this.contact)
+                localStorage.setItem('contact', this.contact)
                 this.$router.push({
                   path: '/settings',
                   query: {
@@ -138,17 +138,18 @@ export default {
                 // 从settings页面跳转而来
                 var temp = this.contact.split(',')
                 var t = ''
-                if (index === 0) {
+                if (parseInt(index) === 0) {
                   t = this.number + ',' + temp[1] + ',' + temp[2]
-                } else if (index === 1) {
+                } else if (parseInt(index) === 1) {
                   t = temp[0] + ',' + this.number + ',' + temp[2]
-                } else if (index === 2) {
+                } else if (parseInt(index) === 2) {
                   t = temp[0] + ',' + temp[1] + ',' + this.number
                 }
-                this.$toast('t:' + t)
-                console.log('t', t)
+                // this.$toast('t:' + t)
+                // console.log('t', t)
                 this.contact = t
-                sessionStorage.setItem('contact', this.contact)
+                localStorage.setItem('contact', this.contact)
+                this.$alert('获取localStorage中电话号码的数据:'+this.contact)
                 // 从settings页面过来的保存数据之后，直接返回到settings页面中即可
                 this.$router.push({
                   path: '/settings',
@@ -196,7 +197,7 @@ export default {
       // this.centerDialogVisible = false
       // 去掉最后一个逗号
       this.contact = this.contact.substr(0, this.contact.length - 1)
-      sessionStorage.setItem('contact', this.contact)
+      localStorage.setItem('contact', this.contact)
       console.log('跳过')
       this.$router.push({
         path: '/settings',
