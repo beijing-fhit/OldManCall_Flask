@@ -131,15 +131,15 @@ export default {
   created: function () {
     // 如果从addContact页面跳转过来的，则不使用网络上获取到的号码,加载本地缓存
     if (this.$route.query.getPhoneNumberFromNet !== null && this.$route.query.getPhoneNumberFromNet === false) {
-      var data = JSON.parse(sessionStorage.getItem('manInfo'))
-      this.manInfo.name = data.old_man_info.name
-      this.manInfo.age = data.old_man_info.age
-      this.manInfo.address = data.old_man_info.address
-      this.manInfo.medical_history = data.old_man_info.medical_history
-      this.manInfo.allergy = data.old_man_info.allergy
-      this.manInfo.blood_type = data.old_man_info.blood_type
-      this.manInfo.drugs = data.old_man_info.drugs
-      this.manInfo.treatment = data.old_man_info.treatment
+      var old_man_info = JSON.parse(sessionStorage.getItem('manInfo'))
+      this.manInfo.name = old_man_info.name
+      this.manInfo.age = old_man_info.age
+      this.manInfo.address = old_man_info.address
+      this.manInfo.medical_history = old_man_info.medical_history
+      this.manInfo.allergy = old_man_info.allergy
+      this.manInfo.blood_type = old_man_info.blood_type
+      this.manInfo.drugs = old_man_info.drugs
+      this.manInfo.treatment = old_man_info.treatment
       return
     }
     // 获取有无数据
