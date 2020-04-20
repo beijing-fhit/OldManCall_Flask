@@ -3,6 +3,17 @@
       <old-man-info :info="this.info"/>
       <el-image :src="call_img" class="call-img" @click="startCall"></el-image>
       <span class="call-text">呼叫家属</span>
+      <el-dialog
+      :visible.sync="centerDialogVisible"
+      title="呼叫失败"
+      width="80%"
+      :show-close="false"
+      center>
+      <span class="center-dialog-content">{{error_msg}}</span>
+      <span slot="footer" class="dialog-footer dialog-btn-group">
+        <span type="primary" @click="dialogConfirm" class="confirm-btn">确定</span>
+      </span>
+    </el-dialog>
     </div>
 </template>
 
@@ -26,7 +37,9 @@ export default {
         drugs: '预设内容',
         treatment: '预设内容'
       },
-      phone_number: []
+      phone_number: [],
+      centerDialogVisible: false,
+      error_msg: ''
     }
   },
   mounted () {
@@ -40,7 +53,7 @@ export default {
     api.wxConfig().then(config => {
       console.log('config', config.data)
       wx.config({
-        debug: false,
+        debug: true,
         appId: config.data.appId,
         timestamp: config.data.timestamp,
         nonceStr: config.data.nonceStr,
@@ -74,11 +87,15 @@ export default {
           if (res.data.Code === 0 && res.data.Caller !== '') {
             window.location.href = 'tel://' + res.data.Caller
           } else {
-            this.$toast('呼叫失败!')
+            // this.$toast('呼叫失败!')
+            this.error_msg = '请您稍后再拨!'
+            this.centerDialogVisible = true
           }
         })
         .catch(err => {
           console.log('呼叫失败:', err)
+           this.error_msg = err + '\n请您稍后再拨!'
+            this.centerDialogVisible = true
         })
     },
     getLocation: function () {
@@ -90,7 +107,7 @@ export default {
           var longitude = res.longitude // 经度，浮点数，范围为180 ~ -180。
           let {data} = await api.getLocationDesc(latitude, longitude)
           var address = data.result.address
-          that.$toast('被叫号码:' + that.phone_number)
+          // that.$toast('被叫号码:' + that.phone_number)
           api.sendMsgNotification(that.phone_number, address)
             .then((res) => {
               console.log('发送成功,', res)
@@ -99,6 +116,9 @@ export default {
             })
         }
       })
+    },
+    dialogConfirm: function () {
+      this.centerDialogVisible = false
     }
   }
 }
@@ -124,5 +144,33 @@ export default {
     letter-spacing: 0;
     text-align: center;
     font-weight: bold;
+  }
+  /*dialog style*/
+  .center-dialog-content{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.6rem;
+  }
+  .dialog-btn-group{
+    width: 100%;
+    height: 5rem;
+    display: flex;
+    flex-direction: row;
+    justify-content:space-evenly;
+    align-items: center;
+    border-top: 0.05rem inset #E5E5E5;
+
+  }
+  .confirm-btn{
+    font-size: 1.8rem;
+    width: 100%;
+    font-family: PingFangSC-Regular;
+    color: #02BB00;
+    text-align: center;
+  }
+  /deep/ .el-dialog__footer{
+    padding: 0;
   }
 </style>

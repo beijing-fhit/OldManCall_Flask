@@ -26,7 +26,7 @@ export default {
   },
   mounted () {
     console.log('created---')
-    this.$alert('当前地址：' + window.location.href)
+    // this.$alert('当前地址：' + window.location.href)
     wx.ready(function () {
       console.log('ready-----')
     })
@@ -37,7 +37,7 @@ export default {
       // this.$alert('config:' + JSON.stringify(config.data))
       // this.$toast('config:' + config.data)
       wx.config({
-        debug: true,
+        debug: false,
         appId: config.data.appId,
         timestamp: config.data.timestamp,
         nonceStr: config.data.nonceStr,
