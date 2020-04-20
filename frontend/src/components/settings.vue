@@ -131,7 +131,7 @@ export default {
   created: function () {
     // 如果从addContact页面跳转过来的，则不使用网络上获取到的号码,加载本地缓存
     if (this.$route.query.getPhoneNumberFromNet !== null && this.$route.query.getPhoneNumberFromNet === false) {
-      var data = sessionStorage.getItem('manInfo')
+      var data = JSON.parse(sessionStorage.getItem('manInfo'))
       this.manInfo.name = data.old_man_info.name
       this.manInfo.age = data.old_man_info.age
       this.manInfo.address = data.old_man_info.address
@@ -157,7 +157,7 @@ export default {
         this.manInfo.drugs = data.old_man_info.drugs
         this.manInfo.treatment = data.old_man_info.treatment
         // this.contact = data.phone_number
-        sessionStorage.setItem('manInfo',this.manInfo)
+        sessionStorage.setItem('manInfo', JSON.stringify(this.manInfo))
         sessionStorage.setItem('contact', this.generatePhoneStr(data.phone_number))
         // sessionStorage.setItem('contact', data.phone_number)
         // console.log('generateStr:', data.phone_number)
@@ -225,7 +225,7 @@ export default {
           return
         }
       }
-      sessionStorage.setItem('manInfo',this.manInfo)
+      sessionStorage.setItem('manInfo', JSON.stringify(this.manInfo))
       // var mode = 0 // 0代表修改，1代表新增
       this.$router.push({
         path: '/addContact',

@@ -145,7 +145,8 @@ export default {
                 } else if (index === 2) {
                   t = temp[0] + ',' + temp[1] + ',' + this.number
                 }
-                this.$toast('t:'+t)
+                this.$toast('t:' + t)
+                console.log('t', t)
                 this.contact = t
                 sessionStorage.setItem('contact', this.contact)
                 // 从settings页面过来的保存数据之后，直接返回到settings页面中即可
