@@ -94,8 +94,8 @@ export default {
         })
         .catch(err => {
           console.log('呼叫失败:', err)
-           this.error_msg = err + '\n请您稍后再拨!'
-            this.centerDialogVisible = true
+          this.error_msg = err + '\n请您稍后再拨!'
+          this.centerDialogVisible = true
         })
     },
     getLocation: function () {

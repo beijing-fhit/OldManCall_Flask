@@ -9,7 +9,7 @@
     <div class="contact-panel">
       <el-row class="first-item">
         <i class="el-icon-star-on red-star margin-horizontal"></i>
-        <span class="title-name">联系人{{this.index+1}}</span>
+        <span class="title-name">联系人{{parseInt(this.index)+1}}</span>
         <span class="title-tip">(必填)</span>
       </el-row>
       <el-row class="first-input-container bottom-border">
@@ -145,6 +145,7 @@ export default {
                 } else if (index === 2) {
                   t = temp[0] + ',' + temp[1] + ',' + this.number
                 }
+                this.$toast('t:'+t)
                 this.contact = t
                 sessionStorage.setItem('contact', this.contact)
                 // 从settings页面过来的保存数据之后，直接返回到settings页面中即可
