@@ -5,8 +5,8 @@ const wxConfig = () => {
   return get(service.wxConfig)
 }
 const wxConfigWithUrl = (url) => {
-  return get(service.wxConfig,{
-    url:url
+  return get(service.wxConfig, {
+    url: url
   })
 }
 const getHeader = function (openId) {
