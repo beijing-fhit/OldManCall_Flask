@@ -15,6 +15,7 @@
 import topbar from './topbar'
 import wx from 'weixin-js-sdk'
 import api from '../api'
+import config from '../config'
 export default {
   name: 'scan',
   components: {topbar},
@@ -33,7 +34,7 @@ export default {
     wx.error(function (res) {
       console.log('error-----')
     })
-    api.wxConfigWithUrl(window.location.href).then(config => {
+    api.wxConfigWithUrl(config.webHost).then(config => {
       // this.$alert('config:' + JSON.stringify(config.data))
       // this.$toast('config:' + config.data)
       wx.config({
