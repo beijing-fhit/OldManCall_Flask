@@ -125,9 +125,22 @@ export default {
       showContact2Delete: false,
       showContact3Delete: false,
       contact: this.getContact(),
-      centerDialogVisible: false
+      centerDialogVisible: false,
+      isModified: false
     }
   },
+  // beforeRouteUpdate: function (to, from, next) {
+  //   console.log('beforeRouteUpdate')
+  // },
+  // beforeRouteLeave: function (to, from, next) {
+  //   // const answer = window.confirm('当前页面数据未保存，确定要离开？')
+  //   // if (answer) {
+  //   //   next()
+  //   // } else {
+  //   //   next(false)
+  //   // }
+  //   // console.log('beforeRouteLeave')
+  // },
   mounted: function () {
     var that = this
     // 如果从addContact页面跳转过来的，则不使用网络上获取到的号码,加载本地缓存
@@ -153,6 +166,7 @@ export default {
       this.manInfo.blood_type = oldManInfo.blood_type
       this.manInfo.drugs = oldManInfo.drugs
       this.manInfo.treatment = oldManInfo.treatment
+      this.contact = this.getContact()
       return
     }
     // 获取有无数据
@@ -267,6 +281,7 @@ export default {
       var qrCodeId = sessionStorage.getItem('qrCodeId')
       var info = this.manInfo
       var phoneNumber = this.getleagalContact(this.contact)
+      sessionStorage.setItem('manInfo', JSON.stringify(info))
       // console.log('合法的contact:', phoneNumber)
       // 调用后端接口，保存老人信息到数据库
       // this.$toast(info)
