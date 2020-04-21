@@ -217,7 +217,7 @@ export default {
       }
       return c
     },
-    getContact: function () {
+     getContact: function () {
       if (sessionStorage.getItem('contact') !== null) {
         var contact = sessionStorage.getItem('contact').split(',')
         var count = 0
@@ -250,6 +250,8 @@ export default {
             this.showContact2Delete = false
             this.showContact3Delete = false
         }
+        console.log('contact length2:', count)
+        console.log('showContactNDelete:', this.showContact2Delete,this.showContact3Delete)
         // console.log('contact:', contact)
         return contact
       }
