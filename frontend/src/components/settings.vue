@@ -132,16 +132,16 @@ export default {
     var that = this
     // 如果从addContact页面跳转过来的，则不使用网络上获取到的号码,加载本地缓存
     // console.log('数据1：', JSON.parse(this.$route.query.getPhoneNumberFromNet))
-    var getPhoneNumberFromNet = false
+    var getPhoneNumberFromNet = true
     var temp = this.$route.query.getPhoneNumberFromNet
     if (temp !== null && temp !== undefined && temp !== '' && temp !== 'undefined') {
       getPhoneNumberFromNet = JSON.parse(temp)
     }
     if (getPhoneNumberFromNet === false) {
       var oldManInfo = this.manInfo
-      var temp = sessionStorage.getItem('manInfo')
-      if (temp !== null && temp !== undefined && temp !== '' && temp !== 'undefined') {
-        oldManInfo = JSON.parse(temp)
+      var temp2 = sessionStorage.getItem('manInfo')
+      if (temp2 !== null && temp2 !== undefined && temp2 !== '' && temp2 !== 'undefined') {
+        oldManInfo = JSON.parse(temp2)
       }
       this.$alert('获取sessionStorage中的数据:' + oldManInfo + ',contact:' + this.contact)
       console.log('数据2：', getPhoneNumberFromNet, ',oldmaninfo:', oldManInfo)
