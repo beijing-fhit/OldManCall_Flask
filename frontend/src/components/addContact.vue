@@ -150,7 +150,7 @@ export default {
                 console.log('t', t)
                 that.contact = t
                 sessionStorage.setItem('contact', that.contact)
-                that.$alert('获取sessionStorage中电话号码的数据:' + that.contact)
+                // that.$alert('获取sessionStorage中电话号码的数据:' + that.contact)
                 // 从settings页面过来的保存数据之后，直接返回到settings页面中即可
                 that.$router.push({
                   path: '/settings',

@@ -156,7 +156,7 @@ export default {
       if (temp2 !== null && temp2 !== undefined && temp2 !== '' && temp2 !== 'undefined') {
         oldManInfo = JSON.parse(temp2)
       }
-      this.$alert('获取sessionStorage中的数据:' + oldManInfo + ',contact:' + this.contact)
+      // this.$alert('获取sessionStorage中的数据:' + oldManInfo + ',contact:' + this.contact)
       console.log('数据2：', getPhoneNumberFromNet, ',oldmaninfo:', oldManInfo)
       this.manInfo.name = oldManInfo.name
       this.manInfo.age = oldManInfo.age
