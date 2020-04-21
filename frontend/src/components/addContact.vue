@@ -51,7 +51,7 @@ export default {
       isVerifyBtnClickable: true,
       centerDialogVisible: false,
       isClearInterval: false,
-      contact: localStorage.getItem('contact') === null ? '' : localStorage.getItem('contact'),
+      contact: sessionStorage.getItem('contact') === null ? '' : sessionStorage.getItem('contact'),
       modifyIndex: 1,
       index: this.$route.query.index ? this.$route.query.index : 0
     }
@@ -88,7 +88,7 @@ export default {
         return
       }
       var that = this
-      api.getVerifyCode(localStorage.getItem('openId'), this.number).then(res => {
+      api.getVerifyCode(sessionStorage.getItem('openId'), this.number).then(res => {
         console.log('获取号码', res)
         if (res.data.Code !== 0) {
           if (res.data.Code === -3) {
@@ -107,6 +107,7 @@ export default {
       })
     },
     verify: function () {
+      var that = this
       if (this.number.length === 0) {
         this.$toast('号码不能为空！')
         return
@@ -115,20 +116,20 @@ export default {
         this.$toast('验证码不能为空！')
         return
       }
-      api.verifyNumber(localStorage.getItem('openId'), this.number, this.verifyNumber)
+      api.verifyNumber(sessionStorage.getItem('openId'), this.number, this.verifyNumber)
         .then(res => {
           console.log('验证成功:', res)
           if (res.data.Code === 0) {
             // console.log('验证成功:', res)
-            this.$toast('验证成功')
+            that.$toast('验证成功')
             // this.centerDialogVisible = true
             // console.log('验证成功contact:', this.contact)
-            if (this.contact.indexOf(this.number, 0) === -1) {
-              var index = this.$route.query.index
+            if (that.contact.indexOf(that.number, 0) === -1) {
+              var index = that.$route.query.index
               if (index === null | index === '' | index === undefined) {
-                this.contact += this.number + ','
-                localStorage.setItem('contact', this.contact)
-                this.$router.push({
+                that.contact += that.number + ','
+                sessionStorage.setItem('contact', that.contact)
+                that.$router.push({
                   path: '/settings',
                   query: {
                     getPhoneNumberFromNet: false
@@ -136,22 +137,22 @@ export default {
                 })
               } else {
                 // 从settings页面跳转而来
-                var temp = this.contact.split(',')
+                var temp = that.contact.split(',')
                 var t = ''
                 if (parseInt(index) === 0) {
-                  t = this.number + ',' + temp[1] + ',' + temp[2]
+                  t = that.number + ',' + temp[1] + ',' + temp[2]
                 } else if (parseInt(index) === 1) {
-                  t = temp[0] + ',' + this.number + ',' + temp[2]
+                  t = temp[0] + ',' + that.number + ',' + temp[2]
                 } else if (parseInt(index) === 2) {
-                  t = temp[0] + ',' + temp[1] + ',' + this.number
+                  t = temp[0] + ',' + temp[1] + ',' + that.number
                 }
                 // this.$toast('t:' + t)
-                // console.log('t', t)
-                this.contact = t
-                localStorage.setItem('contact', this.contact)
-                this.$alert('获取localStorage中电话号码的数据:'+this.contact)
+                console.log('t', t)
+                that.contact = t
+                sessionStorage.setItem('contact', that.contact)
+                that.$alert('获取sessionStorage中电话号码的数据:' + that.contact)
                 // 从settings页面过来的保存数据之后，直接返回到settings页面中即可
-                this.$router.push({
+                that.$router.push({
                   path: '/settings',
                   query: {
                     getPhoneNumberFromNet: false
@@ -161,8 +162,8 @@ export default {
             }
           } else {
             // console.log('验证失败:', res.data)
-            this.$toast('验证失败')
-            this.centerDialogVisible = false
+            that.$toast('验证失败')
+            that.centerDialogVisible = false
           }
           // test 测试,最后上线必须删除
           // this.$router.push({
@@ -173,9 +174,9 @@ export default {
           // })
         })
         .catch(() => {
-          this.$toast('验证失败')
+          that.$toast('验证失败')
           // console.log('验证失败:', err)
-          this.centerDialogVisible = false
+          that.centerDialogVisible = false
         })
     },
     countDown: function () {
@@ -197,7 +198,7 @@ export default {
       // this.centerDialogVisible = false
       // 去掉最后一个逗号
       this.contact = this.contact.substr(0, this.contact.length - 1)
-      localStorage.setItem('contact', this.contact)
+      sessionStorage.setItem('contact', this.contact)
       console.log('跳过')
       this.$router.push({
         path: '/settings',

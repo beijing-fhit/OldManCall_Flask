@@ -56,7 +56,7 @@ export default {
     },
     startScan: function () {
       var that = this
-      var ucallFreeId = localStorage.getItem('UcallFreeId')
+      var ucallFreeId = sessionStorage.getItem('UcallFreeId')
       if (ucallFreeId === null || ucallFreeId === '' || ucallFreeId === 'undefined' || ucallFreeId === undefined) {
         return
       }
@@ -77,22 +77,22 @@ export default {
         // var params = substr.split('&')
         var qrcodeid = this.getQueryValue(substr, 'qrcodeid')
         console.log('传入的qrcode是:' + qrcodeid)
-        localStorage.setItem('qrCodeId', qrcodeid)
+        sessionStorage.setItem('qrCodeId', qrcodeid)
         api.verifyQrCodeActive(qrcodeid).then(res => {
           console.log('验证二维码激活状态结果:', res)
-          var UcallFreeId = localStorage.getItem('UcallFreeId')
+          var UcallFreeId = sessionStorage.getItem('UcallFreeId')
           console.log('本地的UCallfreeid为:', UcallFreeId)
           var data = res.data
           if (data.Code === 0) {
             switch (data.ActiveState) {
               case 0:
                 // 未激活
-                localStorage.setItem('isQrCodeActive', 0)
+                sessionStorage.setItem('isQrCodeActive', 0)
                 that.$router.push('/addContact')
                 break
               case 1:
                 // 已激活
-                localStorage.setItem('isQrCodeActive', 1)
+                sessionStorage.setItem('isQrCodeActive', 1)
                 // 判断owner和自己是否相等
                 if (data.Owner === UcallFreeId) {
                   // 此二维码属于自己

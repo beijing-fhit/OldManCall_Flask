@@ -129,10 +129,13 @@ export default {
     }
   },
   mounted: function () {
+    var that = this
     // 如果从addContact页面跳转过来的，则不使用网络上获取到的号码,加载本地缓存
-    if (this.$route.query.getPhoneNumberFromNet !== null && this.$route.query.getPhoneNumberFromNet === false) {
-      var oldManInfo = JSON.parse(localStorage.getItem('manInfo'))
-      this.$alert('获取localStorage中的数据:' + oldManInfo + ',contact:' + this.contact)
+    console.log('数据1：', JSON.parse(this.$route.query.getPhoneNumberFromNet))
+    if (this.$route.query.getPhoneNumberFromNet !== null && JSON.parse(this.$route.query.getPhoneNumberFromNet) === false) {
+      var oldManInfo = JSON.parse(sessionStorage.getItem('manInfo'))
+      this.$alert('获取sessionStorage中的数据:' + oldManInfo + ',contact:' + this.contact)
+      console.log('数据2：', JSON.parse(this.$route.query.getPhoneNumberFromNet))
       this.manInfo.name = oldManInfo.name
       this.manInfo.age = oldManInfo.age
       this.manInfo.address = oldManInfo.address
@@ -144,25 +147,25 @@ export default {
       return
     }
     // 获取有无数据
-    api.getInfo(localStorage.getItem('qrCodeId')).then(res => {
+    api.getInfo(sessionStorage.getItem('qrCodeId')).then(res => {
       //  获取数据
       // console.log('settings 获取info:', res)
       if (res.data.status_code === 0) {
         var data = res.data.data
-        this.manInfo.name = data.old_man_info.name
-        this.manInfo.age = data.old_man_info.age
-        this.manInfo.address = data.old_man_info.address
-        this.manInfo.medical_history = data.old_man_info.medical_history
-        this.manInfo.allergy = data.old_man_info.allergy
-        this.manInfo.blood_type = data.old_man_info.blood_type
-        this.manInfo.drugs = data.old_man_info.drugs
-        this.manInfo.treatment = data.old_man_info.treatment
+        that.manInfo.name = data.old_man_info.name
+        that.manInfo.age = data.old_man_info.age
+        that.manInfo.address = data.old_man_info.address
+        that.manInfo.medical_history = data.old_man_info.medical_history
+        that.manInfo.allergy = data.old_man_info.allergy
+        that.manInfo.blood_type = data.old_man_info.blood_type
+        that.manInfo.drugs = data.old_man_info.drugs
+        that.manInfo.treatment = data.old_man_info.treatment
         // this.contact = data.phone_number
-        localStorage.setItem('manInfo', JSON.stringify(this.manInfo))
-        localStorage.setItem('contact', this.generatePhoneStr(data.phone_number))
-        // localStorage.setItem('contact', data.phone_number)
+        sessionStorage.setItem('manInfo', JSON.stringify(that.manInfo))
+        sessionStorage.setItem('contact', that.generatePhoneStr(data.phone_number))
+        // sessionStorage.setItem('contact', data.phone_number)
         // console.log('generateStr:', data.phone_number)
-        this.contact = this.getContact()
+        that.contact = that.getContact()
       }
     })
   },
@@ -192,8 +195,8 @@ export default {
       return c
     },
     getContact: function () {
-      if (localStorage.getItem('contact') !== null) {
-        var contact = localStorage.getItem('contact').split(',')
+      if (sessionStorage.getItem('contact') !== null) {
+        var contact = sessionStorage.getItem('contact').split(',')
         switch (contact.length) {
           case 1:
             // this.text1 = '请输入手机号码'
@@ -226,7 +229,7 @@ export default {
           return
         }
       }
-      localStorage.setItem('manInfo', JSON.stringify(this.manInfo))
+      sessionStorage.setItem('manInfo', JSON.stringify(this.manInfo))
       // var mode = 0 // 0代表修改，1代表新增
       this.$router.push({
         path: '/addContact',
@@ -239,7 +242,7 @@ export default {
     },
     deleteContact: function (index) {
       this.contact[index] = ''
-      localStorage.setItem('contact', this.generatePhoneStr(this.contact))
+      sessionStorage.setItem('contact', this.generatePhoneStr(this.contact))
       this.contact = this.getContact()
       this.reload()
     },
@@ -252,7 +255,7 @@ export default {
         return
       }
       // qrCodeId, oldManInfo, phone_number
-      var qrCodeId = localStorage.getItem('qrCodeId')
+      var qrCodeId = sessionStorage.getItem('qrCodeId')
       var info = this.manInfo
       var phoneNumber = this.getleagalContact(this.contact)
       // console.log('合法的contact:', phoneNumber)
@@ -264,10 +267,10 @@ export default {
         // 保存信息成功
         // console.log('保存信息成功:', res)
         if (res.data.status_code === 0) {
-          // console.log('二维码激活状态:', localStorage.getItem('isQrCodeActive'))
-          if (localStorage.getItem('isQrCodeActive') === 0 || localStorage.getItem('isQrCodeActive') === '0') { // 未激活
+          // console.log('二维码激活状态:', sessionStorage.getItem('isQrCodeActive'))
+          if (sessionStorage.getItem('isQrCodeActive') === 0 || sessionStorage.getItem('isQrCodeActive') === '0') { // 未激活
             // 激活二维码
-            api.activateQrCode(localStorage.getItem('openId'), qrCodeId, localStorage.getItem('UcallFreeId'))
+            api.activateQrCode(sessionStorage.getItem('openId'), qrCodeId, sessionStorage.getItem('UcallFreeId'))
               .then(res => {
                 if (res.data.Code === 0) {
                   this.$toast('激活二维码成功')
