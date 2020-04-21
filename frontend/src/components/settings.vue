@@ -25,7 +25,7 @@
           iconColor="red"
           @onConfirm="deleteContact(1)"
           title="删除该联系人吗？">
-          <i slot="reference" class="el-icon-delete delete-img" v-show="showContact2Delete"/>
+          <i slot="reference" class="el-icon-delete delete-img" v-show="showContact2Delete" />
         </el-popconfirm>
       </el-row>
       <el-row class="contact-item">
@@ -38,7 +38,7 @@
           iconColor="red"
           @onConfirm="deleteContact(2)"
           title="删除该联系人吗？">
-          <i class="el-icon-delete delete-img" v-show="showContact3Delete" @click="deleteContact(2)"/>
+          <i slot="reference" class="el-icon-delete delete-img" v-show="showContact3Delete" />
         </el-popconfirm>
       </el-row>
     </div>
@@ -220,7 +220,14 @@ export default {
     getContact: function () {
       if (sessionStorage.getItem('contact') !== null) {
         var contact = sessionStorage.getItem('contact').split(',')
-        switch (contact.length) {
+        var count = 0
+        for (var i in contact) {
+          if (i !== '' && i !== undefined && i !== null && i !== 'undefined') {
+            count++
+          }
+        }
+        console.log('contact length:', count)
+        switch (count) {
           case 1:
             // this.text1 = '请输入手机号码'
             // this.text2 = '请输入手机号码'
@@ -239,6 +246,9 @@ export default {
             // this.text1 = contact[1]
             // this.text2 = contact[2]
             break
+          default:
+            this.showContact2Delete = false
+            this.showContact3Delete = false
         }
         // console.log('contact:', contact)
         return contact
