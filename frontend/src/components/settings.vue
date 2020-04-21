@@ -222,6 +222,7 @@ export default {
         var contact = sessionStorage.getItem('contact').split(',')
         var count = 0
         for (var i in contact) {
+          console.log(i)
           if (i !== '' && i !== undefined && i !== null && i !== 'undefined') {
             count++
           }
