@@ -131,11 +131,20 @@ export default {
   mounted: function () {
     var that = this
     // 如果从addContact页面跳转过来的，则不使用网络上获取到的号码,加载本地缓存
-    console.log('数据1：', JSON.parse(this.$route.query.getPhoneNumberFromNet))
-    if (this.$route.query.getPhoneNumberFromNet !== null && JSON.parse(this.$route.query.getPhoneNumberFromNet) === false) {
-      var oldManInfo = JSON.parse(sessionStorage.getItem('manInfo'))
+    // console.log('数据1：', JSON.parse(this.$route.query.getPhoneNumberFromNet))
+    var getPhoneNumberFromNet = false
+    var temp = this.$route.query.getPhoneNumberFromNet
+    if (temp !== null && temp !== undefined && temp !== '' && temp !== 'undefined') {
+      getPhoneNumberFromNet = JSON.parse(temp)
+    }
+    if (getPhoneNumberFromNet === false) {
+      var oldManInfo = this.manInfo
+      var temp = sessionStorage.getItem('manInfo')
+      if (temp !== null && temp !== undefined && temp !== '' && temp !== 'undefined') {
+        oldManInfo = JSON.parse(temp)
+      }
       this.$alert('获取sessionStorage中的数据:' + oldManInfo + ',contact:' + this.contact)
-      console.log('数据2：', JSON.parse(this.$route.query.getPhoneNumberFromNet))
+      console.log('数据2：', getPhoneNumberFromNet, ',oldmaninfo:', oldManInfo)
       this.manInfo.name = oldManInfo.name
       this.manInfo.age = oldManInfo.age
       this.manInfo.address = oldManInfo.address
@@ -274,6 +283,7 @@ export default {
               .then(res => {
                 if (res.data.Code === 0) {
                   this.$toast('激活二维码成功')
+                  this.centerDialogVisible = true
                   // this.$router.push('/call')
                   // console.log('激活二维码成功:', res)
                 } else {
@@ -287,10 +297,10 @@ export default {
               })
           } else {
             this.$toast('保存信息成功')
+            this.centerDialogVisible = true
             // this.$router.push('/call')
           }
           // this.$alert('保存信息成功')
-          this.centerDialogVisible = true
         } else {
           this.$toast('保存信息失败')
         }
