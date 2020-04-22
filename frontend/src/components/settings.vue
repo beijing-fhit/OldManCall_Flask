@@ -159,16 +159,16 @@ export default {
           oldManInfo = JSON.parse(temp2)
         }
         // console.log('1.3:', oldManInfo)
-        this.$toast('获取sessionStorage中的数据:' + JSON.stringify(oldManInfo))
+        this.$toast('获取数据:' + JSON.stringify(oldManInfo))
         // console.log('数据2：', getPhoneNumberFromNet, ',oldmaninfo:', oldManInfo)
-        this.manInfo.name = oldManInfo.name
-        this.manInfo.age = oldManInfo.age
-        this.manInfo.address = oldManInfo.address
-        this.manInfo.medical_history = oldManInfo.medical_history
-        this.manInfo.allergy = oldManInfo.allergy
-        this.manInfo.blood_type = oldManInfo.blood_type
-        this.manInfo.drugs = oldManInfo.drugs
-        this.manInfo.treatment = oldManInfo.treatment
+        // this.manInfo.name = oldManInfo.name
+        // this.manInfo.age = oldManInfo.age
+        // this.manInfo.address = oldManInfo.address
+        // this.manInfo.medical_history = oldManInfo.medical_history
+        // this.manInfo.allergy = oldManInfo.allergy
+        // this.manInfo.blood_type = oldManInfo.blood_type
+        // this.manInfo.drugs = oldManInfo.drugs
+        // this.manInfo.treatment = oldManInfo.treatment
         this.contact = this.getContact()
         return
       } catch (e) {
