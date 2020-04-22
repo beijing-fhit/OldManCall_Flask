@@ -44,23 +44,23 @@ export default {
   },
   mounted () {
     console.log('created---')
-    // wx.ready(function () {
-    //   console.log('ready-----')
-    // })
+    wx.ready(function () {
+      console.log('ready-----')
+    })
     wx.error(function (res) {
       console.log('error-----')
     })
-    // api.wxConfig().then(config => {
-    //   console.log('config', config.data)
-    //   wx.config({
-    //     debug: true,
-    //     appId: config.data.appId,
-    //     timestamp: config.data.timestamp,
-    //     nonceStr: config.data.nonceStr,
-    //     signature: config.data.signature,
-    //     jsApiList: ['getLocation']
-    //   })
-    // })
+    api.wxConfig().then(config => {
+      console.log('config', config.data)
+      wx.config({
+        debug: true,
+        appId: config.data.appId,
+        timestamp: config.data.timestamp,
+        nonceStr: config.data.nonceStr,
+        signature: config.data.signature,
+        jsApiList: ['getLocation']
+      })
+    })
   },
   created: function () {
     var that = this
@@ -79,20 +79,20 @@ export default {
   },
   methods: {
     startCall: function () {
-      api.wxConfig().then(config => {
-        console.log('config', config.data)
-        wx.config({
-          debug: true,
-          appId: config.data.appId,
-          timestamp: config.data.timestamp,
-          nonceStr: config.data.nonceStr,
-          signature: config.data.signature,
-          jsApiList: ['getLocation']
-        })
-      })
+      // api.wxConfig().then(config => {
+      //   console.log('config', config.data)
+      //   wx.config({
+      //     debug: true,
+      //     appId: config.data.appId,
+      //     timestamp: config.data.timestamp,
+      //     nonceStr: config.data.nonceStr,
+      //     signature: config.data.signature,
+      //     jsApiList: ['getLocation']
+      //   })
+      // })
       var that = this
-      wx.ready(function () {
-        console.log('ready---')
+      // wx.ready(function () {
+      //   console.log('ready---')
         // 获取地理位置发送通知
         that.getLocation()
         api.weChatCalling(sessionStorage.getItem('openId'), this.phone_number, sessionStorage.getItem('qrCodeId'))
@@ -111,7 +111,7 @@ export default {
             that.error_msg = err + '\n请您稍后再拨!'
             that.centerDialogVisible = true
           })
-      })
+      // })
     },
     getLocation: function () {
       var that = this
