@@ -150,14 +150,14 @@ export default {
     if (temp !== null && temp !== undefined && temp !== '' && temp !== 'undefined') {
       getPhoneNumberFromNet = JSON.parse(temp)
     }
-    this.$toast('getPhoneNumberFromNet:' + (getPhoneNumberFromNet === false) + ',sessionStorage:' + sessionStorage.getItem('manInfo'))
+    // this.$toast('getPhoneNumberFromNet:' + (getPhoneNumberFromNet === false) + ',sessionStorage:' + sessionStorage.getItem('manInfo'))
     if (getPhoneNumberFromNet === false) {
       var oldManInfo = this.manInfo
       var temp2 = sessionStorage.getItem('manInfo')
       if (temp2 !== null && temp2 !== undefined && temp2 !== '' && temp2 !== 'undefined') {
         oldManInfo = JSON.parse(temp2)
       }
-      this.$toast('获取sessionStorage中的数据:' + JSON.parse(oldManInfo) + ',contact:' + this.contact)
+      this.$toast('获取sessionStorage中的数据:' + JSON.parse(oldManInfo))
       console.log('数据2：', getPhoneNumberFromNet, ',oldmaninfo:', oldManInfo)
       this.manInfo.name = oldManInfo.name
       this.manInfo.age = oldManInfo.age
