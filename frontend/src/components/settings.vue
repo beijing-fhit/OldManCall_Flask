@@ -54,7 +54,7 @@
       </el-row>
       <el-row class="info-item border-bottom ">
         <span class="info-name">地址</span>
-        <el-input v-model="manInfo.address" class="info-content normal-input-style no-border-input" placeholder="预设内容" clearable></el-input>
+        <el-input v-model="contact[0]" class="info-content normal-input-style no-border-input" placeholder="预设内容" clearable></el-input>
       </el-row>
     </div>
       <el-row class="info-item border-bottom leftpadding white-bg">
@@ -130,18 +130,6 @@ export default {
       isModified: false
     }
   },
-  // beforeRouteUpdate: function (to, from, next) {
-  //   console.log('beforeRouteUpdate')
-  // },
-  // beforeRouteLeave: function (to, from, next) {
-  //   // const answer = window.confirm('当前页面数据未保存，确定要离开？')
-  //   // if (answer) {
-  //   //   next()
-  //   // } else {
-  //   //   next(false)
-  //   // }
-  //   // console.log('beforeRouteLeave')
-  // },
   activated: function () {
     var that = this
     // 如果从addContact页面跳转过来的，则不使用网络上获取到的号码,加载本地缓存
@@ -174,7 +162,6 @@ export default {
         return
       } catch (e) {
         console.log('获取s异常:', e)
-
       }
     }
     this.$toast('获取sessionStorage中的数据2:' + this.manInfo)
@@ -249,6 +236,7 @@ export default {
         oldManInfo3.drugs = t3.drugs
         oldManInfo3.treatment = t3.treatment
       }
+      this.$toast('当前数据:' + oldManInfo3)
       return oldManInfo3
     },
     getContact: function () {
