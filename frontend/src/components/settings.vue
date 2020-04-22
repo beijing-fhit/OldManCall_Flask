@@ -160,7 +160,7 @@ export default {
           console.log('1.2')
           oldManInfo = JSON.parse(temp2)
         }
-        console.log('1.3:',oldManInfo)
+        console.log('1.3:', oldManInfo)
         this.$toast('获取sessionStorage中的数据:' + JSON.parse(oldManInfo))
         console.log('数据2：', getPhoneNumberFromNet, ',oldmaninfo:', oldManInfo)
         this.manInfo.name = oldManInfo.name
@@ -174,7 +174,8 @@ export default {
         this.contact = this.getContact()
         return
       } catch (e) {
-        this.$toast('获取s异常:' + e)
+        console.log('获取s异常:', e)
+
       }
     }
     this.$toast('获取sessionStorage中的数据2:' + this.manInfo)
@@ -226,7 +227,7 @@ export default {
       }
       return c
     },
-     getContact: function () {
+    getContact: function () {
       if (sessionStorage.getItem('contact') !== null) {
         var contact = sessionStorage.getItem('contact').split(',')
         var count = 0
@@ -262,7 +263,7 @@ export default {
             this.showContact3Delete = false
         }
         console.log('contact length2:', count)
-        console.log('showContactNDelete:', this.showContact2Delete,this.showContact3Delete)
+        console.log('showContactNDelete:', this.showContact2Delete, this.showContact3Delete)
         // console.log('contact:', contact)
         return contact
       }
