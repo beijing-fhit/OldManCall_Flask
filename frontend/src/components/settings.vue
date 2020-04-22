@@ -266,7 +266,7 @@ export default {
           return
         }
       }
-      this.$toast('正在保存OldManinfo:', JSON.stringify(this.manInfo))
+      this.$toast('正在保存OldManinfo:' + JSON.stringify(this.manInfo))
       sessionStorage.setItem('manInfo', JSON.stringify(this.manInfo))
       // var mode = 0 // 0代表修改，1代表新增
       this.$router.push({
