@@ -170,6 +170,7 @@ export default {
       this.contact = this.getContact()
       return
     }
+    this.$toast('获取sessionStorage中的数据2:' + this.manInfo)
     // 获取有无数据
     api.getInfo(sessionStorage.getItem('qrCodeId')).then(res => {
       //  获取数据
