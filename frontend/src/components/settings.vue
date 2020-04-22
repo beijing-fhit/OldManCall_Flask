@@ -144,25 +144,23 @@ export default {
   activated: function () {
     var that = this
     // 如果从addContact页面跳转过来的，则不使用网络上获取到的号码,加载本地缓存
-    console.log('数据1：', JSON.parse(this.$route.query.getPhoneNumberFromNet))
+    // console.log('数据1：', JSON.parse(this.$route.query.getPhoneNumberFromNet))
     var getPhoneNumberFromNet = true
     var temp = this.$route.query.getPhoneNumberFromNet
     if (temp !== null && temp !== undefined && temp !== '' && temp !== 'undefined') {
       getPhoneNumberFromNet = JSON.parse(temp)
     }
-    console.log('getPhoneNumberFromNet:' + (getPhoneNumberFromNet === false) + ',sessionStorage:' + sessionStorage.getItem('manInfo'))
+    // console.log('getPhoneNumberFromNet:' + (getPhoneNumberFromNet === false) + ',sessionStorage:' + sessionStorage.getItem('manInfo'))
     if (getPhoneNumberFromNet === false) {
       try {
-        console.log('1.1')
         var oldManInfo = this.manInfo
         var temp2 = sessionStorage.getItem('manInfo')
         if (temp2 !== null && temp2 !== undefined && temp2 !== '' && temp2 !== 'undefined') {
-          console.log('1.2')
           oldManInfo = JSON.parse(temp2)
         }
-        console.log('1.3:', oldManInfo)
-        this.$toast('获取sessionStorage中的数据:' + JSON.parse(oldManInfo))
-        console.log('数据2：', getPhoneNumberFromNet, ',oldmaninfo:', oldManInfo)
+        // console.log('1.3:', oldManInfo)
+        // this.$toast('获取sessionStorage中的数据:' + JSON.stringify(oldManInfo))
+        // console.log('数据2：', getPhoneNumberFromNet, ',oldmaninfo:', oldManInfo)
         this.manInfo.name = oldManInfo.name
         this.manInfo.age = oldManInfo.age
         this.manInfo.address = oldManInfo.address

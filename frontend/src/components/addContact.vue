@@ -56,7 +56,7 @@ export default {
       index: this.$route.query.index ? this.$route.query.index : 0
     }
   },
-  mounted: function () {
+  activated: function () {
     // 在这里获取settings返回过来的数据
     var number = this.$route.query.modifyNumber
     console.log('在addContact页面获取到的参数是:', number)
@@ -66,6 +66,7 @@ export default {
       return
     }
     // 判断字符串是否为数字，是则显示电话号码，不是则不管
+    this.verifyNumber = ''
     if (number + ''.match('[0-9]{1,}')) {
       this.number = number
     } else {
