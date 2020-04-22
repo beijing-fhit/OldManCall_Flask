@@ -45,6 +45,10 @@ export default {
         jsApiList: ['scanQRCode']
       })
     })
+    // 清除缓存
+    sessionStorage.removeItem('manInfo')
+    sessionStorage.removeItem('contact')
+    sessionStorage.removeItem('qrCodeId')
   },
   methods: {
     routeToScanSuccess: function () {

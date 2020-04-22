@@ -110,16 +110,17 @@ export default {
   inject: ['reload'],
   data () {
     return {
-      manInfo: {
-        name: '',
-        address: '',
-        age: '',
-        medical_history: '',
-        allergy: '',
-        blood_type: '',
-        drugs: '',
-        treatment: ''
-      },
+      // manInfo: {
+      //   name: '',
+      //   address: '',
+      //   age: '',
+      //   medical_history: '',
+      //   allergy: '',
+      //   blood_type: '',
+      //   drugs: '',
+      //   treatment: ''
+      // },
+      manInfo: this.getManInfo(),
       text1: '请输入手机号码',
       text2: '请输入手机号码',
       showContact2Delete: false,
@@ -224,6 +225,31 @@ export default {
         }
       }
       return c
+    },
+    getManInfo: function () {
+      var oldManInfo3 = {
+        name: '',
+        address: '',
+        age: '',
+        medical_history: '',
+        allergy: '',
+        blood_type: '',
+        drugs: '',
+        treatment: ''
+      }
+      var temp3 = sessionStorage.getItem('manInfo')
+      if (temp3 !== null && temp3 !== undefined && temp3 !== '' && temp3 !== 'undefined') {
+        var t3 = JSON.parse(temp3)
+        oldManInfo3.name = t3.name
+        oldManInfo3.age = t3.age
+        oldManInfo3.address = t3.address
+        oldManInfo3.medical_history = t3.medical_history
+        oldManInfo3.allergy = t3.allergy
+        oldManInfo3.blood_type = t3.blood_type
+        oldManInfo3.drugs = t3.drugs
+        oldManInfo3.treatment = t3.treatment
+      }
+      return oldManInfo3
     },
     getContact: function () {
       if (sessionStorage.getItem('contact') !== null) {
