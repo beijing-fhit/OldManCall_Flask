@@ -47,9 +47,9 @@ export default {
     // wx.ready(function () {
     //   console.log('ready-----')
     // })
-    // wx.error(function (res) {
-    //   console.log('error-----')
-    // })
+    wx.error(function (res) {
+      console.log('error-----')
+    })
     // api.wxConfig().then(config => {
     //   console.log('config', config.data)
     //   wx.config({
@@ -90,9 +90,11 @@ export default {
           jsApiList: ['getLocation']
         })
       })
+      var that = this
       wx.ready(function () {
+        console.log('ready---')
         // 获取地理位置发送通知
-        this.getLocation()
+        that.getLocation()
         api.weChatCalling(sessionStorage.getItem('openId'), this.phone_number, sessionStorage.getItem('qrCodeId'))
           .then(res => {
             console.log('呼叫成功:', res)
@@ -100,14 +102,14 @@ export default {
               window.location.href = 'tel://' + res.data.Caller
             } else {
               // this.$toast('呼叫失败!')
-              this.error_msg = '请您稍后再拨!'
-              this.centerDialogVisible = true
+              that.error_msg = '请您稍后再拨!'
+              that.centerDialogVisible = true
             }
           })
           .catch(err => {
             console.log('呼叫失败:', err)
-            this.error_msg = err + '\n请您稍后再拨!'
-            this.centerDialogVisible = true
+            that.error_msg = err + '\n请您稍后再拨!'
+            that.centerDialogVisible = true
           })
       })
     },
