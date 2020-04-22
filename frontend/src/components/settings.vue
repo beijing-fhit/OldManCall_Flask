@@ -152,23 +152,27 @@ export default {
     }
     // this.$toast('getPhoneNumberFromNet:' + (getPhoneNumberFromNet === false) + ',sessionStorage:' + sessionStorage.getItem('manInfo'))
     if (getPhoneNumberFromNet === false) {
-      var oldManInfo = this.manInfo
-      var temp2 = sessionStorage.getItem('manInfo')
-      if (temp2 !== null && temp2 !== undefined && temp2 !== '' && temp2 !== 'undefined') {
-        oldManInfo = JSON.parse(temp2)
+      try {
+        var oldManInfo = this.manInfo
+        var temp2 = sessionStorage.getItem('manInfo')
+        if (temp2 !== null && temp2 !== undefined && temp2 !== '' && temp2 !== 'undefined') {
+          oldManInfo = JSON.parse(temp2)
+        }
+        this.$toast('获取sessionStorage中的数据:' + JSON.parse(oldManInfo))
+        console.log('数据2：', getPhoneNumberFromNet, ',oldmaninfo:', oldManInfo)
+        this.manInfo.name = oldManInfo.name
+        this.manInfo.age = oldManInfo.age
+        this.manInfo.address = oldManInfo.address
+        this.manInfo.medical_history = oldManInfo.medical_history
+        this.manInfo.allergy = oldManInfo.allergy
+        this.manInfo.blood_type = oldManInfo.blood_type
+        this.manInfo.drugs = oldManInfo.drugs
+        this.manInfo.treatment = oldManInfo.treatment
+        this.contact = this.getContact()
+        return
+      } catch (e) {
+        this.$toast('获取s异常:' + e)
       }
-      this.$toast('获取sessionStorage中的数据:' + JSON.parse(oldManInfo))
-      console.log('数据2：', getPhoneNumberFromNet, ',oldmaninfo:', oldManInfo)
-      this.manInfo.name = oldManInfo.name
-      this.manInfo.age = oldManInfo.age
-      this.manInfo.address = oldManInfo.address
-      this.manInfo.medical_history = oldManInfo.medical_history
-      this.manInfo.allergy = oldManInfo.allergy
-      this.manInfo.blood_type = oldManInfo.blood_type
-      this.manInfo.drugs = oldManInfo.drugs
-      this.manInfo.treatment = oldManInfo.treatment
-      this.contact = this.getContact()
-      return
     }
     this.$toast('获取sessionStorage中的数据2:' + this.manInfo)
     // 获取有无数据
