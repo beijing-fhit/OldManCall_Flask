@@ -67,7 +67,8 @@ export default {
     }
     // 判断字符串是否为数字，是则显示电话号码，不是则不管
     this.verifyNumber = ''
-    if (number + ''.match('[0-9]{1,}')) {
+    this.number = ''
+    if (number.match('[0-9]{1,}')) {
       this.number = number
     } else {
       this.number = ''
