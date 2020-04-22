@@ -147,6 +147,7 @@ export default {
     // console.log('数据1：', JSON.parse(this.$route.query.getPhoneNumberFromNet))
     var getPhoneNumberFromNet = true
     var temp = this.$route.query.getPhoneNumberFromNet
+    this.$toast('temp:' + temp + ',sessionStorage:' + sessionStorage.getItem('manInfo'))
     if (temp !== null && temp !== undefined && temp !== '' && temp !== 'undefined') {
       getPhoneNumberFromNet = JSON.parse(temp)
     }
