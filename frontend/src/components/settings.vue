@@ -54,7 +54,7 @@
       </el-row>
       <el-row class="info-item border-bottom ">
         <span class="info-name">地址</span>
-        <el-input v-model="contact[0]" class="info-content normal-input-style no-border-input" placeholder="预设内容" clearable></el-input>
+        <el-input v-model="manInfo.address" class="info-content normal-input-style no-border-input" placeholder="预设内容" clearable></el-input>
       </el-row>
     </div>
       <el-row class="info-item border-bottom leftpadding white-bg">
@@ -139,7 +139,6 @@ export default {
     if (temp !== null && temp !== undefined && temp !== '' && temp !== 'undefined') {
       getPhoneNumberFromNet = JSON.parse(temp)
     }
-    // console.log('getPhoneNumberFromNet:' + (getPhoneNumberFromNet === false) + ',sessionStorage:' + sessionStorage.getItem('manInfo'))
     if (getPhoneNumberFromNet === false) {
       try {
         var oldManInfo = this.manInfo
@@ -147,7 +146,6 @@ export default {
         if (temp2 !== null && temp2 !== undefined && temp2 !== '' && temp2 !== 'undefined') {
           oldManInfo = JSON.parse(temp2)
         }
-        // console.log('1.3:', oldManInfo)
         this.$toast('获取数据:' + JSON.stringify(oldManInfo))
         // console.log('数据2：', getPhoneNumberFromNet, ',oldmaninfo:', oldManInfo)
         // this.manInfo.name = oldManInfo.name
@@ -158,6 +156,7 @@ export default {
         // this.manInfo.blood_type = oldManInfo.blood_type
         // this.manInfo.drugs = oldManInfo.drugs
         // this.manInfo.treatment = oldManInfo.treatment
+        this.manInfo = this.getManInfo()
         this.contact = this.getContact()
         return
       } catch (e) {
