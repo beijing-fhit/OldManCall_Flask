@@ -43,24 +43,24 @@ export default {
     }
   },
   mounted () {
-    console.log('created---')
-    wx.ready(function () {
-      console.log('ready-----')
-    })
-    wx.error(function (res) {
-      console.log('error-----')
-    })
-    api.wxConfig().then(config => {
-      console.log('config', config.data)
-      wx.config({
-        debug: true,
-        appId: config.data.appId,
-        timestamp: config.data.timestamp,
-        nonceStr: config.data.nonceStr,
-        signature: config.data.signature,
-        jsApiList: ['getLocation']
-      })
-    })
+    // console.log('created---')
+    // wx.ready(function () {
+    //   console.log('ready-----')
+    // })
+    // wx.error(function (res) {
+    //   console.log('error-----')
+    // })
+    // api.wxConfig().then(config => {
+    //   console.log('config', config.data)
+    //   wx.config({
+    //     debug: true,
+    //     appId: config.data.appId,
+    //     timestamp: config.data.timestamp,
+    //     nonceStr: config.data.nonceStr,
+    //     signature: config.data.signature,
+    //     jsApiList: ['getLocation']
+    //   })
+    // })
   },
   created: function () {
     var that = this
