@@ -159,7 +159,7 @@ export default {
           oldManInfo = JSON.parse(temp2)
         }
         // console.log('1.3:', oldManInfo)
-        // this.$toast('获取sessionStorage中的数据:' + JSON.stringify(oldManInfo))
+        this.$toast('获取sessionStorage中的数据:' + JSON.stringify(oldManInfo))
         // console.log('数据2：', getPhoneNumberFromNet, ',oldmaninfo:', oldManInfo)
         this.manInfo.name = oldManInfo.name
         this.manInfo.age = oldManInfo.age
