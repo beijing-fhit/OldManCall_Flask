@@ -50,6 +50,7 @@ export default {
     wx.error(function (res) {
       console.log('error-----')
     })
+    this.$alert('当前地址:' + window.location.href)
     api.wxConfig().then(config => {
       console.log('config', config.data)
       wx.config({
@@ -61,8 +62,7 @@ export default {
         jsApiList: ['getLocation']
       })
     })
-  },
-  created: function () {
+    // 获取数据
     var that = this
     api.getInfo(sessionStorage.getItem('qrCodeId'))
       .then(res => {
@@ -76,6 +76,8 @@ export default {
       .catch(err => {
         console.log('获取信息失败', err)
       })
+  },
+  created: function () {
   },
   methods: {
     startCall: function () {
