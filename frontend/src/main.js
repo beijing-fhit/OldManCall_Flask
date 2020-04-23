@@ -26,13 +26,13 @@ router.beforeEach((to, from, next) => {
     document.title = to.meta.title
   }
   // ios微信和android微信适配
-  var u = navigator.userAgent
-  var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/) // ios终端
-  if (isiOS && to.path !== location.pathname) {
-    location.assign(to.fullPath) // 此处不可使用location.replace
-  } else {
-    next()
-  }
+  // var u = navigator.userAgent
+  // var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/) // ios终端
+  // if (isiOS && to.path !== location.pathname) {
+  //   location.assign(to.fullPath) // 此处不可使用location.replace
+  // } else {
+  next()
+  // }
 })
 // var onPlusReady = function (callback, context = this) {
 //   if (window.plus) {
