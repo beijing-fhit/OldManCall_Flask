@@ -53,7 +53,7 @@ export default {
     // this.$alert('当前地址:' + window.location.href)
     api.wxConfig().then(config => {
       console.log('config', config.data)
-      this.$alert('签名:' + config.data)
+      this.$alert('签名:' + JSON.stringify(config.data))
       wx.config({
         debug: true,
         appId: config.data.appId,
