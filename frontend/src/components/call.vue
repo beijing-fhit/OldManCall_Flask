@@ -79,39 +79,25 @@ export default {
   },
   methods: {
     startCall: function () {
-      // api.wxConfig().then(config => {
-      //   console.log('config', config.data)
-      //   wx.config({
-      //     debug: true,
-      //     appId: config.data.appId,
-      //     timestamp: config.data.timestamp,
-      //     nonceStr: config.data.nonceStr,
-      //     signature: config.data.signature,
-      //     jsApiList: ['getLocation']
-      //   })
-      // })
-      var that = this
-      // wx.ready(function () {
-      //   console.log('ready---')
-        // 获取地理位置发送通知
-        that.getLocation()
-        api.weChatCalling(sessionStorage.getItem('openId'), this.phone_number, sessionStorage.getItem('qrCodeId'))
-          .then(res => {
-            console.log('呼叫成功:', res)
-            if (res.data.Code === 0 && res.data.Caller !== '') {
-              window.location.href = 'tel://' + res.data.Caller
-            } else {
-              // this.$toast('呼叫失败!')
-              that.error_msg = '请您稍后再拨!'
-              that.centerDialogVisible = true
-            }
-          })
-          .catch(err => {
-            console.log('呼叫失败:', err)
-            that.error_msg = err + '\n请您稍后再拨!'
-            that.centerDialogVisible = true
-          })
-      // })
+      // var that = this
+      // 获取地理位置发送通知
+      this.getLocation()
+      api.weChatCalling(sessionStorage.getItem('openId'), this.phone_number, sessionStorage.getItem('qrCodeId'))
+        .then(res => {
+          console.log('呼叫成功:', res)
+          if (res.data.Code === 0 && res.data.Caller !== '') {
+            window.location.href = 'tel://' + res.data.Caller
+          } else {
+            // this.$toast('呼叫失败!')
+            this.error_msg = '请您稍后再拨!'
+            this.centerDialogVisible = true
+          }
+        })
+        .catch(err => {
+          console.log('呼叫失败:', err)
+          this.error_msg = err + '\n请您稍后再拨!'
+          this.centerDialogVisible = true
+        })
     },
     getLocation: function () {
       var that = this
