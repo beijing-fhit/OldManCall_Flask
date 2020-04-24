@@ -18,13 +18,15 @@ export default {
   },
   methods: {
     init: function () {
+      sessionStorage.clear()
       // 截取路径上的参数，若含有openID和ucallfreeid和qrcodeid则表示从小程序过来的，
       // 若没有openID这些参数，则表示从微信网页打开，则需要获取code和openID(判断参数中是否有code这个参数，若有则用来换取openID，若没有则先获取code)
       // var params = window.location.search
       var openid = getUrlParam('openid')
       var ucallfreeid = getUrlParam('ucallfreeid')
       var qrcodeid = getUrlParam('qrcodeid')
-      // console.log('参数：', openid, ucallfreeid, qrcodeid)
+      console.log('参数：', openid, ucallfreeid, qrcodeid)
+      this.$alert('参数：' + openid + ucallfreeid + qrcodeid)
       if (openid && ucallfreeid && qrcodeid) {
         // 来自小程序，则不用请求参数,跳转到call页面
         sessionStorage.setItem('openId', openid)

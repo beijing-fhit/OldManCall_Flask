@@ -15,6 +15,20 @@ export default {
       message: this.$route.query.message,
       success_img_url: require('../assets/success.png')
     }
+  },
+  mounted () {
+    // // this.$message('阿道夫')
+    // const loading = this.$loading({
+    //   lock: true,
+    //   text: '正在发起呼叫请求...',
+    //   spinner: 'el-icon-loading',
+    //   background: 'rgba(0, 0, 0, 0.5)',
+    //   fullscreen: false,
+    //   customClass: 'el-loading-spinner'
+    // })
+    // setTimeout(() => {
+    //   loading.close()
+    // }, 2000)
   }
 }
 </script>
@@ -50,5 +64,24 @@ export default {
     letter-spacing: 0.01rem;
     font-style: normal;
     margin-top: 0.5rem;
+  }
+
+  /deep/ .el-loading-spinner {
+    top: 50%;
+    left: 50%;
+    margin-left: -55px;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 20px;
+    border-radius: 4px;
+    width: auto;
+    text-align: center;
+    position: absolute;
+  }
+  /deep/ i {
+    color: #eee;
+  }
+
+  /deep/ .el-loading-text {
+    color: #eee;
   }
 </style>

@@ -53,9 +53,9 @@ export default {
     // this.$alert('当前地址:' + window.location.href)
     api.wxConfig().then(config => {
       console.log('config', config.data)
-      this.$alert('签名:' + JSON.stringify(config.data))
+      // this.$alert('签名:' + JSON.stringify(config.data))
       wx.config({
-        debug: true,
+        debug: false,
         appId: config.data.appId,
         timestamp: config.data.timestamp,
         nonceStr: config.data.nonceStr,
@@ -65,9 +65,19 @@ export default {
     })
     // 获取数据
     var that = this
-    api.getInfo(sessionStorage.getItem('qrCodeId'))
+    // that.$alert('openid:' + sessionStorage.getItem('openId') + 'qrcodeid:' + sessionStorage.getItem('qrCodeId'))
+    var qrcodeid = sessionStorage.getItem('qrCodeId')
+    var temp = qrcodeid.split('?') // xxx?qrcodeid=xxx?qrcodeid=xxx
+    var p = temp[temp.length - 1]
+    if (p.indexOf('=') !== -1) {
+      qrcodeid = p.split('=')[1]
+    } else {
+      qrcodeid = p
+    }
+    api.getInfo(qrcodeid)
       .then(res => {
         console.log('获取信息成功', res)
+        // that.$alert('获取信息：' + JSON.stringify(res.data))
         var data = res.data
         if (data.status_code === 0) {
           that.info = data.data.old_man_info
@@ -83,13 +93,21 @@ export default {
   methods: {
     startCall: function () {
       // var that = this
-      // 获取地理位置发送通知
-      this.getLocation()
-      api.weChatCalling(sessionStorage.getItem('openId'), this.phone_number, sessionStorage.getItem('qrCodeId'))
+      var qrcodeid = sessionStorage.getItem('qrCodeId')
+      var temp = qrcodeid.split('?') // xxx?qrcodeid=xxx?qrcodeid=xxx
+      var p = temp[temp.length - 1]
+      if (p.indexOf('=') !== -1) {
+        qrcodeid = p.split('=')[1]
+      } else {
+        qrcodeid = p
+      }
+      api.weChatCalling(sessionStorage.getItem('openId'), this.phone_number, qrcodeid)
         .then(res => {
           console.log('呼叫成功:', res)
           if (res.data.Code === 0 && res.data.Caller !== '') {
             window.location.href = 'tel://' + res.data.Caller
+            // 获取地理位置发送通知
+            this.getLocation()
           } else {
             // this.$toast('呼叫失败!')
             this.error_msg = '请您稍后再拨!'

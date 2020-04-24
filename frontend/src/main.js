@@ -30,6 +30,8 @@ router.beforeEach((to, from, next) => {
   var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/) // ios终端
   if (isiOS && to.path !== location.pathname) {
     location.assign(to.fullPath) // 此处不可使用location.replace
+  } else if (u.indexOf('miniProgram')) {
+    location.assign(to.fullPath) // 此处不可使用location.replace
   } else {
     next()
   }
