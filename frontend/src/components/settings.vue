@@ -140,6 +140,7 @@ export default {
     if (temp !== null && temp !== undefined && temp !== '' && temp !== 'undefined') {
       getPhoneNumberFromNet = JSON.parse(temp)
     }
+    this.$toast('加载本地:' + getPhoneNumberFromNet)
     if (getPhoneNumberFromNet === false) {
       try {
         // var oldManInfo = this.manInfo
@@ -230,7 +231,7 @@ export default {
         var t3 = JSON.parse(temp3)
         oldManInfo3.name = t3.name
         oldManInfo3.age = t3.age
-        oldManInfo3.address  = t3.address
+        oldManInfo3.address = t3.address
         oldManInfo3.medical_history = t3.medical_history
         oldManInfo3.allergy = t3.allergy
         oldManInfo3.blood_type = t3.blood_type
