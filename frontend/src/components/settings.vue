@@ -365,7 +365,8 @@ export default {
     dialogConfirm: function () {
       this.centerDialogVisible = false
       // 回到顶部并刷新页面
-      window.scrollTo(0, 0)
+      this.scroll
+      window.scrollTo({top: 0, left: 0, behavior: 'smooth'})
       this.reload()
     }
   }
