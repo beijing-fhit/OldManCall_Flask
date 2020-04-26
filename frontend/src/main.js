@@ -53,3 +53,16 @@ router.beforeEach((to, from, next) => {
 //     onPlusReady: onPlusReady
 //   }
 // })
+// import { Loading } from 'element-ui'
+// Vue.prototype.$openLoading = function () {
+//   const loading = Loading.service({
+//     lock: true,
+//     text: 'Loading',
+//     spinner: 'el-icon-loading',
+//     background: 'rgba(0, 0, 0, 0.1)'
+//   })
+//   // setTimeout(function () {
+//   //   loading.close();
+//   // }, 10000)
+//   return loading
+// }
