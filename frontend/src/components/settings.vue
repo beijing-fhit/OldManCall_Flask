@@ -162,6 +162,7 @@ export default {
         return
       } catch (e) {
         console.log('获取s异常:', e)
+        return
       }
     }
     // this.$toast('获取sessionStorage中的数据2:' + this.manInfo)
@@ -229,7 +230,7 @@ export default {
         var t3 = JSON.parse(temp3)
         oldManInfo3.name = t3.name
         oldManInfo3.age = t3.age
-        oldManInfo3.address = t3.address
+        oldManInfo3.address  = t3.address
         oldManInfo3.medical_history = t3.medical_history
         oldManInfo3.allergy = t3.allergy
         oldManInfo3.blood_type = t3.blood_type
@@ -365,7 +366,6 @@ export default {
     dialogConfirm: function () {
       this.centerDialogVisible = false
       // 回到顶部并刷新页面
-      this.scroll
       window.scrollTo({top: 0, left: 0, behavior: 'smooth'})
       this.reload()
     }
