@@ -105,6 +105,7 @@ export default {
         // console.log('获取验证码成功:', res)
       }).catch(err => {
         console.log('获取验证码失败:', err)
+        that.$toast('获取验证码失败!')
       })
     },
     verify: function () {

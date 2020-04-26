@@ -172,7 +172,7 @@ export default {
   .wide-button{
     width: 80%;
     height: 5rem;
-    margin-top: 5rem;
+    margin-top: 3rem;
     margin-bottom: 5rem;
     letter-spacing: 0.5rem;
     font-size: 2rem;

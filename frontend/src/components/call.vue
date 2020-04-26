@@ -179,7 +179,7 @@ export default {
   .call-img{
     width: 10rem;
     height: 10rem;
-    margin-top: 5rem;
+    margin-top: 3.5rem;
   }
   .call-text{
     font-family: PingFangSC-Medium;

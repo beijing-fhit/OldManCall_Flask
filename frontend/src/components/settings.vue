@@ -105,9 +105,9 @@
 import Topbar from './topbar'
 import api from '../api'
 export default {
+  inject: ['reload'],
   name: 'settings',
   components: {Topbar},
-  inject: ['reload'],
   data () {
     return {
       // manInfo: {
@@ -131,7 +131,7 @@ export default {
     }
   },
   activated: function () {
-    this.$toast('activated..')
+    // this.$toast('activated..')
     var that = this
     // 如果从addContact页面跳转过来的，则不使用网络上获取到的号码,加载本地缓存
     // console.log('数据1：', JSON.parse(this.$route.query.getPhoneNumberFromNet))
@@ -142,12 +142,12 @@ export default {
     }
     if (getPhoneNumberFromNet === false) {
       try {
-        var oldManInfo = this.manInfo
-        var temp2 = sessionStorage.getItem('manInfo')
-        if (temp2 !== null && temp2 !== undefined && temp2 !== '' && temp2 !== 'undefined') {
-          oldManInfo = JSON.parse(temp2)
-        }
-        this.$toast('获取数据:' + JSON.stringify(oldManInfo))
+        // var oldManInfo = this.manInfo
+        // var temp2 = sessionStorage.getItem('manInfo')
+        // if (temp2 !== null && temp2 !== undefined && temp2 !== '' && temp2 !== 'undefined') {
+        //   oldManInfo = JSON.parse(temp2)
+        // }
+        // this.$toast('获取数据:' + JSON.stringify(oldManInfo))
         // console.log('数据2：', getPhoneNumberFromNet, ',oldmaninfo:', oldManInfo)
         // this.manInfo.name = oldManInfo.name
         // this.manInfo.age = oldManInfo.age
@@ -164,7 +164,7 @@ export default {
         console.log('获取s异常:', e)
       }
     }
-    this.$toast('获取sessionStorage中的数据2:' + this.manInfo)
+    // this.$toast('获取sessionStorage中的数据2:' + this.manInfo)
     // 获取有无数据
     api.getInfo(sessionStorage.getItem('qrCodeId')).then(res => {
       //  获取数据
@@ -236,7 +236,7 @@ export default {
         oldManInfo3.drugs = t3.drugs
         oldManInfo3.treatment = t3.treatment
       }
-      this.$toast('当前数据:' + oldManInfo3)
+      // this.$toast('当前数据:' + oldManInfo3)
       return oldManInfo3
     },
     getContact: function () {
@@ -288,7 +288,7 @@ export default {
           return
         }
       }
-      this.$toast('正在保存OldManinfo:' + JSON.stringify(this.manInfo))
+      // this.$toast('正在保存OldManinfo:' + JSON.stringify(this.manInfo))
       sessionStorage.setItem('manInfo', JSON.stringify(this.manInfo))
       // var mode = 0 // 0代表修改，1代表新增
       this.$router.push({
@@ -364,7 +364,9 @@ export default {
     },
     dialogConfirm: function () {
       this.centerDialogVisible = false
-      // 刷新页面
+      // 回到顶部并刷新页面
+      window.scrollTo(0, 0)
+      this.reload()
     }
   }
 }
