@@ -29,7 +29,7 @@ export default {
       }
     }
   },
-  created: function () {
+  created () {
     document.title = this.$route.meta.title
     var that = this
     api.getInfo(sessionStorage.getItem('qrCodeId'))

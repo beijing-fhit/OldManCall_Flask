@@ -56,7 +56,7 @@ export default {
       index: this.$route.query.index ? this.$route.query.index : 0
     }
   },
-  created() {
+  created () {
     document.title = this.$route.meta.title
   },
   mounted: function () {

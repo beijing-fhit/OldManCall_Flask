@@ -130,7 +130,7 @@ export default {
       isModified: false
     }
   },
-  created() {
+  created () {
     document.title = this.$route.meta.title
   },
   mounted: function () {

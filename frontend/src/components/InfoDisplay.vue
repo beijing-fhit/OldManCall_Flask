@@ -17,7 +17,7 @@ export default {
       success_img_url: require('../assets/success.png')
     }
   },
-  created() {
+  created () {
     document.title = this.$route.meta.title
   },
   mounted () {

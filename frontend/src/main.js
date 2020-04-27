@@ -24,9 +24,10 @@ new Vue({
   template: '<App/>'
 })
 router.beforeEach((to, from, next) => {
-  if (to.meta.title) {
-    document.title = to.meta.title
-  }
+  // 因为下面使用了location.assign，这个改变title的方式无效
+  // if (to.meta.title) {
+  //   document.title = to.meta.title
+  // }
   // ios微信和android微信适配
   var u = navigator.userAgent
   var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/) // ios终端

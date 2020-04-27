@@ -24,7 +24,7 @@ export default {
       img_url: require('../assets/yellow_card.png')
     }
   },
-  created() {
+  created () {
     document.title = this.$route.meta.title
   },
   mounted () {

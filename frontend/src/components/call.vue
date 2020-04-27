@@ -88,7 +88,7 @@ export default {
         console.log('获取信息失败', err)
       })
   },
-  created: function () {
+  created () {
     document.title = this.$route.meta.title
   },
   methods: {
