@@ -56,6 +56,9 @@ export default {
       index: this.$route.query.index ? this.$route.query.index : 0
     }
   },
+  created() {
+    document.title = this.$route.meta.title
+  },
   mounted: function () {
     // 在这里获取settings返回过来的数据
     var number = this.$route.query.modifyNumber

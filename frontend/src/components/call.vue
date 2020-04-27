@@ -89,6 +89,7 @@ export default {
       })
   },
   created: function () {
+    document.title = this.$route.meta.title
   },
   methods: {
     startCall: function () {

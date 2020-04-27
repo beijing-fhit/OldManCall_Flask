@@ -17,6 +17,9 @@ export default {
       success_img_url: require('../assets/success.png')
     }
   },
+  created() {
+    document.title = this.$route.meta.title
+  },
   mounted () {
     // this.$message('阿道夫')
   }

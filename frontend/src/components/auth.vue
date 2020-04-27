@@ -14,6 +14,7 @@ export default {
     }
   },
   created () {
+    document.title = this.$route.meta.title
     this.init()
   },
   methods: {

@@ -24,6 +24,9 @@ export default {
       img_url: require('../assets/yellow_card.png')
     }
   },
+  created() {
+    document.title = this.$route.meta.title
+  },
   mounted () {
     console.log('created---')
     wx.ready(function () {
