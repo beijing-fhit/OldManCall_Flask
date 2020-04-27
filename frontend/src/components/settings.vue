@@ -131,7 +131,7 @@ export default {
     }
   },
   mounted: function () {
-    // this.$toast('activated..')
+    this.$toast('activated..')
     var that = this
     // 如果从addContact页面跳转过来的，则不使用网络上获取到的号码,加载本地缓存
     // console.log('数据1：', JSON.parse(this.$route.query.getPhoneNumberFromNet))
