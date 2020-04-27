@@ -36,6 +36,11 @@ router.beforeEach((to, from, next) => {
     next()
   }
 })
+router.afterEach((to, from) => {
+  if (to.meta.title) {
+    document.title = to.meta.title
+  }
+})
 // var onPlusReady = function (callback, context = this) {
 //   if (window.plus) {
 //     callback.call(context)

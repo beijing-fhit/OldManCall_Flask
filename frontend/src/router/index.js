@@ -88,11 +88,5 @@ export default new Router({
         title: '呼叫'
       }
     }
-  ],
-  scrollBehavior (to, from, savedPosition) {
-    return {
-      x: 0,
-      y: 0
-    }
-  }
+  ]
 })
