@@ -138,9 +138,9 @@ export default {
       window.onpageshow = function (e) {
         if (
           e.persisted ||
-          (window.performance && window.performance.navigation.type == 2)
+          (window.performance && window.performance.navigation.type === 2)
         ) {
-          window.location.reload();
+          window.location.reload()
         }
       }
     }
