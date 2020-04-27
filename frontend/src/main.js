@@ -9,8 +9,10 @@ import 'element-ui/lib/theme-chalk/index.css'
 import './components/Toast/index.css'
 import Toast from './components/Toast/index'
 import 'default-passive-events'
-Vue.use(Toast)
+import VueWechatTitle from 'vue-wechat-title' // 动态修改title
 
+Vue.use(Toast)
+Vue.use(VueWechatTitle)
 Vue.use(ElementUI)
 Vue.config.productionTip = false
 
