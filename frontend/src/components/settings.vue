@@ -153,7 +153,7 @@ export default {
     if (temp !== null && temp !== undefined && temp !== '' && temp !== 'undefined') {
       getPhoneNumberFromNet = JSON.parse(temp)
     }
-    this.$toast('加载本地:' + getPhoneNumberFromNet)
+    // this.$toast('加载本地:' + getPhoneNumberFromNet)
     if (getPhoneNumberFromNet === false) {
       try {
         // var oldManInfo = this.manInfo

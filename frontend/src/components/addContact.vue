@@ -65,7 +65,7 @@ export default {
       console.log('在addContact页面获取到的参数contact2是:', number)
       return
     }
-    this.$toast('数据：' + number)
+    // this.$toast('数据：' + number)
     // 判断字符串是否为数字，是则显示电话号码，不是则不管
     if (number.toString().match('[0-9]{1,}')) {
       this.number = number
