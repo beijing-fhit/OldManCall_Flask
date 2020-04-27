@@ -103,6 +103,8 @@ class QRCodeInfo(Resource):
         # print(qrcodeid, old_man_info, phone_numbers)
         try:
             qrCode = QrCode.query.get(qrcodeid)
+            if qrCode.old_man_info is None or qrCode.old_man_info is '':
+                raise Exception('找不到OldManinfo,oldmaninfo:'+qrCode.old_man_info)
             # 更新数据
             db.session.query(OldManInfo).filter(OldManInfo.id == qrCode.old_man_info) \
                 .update({
