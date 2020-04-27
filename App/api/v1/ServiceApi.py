@@ -152,8 +152,15 @@ class QRCodeInfo(Resource):
                 with open('flask.log', 'a+') as f:
                     f.write('\ncreate OldManInfo info :%s' % (oldManInfo))
                     f.close()
-                qrCode = QrCode(qr_code_id=qrcodeid, old_man_info=oldManInfo.id)
-                qrCode.save()
+
+                if QrCode.query.get(qrcodeid) is  None:
+                    qrCode1 = QrCode(qr_code_id=qrcodeid, old_man_info=oldManInfo.id)
+                    qrCode1.save()
+                else:
+                    qrCode2 = QrCode.query.get(qrcodeid)
+                    qrCode2.old_man_info=oldManInfo.id
+                    qrCode2.save()
+
             except Exception as e:
                 with open('flask.log', 'a+') as f:
                     f.write('\ncreate OldManInfo exception :%s' % (e))
