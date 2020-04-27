@@ -24,24 +24,17 @@ new Vue({
   template: '<App/>'
 })
 router.beforeEach((to, from, next) => {
-
+  if (to.meta.title) {
+    document.title = to.meta.title
+  }
   // ios微信和android微信适配
   var u = navigator.userAgent
   var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/) // ios终端
   if (isiOS && to.path !== location.pathname) {
     location.assign(to.fullPath) // 此处不可使用location.replace
-    if (to.meta.title) {
-      document.title = to.meta.title
-    }
   } else if (u.indexOf('miniProgram')) {
     location.assign(to.fullPath) // 此处不可使用location.replace
-    if (to.meta.title) {
-      document.title = to.meta.title
-    }
   } else {
-    if (to.meta.title) {
-      document.title = to.meta.title
-    }
     next()
   }
 })

@@ -130,6 +130,9 @@ export default {
       isModified: false
     }
   },
+  created() {
+    document.title = '设置'
+  },
   mounted: function () {
     // 这部分代码是为了解决在ios上页面返回时不刷新的问题--start
     var u = navigator.userAgent
