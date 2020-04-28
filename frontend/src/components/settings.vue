@@ -95,7 +95,7 @@
       center>
       <span class="center-dialog-content">你的信息已经保存!</span>
       <span slot="footer" class="dialog-footer dialog-btn-group">
-        <span type="primary" @click="dialogConfirm" class="confirm-btn">确定</span>
+        <el-button type="primary" @click="dialogConfirm" class="confirm-btn">确定</el-button>
       </span>
     </el-dialog>
   </div>
@@ -591,7 +591,7 @@ export default {
     flex-direction: row;
     justify-content:space-evenly;
     align-items: center;
-    border-top: 0.05rem inset #E5E5E5;
+    border-top: 0.02rem inset #E5E5E5;
 
   }
   .confirm-btn{

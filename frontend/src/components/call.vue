@@ -109,7 +109,7 @@ export default {
           .then(res => {
             console.log('呼叫成功:', res)
             if (res.data.Code === 0 && res.data.Caller !== '') {
-              window.location.href = 'tel://' + res.data.Caller
+              window.location.href = 'tel:' + res.data.Caller
               // 获取地理位置发送通知
               this.getLocation()
             } else {
