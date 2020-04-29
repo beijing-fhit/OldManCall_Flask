@@ -121,6 +121,7 @@ export default {
         this.$toast('验证码不能为空！')
         return
       }
+      const loading = this.showLoading('验证中...')
       api.verifyNumber(sessionStorage.getItem('openId'), this.number, this.verifyNumber)
         .then(res => {
           console.log('验证成功:', res)
@@ -167,18 +168,14 @@ export default {
             that.$toast('验证失败')
             that.centerDialogVisible = false
           }
-          // test 测试,最后上线必须删除
-          // this.$router.push({
-          //   path: '/settings',
-          //   query: {
-          //     getPhoneNumberFromNet: false
-          //   }
-          // })
         })
         .catch(() => {
           that.$toast('验证失败')
           // console.log('验证失败:', err)
           that.centerDialogVisible = false
+        })
+        .finally(() => {
+          loading.close()
         })
     },
     countDown: function () {
@@ -215,6 +212,19 @@ export default {
       this.isClearInterval = true // 重置interval
       this.number = ''
       this.verifyNumber = ''
+    },
+    showLoading: function (text) {
+      const loading = this.$loading({
+        lock: true,
+        customClass: 'create-isLoading', //  *这里设置他的class名称,这里最重要
+        text: text,
+        spinner: 'el-icon-loading',
+        background: 'rgba(0, 0, 0, 0)'
+      })
+      return loading
+    },
+    hideLoading: function (loading) {
+      loading.close()
     }
   }
 }
