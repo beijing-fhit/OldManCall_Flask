@@ -175,6 +175,9 @@ class QRCodeInfo(Resource):
             qrCode = QrCode.query.filter_by(qr_code_id=qrcodeid).first()  # 这重新查询一次
             oldNumbers = [p.phone_number for p in qrCode.phone_number.all()]
             delete, add = CommonUtils.compareArrays(oldNumbers, phone_numbers)
+            with open('flask.log', 'a+') as f:
+                f.write('\ndelete and add phonenumbers :%s,%s' % (delete,add))
+                f.close()
             for d in delete:
                 PhoneNumber.query.filter_by(phone_number=d, q_id=qrcodeid).delete()
             for a in add:
