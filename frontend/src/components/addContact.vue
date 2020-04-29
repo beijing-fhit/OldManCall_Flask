@@ -22,7 +22,7 @@
         <span class="fourty-percent verify-code-text-btn" @click="getVerifyCode">{{this.verifyBtnContent}}</span>
       </el-row>
     </div>
-    <el-button type="success" class="wide-button" @click="verify">确定</el-button>
+    <el-button type="success" class="wide-button" @click="verify">下一步</el-button>
     <el-dialog
       :visible.sync="centerDialogVisible"
       title="绑定成功"
@@ -125,10 +125,7 @@ export default {
         .then(res => {
           console.log('验证成功:', res)
           if (res.data.Code === 0) {
-            // console.log('验证成功:', res)
-            that.$toast('验证成功')
-            // this.centerDialogVisible = true
-            // console.log('验证成功contact:', this.contact)
+            // that.$toast('验证成功')
             if (that.contact.indexOf(that.number, 0) === -1) {
               var index = that.$route.query.index
               if (index === null | index === '' | index === undefined) {
@@ -254,7 +251,7 @@ export default {
   .contact-panel{
     display: flex;
     flex-direction: column;
-    align-items: left;
+    align-items: flex-start;
     justify-content: center;
     background-color:#FFFFFF ;
     width: 100%;

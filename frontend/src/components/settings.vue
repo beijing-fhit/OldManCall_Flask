@@ -2,6 +2,7 @@
   <div>
     <div >
       <Topbar class="topbar" :show-save-btn="true" @saveInfo="saveInfo"/>
+      <el-row class="alert-row margin-horizontal">注意保存信息!</el-row>
     </div>
     <div class="item-title">
       <span class="title-text">联系人号码绑定/修改</span>
@@ -49,7 +50,7 @@
      </div>
     <div class="info-fill-panel leftpadding">
       <el-row class="info-item border-bottom ">
-        <span class="info-name">姓名</span>
+        <span class="info-name">姓名*</span>
         <el-input v-model="manInfo.name" class="info-content normal-input-style no-border-input" placeholder="预设内容(必填)" clearable></el-input>
       </el-row>
       <el-row class="info-item border-bottom ">
@@ -301,7 +302,7 @@ export default {
     },
     modifyContact: function (index) {
       if (index === 2) {
-        if (this.text1 === '') {
+        if (this.contact[1] === '' || this.contact[1] === undefined) {
           this.$toast('请先绑定第二个联系人！')
           return
         }
@@ -394,7 +395,15 @@ export default {
   .topbar {
     background: #FFFFFF !important;
   }
-
+  .alert-row {
+    background-color: #FFEB99;
+    color: #B21D2C;
+    font-size: 1.8rem;
+    font-family: "PingFang SC";
+    padding: 0.5rem 0;
+    text-align: start;
+    letter-spacing: 0.3rem;
+  }
   .item-title {
     display: flex;
     flex-direction: row;
