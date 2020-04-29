@@ -29,7 +29,10 @@ class Base:
             try:
                 db.session.delete_all(List)
                 db.session.commit()
-            except:
+            except Exception as e:
+                with open('flask.log', 'a+') as f:
+                    f.write('\ndelete all model exception :%s' % (e))
+                    f.close()
                 db.session.rollback()
 
     # 定义删除方法
@@ -37,7 +40,10 @@ class Base:
         try:
             db.session.delete(self)
             db.session.commit()
-        except:
+        except Exception as e:
+            with open('flask.log', 'a+') as f:
+                f.write('\ndelete model exception :%s' % (e))
+                f.close()
             db.session.rollback()
 
 class OldManInfo(db.Model,Base):
