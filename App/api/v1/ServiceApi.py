@@ -180,7 +180,9 @@ class QRCodeInfo(Resource):
                 f.close()
             for d in delete:
                 p1=PhoneNumber.query.filter_by(phone_number=d, q_id=qrcodeid)
-                p1.delete()
+                db.session.delete(p1)
+                db.session.commit()
+                # p1.delete()
             for a in add:
                 p2=PhoneNumber(phone_number=a, q_id=qrcodeid)
                 p2.save()
@@ -190,6 +192,7 @@ class QRCodeInfo(Resource):
             }
             return res
         except Exception as e:
+            db.session.rollback()
             print("创建PhoneNumber失败:", e)
             res = {
                 'status_code': -1,
