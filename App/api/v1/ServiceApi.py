@@ -179,9 +179,11 @@ class QRCodeInfo(Resource):
                 f.write('\ndelete and add phonenumbers :%s,%s' % (delete,add))
                 f.close()
             for d in delete:
-                PhoneNumber.query.filter_by(phone_number=d, q_id=qrcodeid).delete()
+                p1=PhoneNumber.query.filter_by(phone_number=d, q_id=qrcodeid)
+                p1.delete()
             for a in add:
-                PhoneNumber(phone_number=a, q_id=qrcodeid).save()
+                p2=PhoneNumber(phone_number=a, q_id=qrcodeid)
+                p2.save()
             res = {
                 'status_code': 0,
                 'message': '信息保存成功'
