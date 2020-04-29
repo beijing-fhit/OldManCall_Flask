@@ -9,10 +9,8 @@ class Base:
             db.session.add(self)  # self实例化对象代表就是u对象
             db.session.commit()
         except Exception as e:
-            with open('flask.log', 'a+') as f:
-                f.write('\nsave model exception :%s' % (e))
-                f.close()
             db.session.rollback()
+            raise Exception('保存model异常：'+e)
 
     # 定义静态类方法接收List参数
     @staticmethod
@@ -20,8 +18,9 @@ class Base:
         try:
             db.session.add_all(List)
             db.session.commit()
-        except:
+        except Exception as e:
             db.session.rollback()
+            raise Exception('批量保存model异常：'+e)
 
         # 定义静态类方法接收List参数
         @staticmethod
@@ -30,10 +29,8 @@ class Base:
                 db.session.delete_all(List)
                 db.session.commit()
             except Exception as e:
-                with open('flask.log', 'a+') as f:
-                    f.write('\ndelete all model exception :%s' % (e))
-                    f.close()
                 db.session.rollback()
+                raise Exception('批量删除model异常：'+e)
 
     # 定义删除方法
     def delete(self):
@@ -41,10 +38,8 @@ class Base:
             db.session.delete(self)
             db.session.commit()
         except Exception as e:
-            with open('flask.log', 'a+') as f:
-                f.write('\ndelete model exception :%s' % (e))
-                f.close()
             db.session.rollback()
+            raise Exception('删除model异常：'+e)
 
 class OldManInfo(db.Model,Base):
     __tablename__='oldmaninfo'
