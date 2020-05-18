@@ -365,7 +365,6 @@ export default {
               .then(res => {
                 if (res.data.Code === 0) {
                   this.$toast('激活二维码成功')
-                  window.location.reload()
                   this.centerDialogVisible = true
                   // this.$router.push('/call')
                   // console.log('激活二维码成功:', res)
@@ -382,7 +381,6 @@ export default {
               })
           } else {
             this.$toast('保存信息成功')
-            window.location.reload()
             this.centerDialogVisible = true
             // this.$router.push('/call')
           }
@@ -404,6 +402,7 @@ export default {
       // 回到顶部并刷新页面
       this.centerDialogVisible = false
       window.scrollTo({top: 0, left: 0, behavior: 'smooth'})
+      window.location.reload()
     }
   }
 }
