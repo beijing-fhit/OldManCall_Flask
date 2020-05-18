@@ -337,7 +337,6 @@ export default {
       this.reload()
     },
     saveInfo: function () {
-      var that = this
       // this.$router.push('/call')
       // 保存老人信息
       // 判空
@@ -371,15 +370,13 @@ export default {
                   // console.log('激活二维码成功:', res)
                 } else {
                   this.$toast('激活二维码失败')
-                  // window.location.reload()
-                  that.reload()
+                  window.location.reload()
                   // console.log('激活二维码失败:', res)
                 }
               })
               .catch(err => {
                 this.$toast('激活二维码失败')
-                // window.location.reload()
-                that.reload()
+                window.location.reload()
                 console.log('激活二维码失败:', err)
               })
           } else {
@@ -390,23 +387,21 @@ export default {
           // this.$alert('保存信息成功')
         } else {
           this.$toast('保存信息失败')
-          // window.location.reload()
+          window.location.reload()
           // this.centerDialogVisible = false
         }
       }).catch(err => {
         // 保存信息失败
         console.log('保存信息失败:', err)
         this.$toast('保存信息失败!')
-        // window.location.reload()
-        that.reload()
+        window.location.reload()
         this.centerDialogVisible = false
       })
     },
     dialogConfirm: function () {
       // 回到顶部并刷新页面
       this.centerDialogVisible = false
-      // window.location.reload()
-      that.reload()
+      window.location.reload()
       window.scrollTo({top: 0, left: 0, behavior: 'smooth'})
     }
   }

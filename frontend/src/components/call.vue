@@ -179,8 +179,8 @@ export default {
     },
     hideLoading: function (loading) {
       loading.close()
-      // window.location.reload()
-      this.reload()
+      window.location.reload()
+      // this.reload()
     }
   }
 }
