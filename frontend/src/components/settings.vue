@@ -393,7 +393,7 @@ export default {
         this.$toast('保存信息失败!')
         this.centerDialogVisible = false
       }).finally(() => {
-        this.reload()
+        window.location.reload()
       })
     },
     dialogConfirm: function () {
