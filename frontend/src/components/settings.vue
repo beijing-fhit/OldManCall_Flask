@@ -80,15 +80,16 @@
     <div class="info-fill-panel leftpadding ">
       <el-row class="info-item border-bottom">
         <span class="long-info-name">正在吃的药</span>
-        <el-input v-model="manInfo.drugs" class="long-info-content normal-input-style no-border-input" placeholder="预设内容" clearable></el-input>
+        <el-input v-model="manInfo.drugs" maxlength=8 class="long-info-content normal-input-style no-border-input" placeholder="预设内容" clearable></el-input>
       </el-row>
       <el-row class="info-item">
         <span class="long-info-name">正在进行的治疗</span>
-        <el-input v-model="manInfo.treatment" class="long-info-content normal-input-style no-border-input" placeholder="预设内容" clearable></el-input>
+        <el-input v-model="manInfo.treatment" maxlength=8 class="long-info-content normal-input-style no-border-input" placeholder="预设内容" clearable></el-input>
       </el-row>
     </div>
     <el-button type="success" class="wide-button" @click="saveInfo">保存</el-button>
     <el-dialog
+      :lock-scroll="false"
       :visible.sync="centerDialogVisible"
       title="操作成功"
       width="80%"
@@ -133,6 +134,12 @@ export default {
   },
   created () {
     document.title = this.$route.meta.title
+    // window.ontouchstart = function (e) {
+    //   e.preventDefault()
+    // }
+    // document.addEventListener('touchmove', function (e) {
+    //   e.preventDefault()
+    // }, false)
   },
   mounted: function () {
     // 这部分代码是为了解决在ios上页面返回时不刷新的问题--start
@@ -301,6 +308,10 @@ export default {
       return []
     },
     modifyContact: function (index) {
+      if (index === 0) {
+        // 第一个号码不能修改
+        return
+      }
       if (index === 2) {
         if (this.contact[1] === '' || this.contact[1] === undefined) {
           this.$toast('请先绑定第二个联系人！')
@@ -374,16 +385,18 @@ export default {
           // this.$alert('保存信息成功')
         } else {
           this.$toast('保存信息失败')
+          // this.centerDialogVisible = false
         }
       }).catch(err => {
         // 保存信息失败
         console.log('保存信息失败:', err)
-        this.$toast('保存信息失败')
+        this.$toast('保存信息失败!')
+        this.centerDialogVisible = false
       })
     },
     dialogConfirm: function () {
-      this.centerDialogVisible = false
       // 回到顶部并刷新页面
+      this.centerDialogVisible = false
       window.scrollTo({top: 0, left: 0, behavior: 'smooth'})
       this.reload()
     }
@@ -600,7 +613,7 @@ export default {
     flex-direction: row;
     justify-content:space-evenly;
     align-items: center;
-    border-top: 0.01rem inset #E5E5E5;
+    border-top: 0.02px inset #E5E5E5;
 
   }
   .confirm-btn{
@@ -612,5 +625,23 @@ export default {
   }
   /deep/ .el-dialog__footer{
     padding: 0;
+  }
+
+  /deep/ .el-dialog {
+    display: flex;
+    flex-direction: column;
+    margin: 0 !important;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /*height:600px;*/
+    max-height: calc(100% - 30px);
+    max-width: calc(100% - 30px);
+  }
+
+  /deep/ .el-dialog .el-dialog__body {
+    flex: 1;
+    overflow: auto;
   }
 </style>

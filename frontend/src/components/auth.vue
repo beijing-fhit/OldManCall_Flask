@@ -17,6 +17,22 @@ export default {
     document.title = this.$route.meta.title
     this.init()
   },
+  mounted () {
+    // 这部分代码是为了解决在ios上页面返回时不刷新的问题--start
+    var u = navigator.userAgent
+    var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/) // ios终端
+    if (isiOS) {
+      window.onpageshow = function (e) {
+        if (
+          e.persisted ||
+          (window.performance && window.performance.navigation.type === 2)
+        ) {
+          window.location.reload()
+        }
+      }
+    }
+    // 这部分代码是为了解决在ios上页面返回时不刷新的问题--end
+  },
   methods: {
     init: function () {
       sessionStorage.clear()

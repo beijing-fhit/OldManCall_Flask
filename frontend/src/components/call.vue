@@ -4,16 +4,17 @@
       <el-image :src="call_img" class="call-img" @click="startCall"></el-image>
       <span class="call-text">呼叫家属</span>
       <el-dialog
-      :visible.sync="centerDialogVisible"
-      title="呼叫失败"
-      width="80%"
-      :show-close="false"
-      center>
-      <span class="center-dialog-content">{{error_msg}}</span>
-      <span slot="footer" class="dialog-footer dialog-btn-group">
-        <span type="primary" @click="dialogConfirm" class="confirm-btn">确定</span>
-      </span>
-    </el-dialog>
+        :lock-scroll="false"
+        :visible.sync="centerDialogVisible"
+        title="呼叫失败"
+        width="80%"
+        :show-close="false"
+        center>
+        <span class="center-dialog-content">{{error_msg}}</span>
+        <span slot="footer" class="dialog-footer dialog-btn-group">
+          <span type="primary" @click="dialogConfirm" class="confirm-btn">确定</span>
+        </span>
+      </el-dialog>
     </div>
 </template>
 
@@ -43,6 +44,18 @@ export default {
     }
   },
   mounted () {
+    // window.addEventListener('touchmove')
+    window.ontouchmove = function (e) {
+      var clientX = e.touches[0].clientX
+      var clientY = e.touches[0].clientY
+      var x = e.changedTouches[0].clientX - clientX
+      var y = e.changedTouches[0].clientY - clientY
+      var w = x < 0 ? x * -1 : x // x轴的滑动值
+      var h = y < 0 ? y * -1 : y // y轴的滑动值
+      if (w > h) { // 如果是在x轴中滑动
+        e.preventDefault() // 阻止后面的事件触发
+      }
+    }
     console.log('created---')
     wx.ready(function () {
       console.log('ready-----')
