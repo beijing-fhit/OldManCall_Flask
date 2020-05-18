@@ -392,6 +392,8 @@ export default {
         console.log('保存信息失败:', err)
         this.$toast('保存信息失败!')
         this.centerDialogVisible = false
+      }).finally(() => {
+        this.reload()
       })
     },
     dialogConfirm: function () {
