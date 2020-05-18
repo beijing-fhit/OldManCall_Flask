@@ -138,7 +138,6 @@ export default {
           })
           .finally(() => {
             this.hideLoading(loading)
-            window.location.reload()
           })
       } catch (e) {
         this.hideLoading(loading)
@@ -165,6 +164,7 @@ export default {
     },
     dialogConfirm: function () {
       this.centerDialogVisible = false
+      window.location.reload()
     },
     showLoading: function (text) {
       const loading = this.$loading({
@@ -178,6 +178,7 @@ export default {
     },
     hideLoading: function (loading) {
       loading.close()
+      window.location.reload()
     }
   }
 }
