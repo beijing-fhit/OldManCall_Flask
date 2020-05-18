@@ -23,6 +23,7 @@ import OldManInfo from './oldManInfo'
 import api from '../api'
 import wx from 'weixin-js-sdk'
 export default {
+  inject: ['reload'],
   name: 'call',
   components: {OldManInfo},
   data () {
