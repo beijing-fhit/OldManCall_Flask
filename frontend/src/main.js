@@ -28,6 +28,7 @@ router.beforeEach((to, from, next) => {
   // if (to.meta.title) {
   //   document.title = to.meta.title
   // }
+  document.body.scrollTop = 0
   // ios微信和android微信适配
   var u = navigator.userAgent
   var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/) // ios终端
