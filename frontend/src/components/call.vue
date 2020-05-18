@@ -178,7 +178,8 @@ export default {
     },
     hideLoading: function (loading) {
       loading.close()
-      window.location.reload()
+      // window.location.reload()
+      this.reload()
     }
   }
 }
