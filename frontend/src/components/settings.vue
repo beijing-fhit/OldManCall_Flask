@@ -342,6 +342,7 @@ export default {
       // 判空
       if (this.manInfo.name.length === 0) {
         this.$toast('姓名不能为空!')
+        window.location.reload()
         return
       }
       // qrCodeId, oldManInfo, phone_number
@@ -402,6 +403,7 @@ export default {
       // 回到顶部并刷新页面
       this.centerDialogVisible = false
       window.scrollTo({top: 0, left: 0, behavior: 'smooth'})
+      // 先让页面回到顶部，再刷新页面
       setTimeout(() => {
         window.location.reload()
       }, 500)
