@@ -402,7 +402,9 @@ export default {
       // 回到顶部并刷新页面
       this.centerDialogVisible = false
       window.location.reload()
-      window.scrollTo({top: 0, left: 0, behavior: 'smooth'})
+      setTimeout(() => {
+        window.scrollTo({top: 0, left: 0, behavior: 'smooth'})
+      }, 500)
     }
   }
 }
