@@ -54,6 +54,10 @@ export default {
     sessionStorage.removeItem('manInfo')
     sessionStorage.removeItem('contact')
     sessionStorage.removeItem('qrCodeId')
+    const loading2 = this.showLoading('加载中...')
+    setTimeout(()=>{
+      this.hideLoading(loading2)
+    },1000)
   },
   methods: {
     routeToScanSuccess: function () {
