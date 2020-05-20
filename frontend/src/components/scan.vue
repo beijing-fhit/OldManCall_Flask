@@ -35,6 +35,7 @@ export default {
     wx.error(function (res) {
       console.log('error-----')
     })
+    const loading = this.showLoading('加载中...')
     api.wxConfig().then(config => {
       wx.config({
         debug: false,
@@ -43,7 +44,11 @@ export default {
         nonceStr: config.data.nonceStr,
         signature: config.data.signature,
         jsApiList: ['scanQRCode']
+      }).finally(() => {
+        this.hideLoading(loading)
       })
+    }).finally(() => {
+      this.hideLoading(loading)
     })
     // 清除缓存
     sessionStorage.removeItem('manInfo')
@@ -114,10 +119,10 @@ export default {
           }
         }).catch(res => {
           console.log('error验证二维码激活状态结果:', res)
+          this.$toast('二维码无效')
         })
       }
     },
-
     getQueryValue: function (str, queryName) {
       var vars = str.split('&')
       for (var i = 0; i < vars.length; i++) {
@@ -127,8 +132,20 @@ export default {
         }
       }
       return null
+    },
+    showLoading: function (text) {
+      const loading = this.$loading({
+        lock: true,
+        customClass: 'create-isLoading', //  *这里设置他的class名称,这里最重要
+        text: text,
+        spinner: 'el-icon-loading',
+        background: 'rgba(0, 0, 0, 0)'
+      })
+      return loading
+    },
+    hideLoading: function (loading) {
+      loading.close()
     }
-
   }
 }
 </script>
