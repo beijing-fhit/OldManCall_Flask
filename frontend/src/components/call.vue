@@ -131,17 +131,26 @@ export default {
               this.error_msg = '请您稍后再拨!'
               this.centerDialogVisible = true
             }
+            setTimeout(() => {
+              window.location.reload()
+            }, 3000)
           })
           .catch(err => {
             console.log('呼叫失败:', err)
             this.error_msg = err + '\n请您稍后再拨!'
             this.centerDialogVisible = true
+            setTimeout(() => {
+              window.location.reload()
+            }, 500)
           })
           .finally(() => {
             this.hideLoading(loading)
           })
       } catch (e) {
         this.hideLoading(loading)
+        setTimeout(() => {
+          window.location.reload()
+        }, 500)
       }
     },
     getLocation: function () {
@@ -179,7 +188,6 @@ export default {
     },
     hideLoading: function (loading) {
       loading.close()
-      window.location.reload()
       // this.reload()
     }
   }
