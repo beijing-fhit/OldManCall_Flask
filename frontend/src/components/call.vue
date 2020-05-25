@@ -58,25 +58,25 @@ export default {
       }
     }
     console.log('created---')
-    wx.ready(function () {
-      console.log('ready-----')
-    })
-    wx.error(function (res) {
-      console.log('error-----')
-    })
+    // wx.ready(function () {
+    //   console.log('ready-----')
+    // })
+    // wx.error(function (res) {
+    //   console.log('error-----')
+    // })
     // this.$alert('当前地址:' + window.location.href)
-    api.wxConfig().then(config => {
-      console.log('config', config.data)
-      // this.$alert('签名:' + JSON.stringify(config.data))
-      wx.config({
-        debug: false,
-        appId: config.data.appId,
-        timestamp: config.data.timestamp,
-        nonceStr: config.data.nonceStr,
-        signature: config.data.signature,
-        jsApiList: ['getLocation']
-      })
-    })
+    // api.wxConfig().then(config => {
+    //   console.log('config', config.data)
+    //   // this.$alert('签名:' + JSON.stringify(config.data))
+    //   wx.config({
+    //     debug: false,
+    //     appId: config.data.appId,
+    //     timestamp: config.data.timestamp,
+    //     nonceStr: config.data.nonceStr,
+    //     signature: config.data.signature,
+    //     jsApiList: ['getLocation']
+    //   })
+    // })
     // 获取数据
     var that = this
     // that.$alert('openid:' + sessionStorage.getItem('openId') + 'qrcodeid:' + sessionStorage.getItem('qrCodeId'))
@@ -154,22 +154,36 @@ export default {
       }
     },
     getLocation: function () {
+      api.wxConfig().then(config => {
+        console.log('config', config.data)
+        // this.$alert('签名:' + JSON.stringify(config.data))
+        wx.config({
+          debug: false,
+          appId: config.data.appId,
+          timestamp: config.data.timestamp,
+          nonceStr: config.data.nonceStr,
+          signature: config.data.signature,
+          jsApiList: ['getLocation']
+        })
+      })
       var that = this
-      wx.getLocation({
-        type: 'wgs84', // 默认为wgs84的gps坐标，如果要返回直接给openLocation用的火星坐标，可传入'gcj02'
-        success: async function (res) {
-          var latitude = res.latitude // 纬度，浮点数，范围为90 ~ -90
-          var longitude = res.longitude // 经度，浮点数，范围为180 ~ -180。
-          let {data} = await api.getLocationDesc(latitude, longitude)
-          var address = data.result.address
-          // that.$toast('被叫号码:' + that.phone_number)
-          api.sendMsgNotification(that.phone_number, address)
-            .then((res) => {
-              console.log('发送成功,', res)
-            }).catch((err) => {
+      wx.ready(function () {
+        wx.getLocation({
+          type: 'wgs84', // 默认为wgs84的gps坐标，如果要返回直接给openLocation用的火星坐标，可传入'gcj02'
+          success: async function (res) {
+            var latitude = res.latitude // 纬度，浮点数，范围为90 ~ -90
+            var longitude = res.longitude // 经度，浮点数，范围为180 ~ -180。
+            let {data} = await api.getLocationDesc(latitude, longitude)
+            var address = data.result.address
+            // that.$toast('被叫号码:' + that.phone_number)
+            api.sendMsgNotification(that.phone_number, address)
+              .then((res) => {
+                console.log('发送成功,', res)
+              }).catch((err) => {
               console.log('发送短信失败,', err)
             })
-        }
+          }
+        })
       })
     },
     dialogConfirm: function () {
