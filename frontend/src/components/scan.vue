@@ -2,9 +2,9 @@
   <div class="all-container">
     <topbar :hide-back-btn="true"/>
     <div class="img-text-container">
-      <div class="text-container">
-        <label v-html="this.tip" class="label-style"></label>
-      </div>
+<!--      <div class="text-container">-->
+<!--        <label v-html="this.tip" class="label-style"></label>-->
+<!--      </div>-->
       <el-image :src="img_url" class="img-style"></el-image>
     </div>
     <el-button type="success" class="wide-button" v-on:click.prevent="routeToScanSuccess">扫码</el-button>
@@ -44,8 +44,6 @@ export default {
         nonceStr: config.data.nonceStr,
         signature: config.data.signature,
         jsApiList: ['scanQRCode']
-      }).finally(() => {
-        this.hideLoading(loading)
       })
     }).finally(() => {
       this.hideLoading(loading)
@@ -55,9 +53,9 @@ export default {
     sessionStorage.removeItem('contact')
     sessionStorage.removeItem('qrCodeId')
     const loading2 = this.showLoading('加载中...')
-    setTimeout(()=>{
+    setTimeout(() => {
       this.hideLoading(loading2)
-    },1000)
+    }, 1000)
   },
   methods: {
     routeToScanSuccess: function () {

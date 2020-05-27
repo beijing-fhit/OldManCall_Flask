@@ -58,25 +58,26 @@ export default {
       }
     }
     console.log('created---')
-    // wx.ready(function () {
-    //   console.log('ready-----')
-    // })
-    // wx.error(function (res) {
-    //   console.log('error-----')
-    // })
+    wx.ready(function () {
+      console.log('ready-----')
+    })
+    wx.error(function (res) {
+      console.log('error-----')
+      this.$toast('授权失败!' + res)
+    })
     // this.$alert('当前地址:' + window.location.href)
-    // api.wxConfig().then(config => {
-    //   console.log('config', config.data)
-    //   // this.$alert('签名:' + JSON.stringify(config.data))
-    //   wx.config({
-    //     debug: false,
-    //     appId: config.data.appId,
-    //     timestamp: config.data.timestamp,
-    //     nonceStr: config.data.nonceStr,
-    //     signature: config.data.signature,
-    //     jsApiList: ['getLocation']
-    //   })
-    // })
+    api.wxConfig().then(config => {
+      console.log('config', config.data)
+      // this.$alert('签名:' + JSON.stringify(config.data))
+      wx.config({
+        debug: false,
+        appId: config.data.appId,
+        timestamp: config.data.timestamp,
+        nonceStr: config.data.nonceStr,
+        signature: config.data.signature,
+        jsApiList: ['getLocation']
+      })
+    })
     // 获取数据
     var that = this
     // that.$alert('openid:' + sessionStorage.getItem('openId') + 'qrcodeid:' + sessionStorage.getItem('qrCodeId'))
@@ -123,25 +124,19 @@ export default {
           .then(res => {
             console.log('呼叫成功:', res)
             if (res.data.Code === 0 && res.data.Caller !== '') {
-              window.location.href = 'tel:' + res.data.Caller
               // 获取地理位置发送通知
               this.getLocation()
+              window.location.href = 'tel:' + res.data.Caller
             } else {
               // this.$toast('呼叫失败!')
               this.error_msg = '请您稍后再拨!'
               this.centerDialogVisible = true
             }
-            setTimeout(() => {
-              window.location.reload()
-            }, 3000)
           })
           .catch(err => {
             console.log('呼叫失败:', err)
-            this.error_msg = err + '\n请您稍后再拨!'
+            this.error_msg = '呼叫失败' + '\n请您稍后再拨!'
             this.centerDialogVisible = true
-            setTimeout(() => {
-              window.location.reload()
-            }, 500)
           })
           .finally(() => {
             this.hideLoading(loading)
@@ -154,36 +149,27 @@ export default {
       }
     },
     getLocation: function () {
-      api.wxConfig().then(config => {
-        console.log('config', config.data)
-        // this.$alert('签名:' + JSON.stringify(config.data))
-        wx.config({
-          debug: false,
-          appId: config.data.appId,
-          timestamp: config.data.timestamp,
-          nonceStr: config.data.nonceStr,
-          signature: config.data.signature,
-          jsApiList: ['getLocation']
-        })
-      })
       var that = this
-      wx.ready(function () {
-        wx.getLocation({
-          type: 'wgs84', // 默认为wgs84的gps坐标，如果要返回直接给openLocation用的火星坐标，可传入'gcj02'
-          success: async function (res) {
-            var latitude = res.latitude // 纬度，浮点数，范围为90 ~ -90
-            var longitude = res.longitude // 经度，浮点数，范围为180 ~ -180。
-            let {data} = await api.getLocationDesc(latitude, longitude)
-            var address = data.result.address
-            // that.$toast('被叫号码:' + that.phone_number)
-            api.sendMsgNotification(that.phone_number, address)
-              .then((res) => {
-                console.log('发送成功,', res)
-              }).catch((err) => {
-              console.log('发送短信失败,', err)
-            })
-          }
-        })
+      wx.getLocation({
+        type: 'wgs84', // 默认为wgs84的gps坐标，如果要返回直接给openLocation用的火星坐标，可传入'gcj02'
+        success: async function (res) {
+          var latitude = res.latitude // 纬度，浮点数，范围为90 ~ -90
+          var longitude = res.longitude // 经度，浮点数，范围为180 ~ -180。
+          let {data} = await api.getLocationDesc(latitude, longitude)
+          var address = data.result.address
+          that.$toast('地理位置:' + address)
+          await api.sendMsgNotification(that.phone_number, address)
+        },
+        fail: function (error) {
+          // this.$toast('获取地理位置错误：' + error)
+          console.log('获取地理位置错误：' + error)
+        },
+        complete: function () {
+          setTimeout(() => {
+            this.$toast('获取地理位置完成')
+            window.location.reload()
+          }, 3000)
+        }
       })
     },
     dialogConfirm: function () {
