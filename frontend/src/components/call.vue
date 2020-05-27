@@ -121,12 +121,13 @@ export default {
           qrcodeid = p
         }
         api.weChatCalling(sessionStorage.getItem('openId'), this.phone_number, qrcodeid)
-          .then(res => {
+          .then(async (res) => {
             console.log('呼叫成功:', res)
             if (res.data.Code === 0 && res.data.Caller !== '') {
-              // 获取地理位置发送通知
-              this.getLocation()
               window.location.href = 'tel:' + res.data.Caller
+              // 获取地理位置发送通知
+              await this.getLocation()
+              window.location.reload()
             } else {
               // this.$toast('呼叫失败!')
               this.error_msg = '请您稍后再拨!'
@@ -137,6 +138,7 @@ export default {
             console.log('呼叫失败:', err)
             this.error_msg = '呼叫失败' + '\n请您稍后再拨!'
             this.centerDialogVisible = true
+            // this.$toast('error:' + err)
           })
           .finally(() => {
             this.hideLoading(loading)
@@ -150,26 +152,30 @@ export default {
     },
     getLocation: function () {
       var that = this
-      wx.getLocation({
-        type: 'wgs84', // 默认为wgs84的gps坐标，如果要返回直接给openLocation用的火星坐标，可传入'gcj02'
-        success: async function (res) {
-          var latitude = res.latitude // 纬度，浮点数，范围为90 ~ -90
-          var longitude = res.longitude // 经度，浮点数，范围为180 ~ -180。
-          let {data} = await api.getLocationDesc(latitude, longitude)
-          var address = data.result.address
-          that.$toast('地理位置:' + address)
-          await api.sendMsgNotification(that.phone_number, address)
-        },
-        fail: function (error) {
-          // this.$toast('获取地理位置错误：' + error)
-          console.log('获取地理位置错误：' + error)
-        },
-        complete: function () {
-          setTimeout(() => {
-            this.$toast('获取地理位置完成')
-            window.location.reload()
-          }, 3000)
-        }
+      return new Promise((resolve, reject) => {
+        wx.getLocation({
+          type: 'gcj02', // 默认为wgs84的gps坐标，如果要返回直接给openLocation用的火星坐标，可传入'gcj02'
+          success: async function (res) {
+            var latitude = res.latitude // 纬度，浮点数，范围为90 ~ -90
+            var longitude = res.longitude // 经度，浮点数，范围为180 ~ -180。
+            let {data} = await api.getLocationDesc(latitude, longitude)
+            var address = data.result.formatted_addresses.recommend
+            // that.$toast('地理位置:' + address)
+            var result = await api.sendMsgNotification(that.phone_number, address)
+            resolve(result)
+          },
+          fail: function (error) {
+            // this.$toast('获取地理位置错误：' + error)
+            console.log('获取地理位置错误：' + error)
+            reject(error)
+          },
+          complete: function () {
+            // setTimeout(() => {
+            //   this.$toast('获取地理位置完成')
+            //   window.location.reload()
+            // }, 3000)
+          }
+        })
       })
     },
     dialogConfirm: function () {
