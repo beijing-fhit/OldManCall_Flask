@@ -130,15 +130,17 @@ export default {
               window.location.reload()
             } else {
               // this.$toast('呼叫失败!')
-              this.error_msg = '请您稍后再拨!'
+              this.error_msg = '请您稍后再拨!' + JSON.stringify(res.data)
               this.centerDialogVisible = true
             }
           })
           .catch(err => {
             console.log('呼叫失败:', err)
-            this.error_msg = '呼叫失败' + '\n请您稍后再拨!'
+            // this.error_msg = '请您稍后再拨!' + JSON.stringify(err)
+            this.error_msg = '请您稍后再拨!'
             this.centerDialogVisible = true
             // this.$toast('error:' + err)
+            // alert('error:' + JSON.stringify(err))
           })
           .finally(() => {
             this.hideLoading(loading)

@@ -1,17 +1,22 @@
 import axios from 'axios'
 // import router from './router/index'
 
-axios.defaults.timeout = 10000 // 请求超时5秒
-
+axios.defaults.timeout = 5000 // 请求超时5秒
 // 创建axios实例
 const service = axios.create({
   timeout: 30000 // 请求超时时间
 })
 // 添加request拦截器
 service.interceptors.request.use(config => {
+  // config.params.t = Date.parse(new Date()) / 1000
+  // 加时间戳防止请求缓存
+  config.params = {
+    _t: Date.parse(new Date()) / 1000,
+    ...config.params
+  }
   return config
 }, error => {
-  Promise.reject(error)
+  return Promise.reject(error)
 })
 // 添加response拦截器
 service.interceptors.response.use(
