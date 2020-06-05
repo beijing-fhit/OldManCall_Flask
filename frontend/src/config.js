@@ -18,7 +18,8 @@ var service = {
   qrCodeInfo: `${webAPIHost}/qr_code_info`, // qrcode绑定的信息
   weChatCalling: `${apiHost}/api/v4/wechatcalling`,
   locationDesc: `${webAPIHost}/locationDesc`,
-  msgNotification: `${webAPIHost}/msgNotification`
+  msgNotification: `${webAPIHost}/msgNotification`,
+  modifyOpenid: `${apiHost}/api/v1/ModifyOpenid`
   // getURLFrom: `${webHost}/getUrlFrom`,
   // getCode: `${webHost}/code`
 }

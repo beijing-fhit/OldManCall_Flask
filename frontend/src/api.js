@@ -119,6 +119,15 @@ const sendMsgNotification = (mobile, content) => {
   })
 }
 
+const modifyOpenid = (openId, ucallfreeid, nickname, unionid, headurl) => {
+  return post(service.modifyOpenid, {
+    'ucallfreeid': ucallfreeid,
+    'nickname': nickname,
+    'unionid': unionid,
+    'headurl': headurl,
+  }, getHeader(openId))
+}
+
 export default {
   wxConfig,
   wxConfigWithUrl,
@@ -132,5 +141,6 @@ export default {
   saveInfo,
   weChatCalling,
   getLocationDesc,
-  sendMsgNotification
+  sendMsgNotification,
+  modifyOpenid
 }

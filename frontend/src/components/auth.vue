@@ -87,10 +87,11 @@ export default {
           let openId = res.data.data
           sessionStorage.setItem('openId', openId)
           // 获取用户状态，保存其中的ucallfreeid
-          api.weChatState(openId).then(res => {
+          api.weChatState(openId).then(async res => {
             // console.log('weChatState', res)
             sessionStorage.setItem('UcallFreeId', res.data.UcallFreeId)
             sessionStorage.setItem('Tel', res.data.Tel[0])
+            await api.modifyOpenid(openId, res.data.UcallFreeId, res.data.NickName, '', res.data.Headurl)
             this.$router.push('/scan')
           }).catch(res => {
             console.log('webChatState error', res)
