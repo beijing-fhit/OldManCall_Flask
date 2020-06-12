@@ -128,6 +128,7 @@ export default {
           if (res.data.Code === 0) {
             // that.$toast('验证成功')
             if (that.contact.indexOf(that.number, 0) === -1) {
+              // 第一次添加此号码
               var index = that.$route.query.index
               if (index === null | index === '' | index === undefined) {
                 that.contact += that.number + ','
@@ -162,6 +163,13 @@ export default {
                   }
                 })
               }
+            }else{
+              that.$router.push({
+                  path: '/settings',
+                  query: {
+                    getPhoneNumberFromNet: false
+                  }
+                })
             }
           } else {
             // console.log('验证失败:', res.data)

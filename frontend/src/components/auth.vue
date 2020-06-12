@@ -27,7 +27,10 @@ export default {
           e.persisted ||
           (window.performance && window.performance.navigation.type === 2)
         ) {
-          window.location.reload()
+          window.location.replace(window.location.href.split('?')[0])
+          console.log(window.location.href.split('?')[0])
+          // this.$router.replace('/auth')
+          // window.location.reload()
         }
       }
     }
@@ -68,6 +71,7 @@ export default {
         var code = getUrlParam('code')
         if (code) {
           // 若参数中有code，直接来换取openID
+          console.log('code' + code)
           this.getOpenId(code)
         } else {
           // 若没有参数，则先获取code，回掉地址填本地址
