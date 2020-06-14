@@ -368,32 +368,34 @@ export default {
                   this.$toast('激活二维码成功')
                   this.centerDialogVisible = true
                   // this.$router.push('/call')
-                  // console.log('激活二维码成功:', res)
+                  console.log('激活二维码成功:', res)
                 } else {
                   this.$toast('激活二维码失败')
                   window.location.reload()
-                  // console.log('激活二维码失败:', res)
+                  console.log('激活二维码失败1:', res)
                 }
               })
               .catch(err => {
                 this.$toast('激活二维码失败')
                 window.location.reload()
-                console.log('激活二维码失败:', err)
+                console.log('激活二维码失败2:', err)
               })
           } else {
             this.$toast('保存信息成功')
+            console.log('保存信息成功:')
             this.centerDialogVisible = true
             // this.$router.push('/call')
           }
           // this.$alert('保存信息成功')
         } else {
           this.$toast('保存信息失败')
+          console.log('保存信息失败1:')
           window.location.reload()
           // this.centerDialogVisible = false
         }
       }).catch(err => {
         // 保存信息失败
-        console.log('保存信息失败:', err)
+        console.log('保存信息失败2:', err)
         this.$toast('保存信息失败!')
         window.location.reload()
         this.centerDialogVisible = false
