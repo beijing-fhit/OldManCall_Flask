@@ -124,7 +124,7 @@ const modifyOpenid = (openId, ucallfreeid, nickname, unionid, headurl) => {
     'ucallfreeid': ucallfreeid,
     'nickname': nickname,
     'unionid': unionid,
-    'headurl': headurl,
+    'headurl': headurl
   }, getHeader(openId))
 }
 

@@ -163,13 +163,13 @@ export default {
                   }
                 })
               }
-            }else{
+            } else {
               that.$router.push({
-                  path: '/settings',
-                  query: {
-                    getPhoneNumberFromNet: false
-                  }
-                })
+                path: '/settings',
+                query: {
+                  getPhoneNumberFromNet: false
+                }
+              })
             }
           } else {
             // console.log('验证失败:', res.data)
