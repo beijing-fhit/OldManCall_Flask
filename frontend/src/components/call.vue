@@ -122,9 +122,9 @@ export default {
         }
         api.weChatCalling(sessionStorage.getItem('openId'), this.phone_number, qrcodeid)
           .then(async (res) => {
-            console.log('呼叫成功:', res)
             if (res.data.Code === 0 && res.data.Caller !== '') {
-              window.location.href = 'tel:' + res.data.Caller
+              console.log('呼叫成功:', res)
+              // window.location.href = 'tel:' + res.data.Caller
               // 获取地理位置发送通知
               await this.getLocation()
               window.location.reload()
