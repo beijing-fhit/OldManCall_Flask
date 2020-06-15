@@ -127,7 +127,7 @@ export default {
               // window.location.href = 'tel:' + res.data.Caller
               // 获取地理位置发送通知
               await this.getLocation()
-              window.location.reload()
+              // window.location.reload()
             } else {
               // this.$toast('呼叫失败!')
               this.error_msg = '请您稍后再拨!' + JSON.stringify(res.data)
