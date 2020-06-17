@@ -59,13 +59,21 @@
       </el-row>
     </div>
       <el-row class="info-item border-bottom leftpadding white-bg">
-        <span class="info-name">年纪</span>
-        <el-input type="number" v-model="manInfo.age" class="info-content normal-input-style no-border-input" placeholder="预设内容" clearable></el-input>
+        <span class="info-name">出生年份</span>
+        <el-date-picker  type="year" v-model="manInfo.age" class="info-content normal-input-style no-border-input" placeholder="请选择年份" ></el-date-picker>
       </el-row>
     <div class="info-fill-panel leftpadding">
       <el-row class="info-item border-bottom">
         <span class="info-name">病史</span>
-        <el-input v-model="manInfo.medical_history" class="info-content normal-input-style no-border-input" placeholder="预设内容" clearable></el-input>
+        <el-select v-model="manInfo.medical_history" default-first-option allow-create filterable multiple  class="info-content normal-input-style no-border-input" placeholder="预设内容" clearable>
+          <el-option
+            v-for="d in diseases"
+            :key="d"
+            :label="d"
+            :value="d"
+          >
+          </el-option>
+        </el-select>
       </el-row>
       <el-row class="info-item border-bottom">
         <span class="info-name">过敏史</span>
@@ -75,7 +83,15 @@
 
       <el-row class="info-item border-bottom leftpadding white-bg">
         <span class="info-name">血型</span>
-        <el-input v-model="manInfo.blood_type" class="info-content normal-input-style no-border-input" placeholder="预设内容" clearable></el-input>
+        <el-select v-model="manInfo.blood_type" class="info-content normal-input-style no-border-input" placeholder="请选择血型" clearable>
+          <el-option
+            v-for="b in blood_select"
+            :key="b"
+            :label="b"
+            :value="b"
+          >
+          </el-option>
+        </el-select>
       </el-row>
     <div class="info-fill-panel leftpadding ">
       <el-row class="info-item border-bottom">
@@ -112,16 +128,8 @@ export default {
   components: {Topbar},
   data () {
     return {
-      // manInfo: {
-      //   name: '',
-      //   address: '',
-      //   age: '',
-      //   medical_history: '',
-      //   allergy: '',
-      //   blood_type: '',
-      //   drugs: '',
-      //   treatment: ''
-      // },
+      diseases: ['无', '高血压', '高血脂', '冠心病', '脑中风', '支气管哮喘', '慢性支气管炎', '老年痴呆', '其他'],
+      blood_select: ['A', 'B', 'AB', 'O'],
       manInfo: this.getManInfo(),
       text1: '请输入手机号码',
       text2: '请输入手机号码',
@@ -134,12 +142,6 @@ export default {
   },
   created () {
     document.title = this.$route.meta.title
-    // window.ontouchstart = function (e) {
-    //   e.preventDefault()
-    // }
-    // document.addEventListener('touchmove', function (e) {
-    //   e.preventDefault()
-    // }, false)
   },
   mounted: function () {
     // 这部分代码是为了解决在ios上页面返回时不刷新的问题--start
@@ -167,21 +169,6 @@ export default {
     // this.$toast('加载本地:' + getPhoneNumberFromNet)
     if (getPhoneNumberFromNet === false) {
       try {
-        // var oldManInfo = this.manInfo
-        // var temp2 = sessionStorage.getItem('manInfo')
-        // if (temp2 !== null && temp2 !== undefined && temp2 !== '' && temp2 !== 'undefined') {
-        //   oldManInfo = JSON.parse(temp2)
-        // }
-        // this.$toast('获取数据:' + JSON.stringify(oldManInfo))
-        // console.log('数据2：', getPhoneNumberFromNet, ',oldmaninfo:', oldManInfo)
-        // this.manInfo.name = oldManInfo.name
-        // this.manInfo.age = oldManInfo.age
-        // this.manInfo.address = oldManInfo.address
-        // this.manInfo.medical_history = oldManInfo.medical_history
-        // this.manInfo.allergy = oldManInfo.allergy
-        // this.manInfo.blood_type = oldManInfo.blood_type
-        // this.manInfo.drugs = oldManInfo.drugs
-        // this.manInfo.treatment = oldManInfo.treatment
         this.manInfo = this.getManInfo()
         this.contact = this.getContact()
         return
@@ -593,7 +580,7 @@ export default {
    border: 0 none;
     color: #48534A;
     max-lines: 1;
-    padding: 0;
+    /*padding: 0;*/
     font-size: 2rem;
   }
   .wide-button {
