@@ -1,6 +1,6 @@
 var apiHost = 'https://ucallfree-tecent.ucallclub.com'
-// var webHost = 'https://mustberich.cn'
-var webHost = 'https://oldmancard.ucallclub.com'
+var webHost = 'https://mustberich.cn'
+// var webHost = 'https://oldmancard.ucallclub.com'
 // var webHost = 'http://127.0.0.1:5000'
 var webAPIHost = webHost + '/api'
 var service = {
