@@ -247,10 +247,14 @@ export default {
         oldManInfo3.name = t3.name
         oldManInfo3.age = t3.age.toString()
         oldManInfo3.address = t3.address
-        if (t3.medical_history.trim() === '') {
-          oldManInfo3.medical_history = []
+        if (isString(t3.medical_history)) { // 如果不是列表对象
+          if (t3.medical_history.trim() === '') {
+            oldManInfo3.medical_history = []
+          } else {
+            oldManInfo3.medical_history = t3.medical_history.split(',')
+          }
         } else {
-          oldManInfo3.medical_history = t3.medical_history.split(',')
+          oldManInfo3.medical_history = t3.medical_history
         }
         oldManInfo3.allergy = t3.allergy
         oldManInfo3.blood_type = t3.blood_type
