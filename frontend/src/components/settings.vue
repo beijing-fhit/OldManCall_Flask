@@ -65,7 +65,7 @@
     <div class="info-fill-panel leftpadding">
       <el-row  class="info-item-height-wrap-content border-bottom">
         <span class="info-name">病史</span>
-        <el-select v-model="manInfo.medical_history"   allow-create filterable multiple  class="info-content normal-input-style no-border-input" placeholder="预设内容" >
+        <el-select v-model="manInfo.medical_history"   allow-create filterable multiple  class="info-content normal-input-style no-border-input" placeholder="请输入病史" >
           <el-option
             v-for="d in diseases"
             :key="d"
@@ -346,6 +346,7 @@ export default {
       }
       // qrCodeId, oldManInfo, phone_number
       var qrCodeId = sessionStorage.getItem('qrCodeId')
+      // 利用JSON的stringify和parse进行深拷贝
       var temp = JSON.stringify(this.manInfo)
       var info = JSON.parse(temp)
       info.age = parseInt(info.age)

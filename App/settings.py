@@ -35,7 +35,7 @@ class Config:
     # 需要数据库初始化时，设为True
     INIT_DB=False
     # 需要数据库迁移时，设为True
-    MIGRATE_DB=False
+    MIGRATE_DB=True
 
 
 

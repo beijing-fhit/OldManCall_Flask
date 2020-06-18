@@ -47,8 +47,8 @@ class OldManInfo(db.Model,Base):
     name = db.Column(db.String(10))
     address = db.Column(db.String(30),nullable=True)
     age = db.Column(db.Integer,nullable=True) # 注意不传的话，会是个空字符串，会报错
-    medical_history = db.Column(db.String(30),nullable=True)
-    allergy = db.Column(db.String(30),nullable=True)
+    medical_history = db.Column(db.String(100),nullable=True)
+    allergy = db.Column(db.String(100),nullable=True)
     blood_type = db.Column(db.String(10),nullable=True)
     drugs = db.Column(db.String(30),nullable=True)
     treatment = db.Column(db.String(30),nullable=True)
