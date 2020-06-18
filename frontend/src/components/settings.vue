@@ -65,7 +65,7 @@
     <div class="info-fill-panel leftpadding">
       <el-row  class="info-item-height-wrap-content border-bottom">
         <span class="info-name">病史</span>
-        <el-select v-model="manInfo.medical_history"   allow-create filterable multiple  class="info-content normal-input-style no-border-input" placeholder="预设内容" clearable>
+        <el-select v-model="manInfo.medical_history"   allow-create filterable multiple  class="info-content normal-input-style no-border-input" placeholder="预设内容" >
           <el-option
             v-for="d in diseases"
             :key="d"
@@ -185,7 +185,7 @@ export default {
       if (res.data.status_code === 0) {
         var data = res.data.data
         that.manInfo.name = data.old_man_info.name
-        that.manInfo.age = data.old_man_info.age
+        that.manInfo.age = data.old_man_info.age.toString()
         that.manInfo.address = data.old_man_info.address
         if (data.old_man_info.medical_history.trim() === '') {
           that.manInfo.medical_history = []
@@ -245,7 +245,7 @@ export default {
       if (temp3 !== null && temp3 !== undefined && temp3 !== '' && temp3 !== 'undefined') {
         var t3 = JSON.parse(temp3)
         oldManInfo3.name = t3.name
-        oldManInfo3.age = t3.age
+        oldManInfo3.age = t3.age.toString()
         oldManInfo3.address = t3.address
         if (t3.medical_history.trim() === '') {
           oldManInfo3.medical_history = []
@@ -343,6 +343,7 @@ export default {
       // qrCodeId, oldManInfo, phone_number
       var qrCodeId = sessionStorage.getItem('qrCodeId')
       var info = this.manInfo
+      info.age = parseInt(info.age)
       info.medical_history = info.medical_history.toString() // 将数组转为字符串
       var phoneNumber = this.getleagalContact(this.contact)
       sessionStorage.setItem('manInfo', JSON.stringify(info))

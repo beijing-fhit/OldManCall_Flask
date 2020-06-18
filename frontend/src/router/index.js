@@ -68,6 +68,7 @@ export default new Router({
       name: 'settings',
       component: settings,
       meta: {
+        keepAlive: false, // 该字段表示该页面需要缓存
         title: '设置'
       }
     },
