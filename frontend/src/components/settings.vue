@@ -60,7 +60,7 @@
     </div>
       <el-row class="info-item border-bottom leftpadding white-bg">
         <span class="info-name">出生年份</span>
-        <el-date-picker  type="year" v-model="manInfo.age" size="mini" value-format="yyyy" editable class="info-content normal-input-style no-border-input" placeholder="请选择年份" ></el-date-picker>
+        <el-date-picker  type="year" v-model="manInfo.age"  value-format="yyyy"  class="info-content normal-input-style no-border-input" placeholder="请选择年份" ></el-date-picker>
       </el-row>
     <div class="info-fill-panel leftpadding">
       <el-row  class="info-item-height-wrap-content border-bottom">
@@ -533,6 +533,7 @@ export default {
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
+    padding-bottom: 0.1rem;
   }
   .full-width-info-item{
     width: 100%;
