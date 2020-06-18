@@ -346,7 +346,8 @@ export default {
       }
       // qrCodeId, oldManInfo, phone_number
       var qrCodeId = sessionStorage.getItem('qrCodeId')
-      var info = this.manInfo
+      var temp = JSON.stringify(this.manInfo)
+      var info = JSON.parse(temp)
       info.age = parseInt(info.age)
       info.medical_history = info.medical_history.toString() // 将数组转为字符串
       var phoneNumber = this.getleagalContact(this.contact)
