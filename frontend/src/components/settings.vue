@@ -60,12 +60,12 @@
     </div>
       <el-row class="info-item border-bottom leftpadding white-bg">
         <span class="info-name">出生年份</span>
-        <el-date-picker  type="year" v-model="manInfo.age" class="info-content normal-input-style no-border-input" placeholder="请选择年份" ></el-date-picker>
+        <el-date-picker  type="year" v-model="manInfo.age" size="mini" value-format="yyyy" editable class="info-content normal-input-style no-border-input" placeholder="请选择年份" ></el-date-picker>
       </el-row>
     <div class="info-fill-panel leftpadding">
-      <el-row class="info-item border-bottom">
+      <el-row  class="info-item-height-wrap-content border-bottom">
         <span class="info-name">病史</span>
-        <el-select v-model="manInfo.medical_history" default-first-option allow-create filterable multiple  class="info-content normal-input-style no-border-input" placeholder="预设内容" clearable>
+        <el-select v-model="manInfo.medical_history"   allow-create filterable multiple  class="info-content normal-input-style no-border-input" placeholder="预设内容" clearable>
           <el-option
             v-for="d in diseases"
             :key="d"
@@ -187,7 +187,11 @@ export default {
         that.manInfo.name = data.old_man_info.name
         that.manInfo.age = data.old_man_info.age
         that.manInfo.address = data.old_man_info.address
-        that.manInfo.medical_history = data.old_man_info.medical_history
+        if (data.old_man_info.medical_history.trim() === '') {
+          that.manInfo.medical_history = []
+        } else {
+          that.manInfo.medical_history = data.old_man_info.medical_history.split(',') // 将字符串转为数组
+        }
         that.manInfo.allergy = data.old_man_info.allergy
         that.manInfo.blood_type = data.old_man_info.blood_type
         that.manInfo.drugs = data.old_man_info.drugs
@@ -243,7 +247,11 @@ export default {
         oldManInfo3.name = t3.name
         oldManInfo3.age = t3.age
         oldManInfo3.address = t3.address
-        oldManInfo3.medical_history = t3.medical_history
+        if (t3.medical_history.trim() === '') {
+          oldManInfo3.medical_history = []
+        } else {
+          oldManInfo3.medical_history = t3.medical_history.split(',')
+        }
         oldManInfo3.allergy = t3.allergy
         oldManInfo3.blood_type = t3.blood_type
         oldManInfo3.drugs = t3.drugs
@@ -335,6 +343,7 @@ export default {
       // qrCodeId, oldManInfo, phone_number
       var qrCodeId = sessionStorage.getItem('qrCodeId')
       var info = this.manInfo
+      info.medical_history = info.medical_history.toString() // 将数组转为字符串
       var phoneNumber = this.getleagalContact(this.contact)
       sessionStorage.setItem('manInfo', JSON.stringify(info))
       // console.log('合法的contact:', phoneNumber)
@@ -511,6 +520,15 @@ export default {
   .info-item{
     width: 100%;
     height: 5rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+  }
+  .info-item-height-wrap-content{
+    width: 100%;
+    height: fit-content;
+    min-height: 5rem;
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
