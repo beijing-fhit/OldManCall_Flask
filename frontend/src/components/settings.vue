@@ -574,7 +574,7 @@ export default {
     align-items: center;
   }
   .long-info-name{
-     width: 45%;
+     width: 47%;
     font-size: 2rem;
     font-family: PingFangSC-Regular;
     color: #48534A;
