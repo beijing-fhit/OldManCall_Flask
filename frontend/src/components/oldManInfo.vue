@@ -111,7 +111,7 @@ export default {
     color: #48534A;
     font-size: 1.8rem;
     font-family: PingFangSC-Regular;
-    width: 18%;
+    width: 20%;
     text-align: left;
     margin-left: 5%;
   }
