@@ -14,7 +14,7 @@
     </el-row>
     <el-row class="info-item">
       <span class="info-key">病史</span>
-      <span class="long-info-value">{{this.info.medical_history.substring(0,10)+"..."}}</span>
+      <span class="long-info-value">{{this.info.medical_history}}</span>
       <el-popover
         placement="bottom"
         title="病史"
@@ -136,6 +136,11 @@ export default {
     font-family: PingFangSC-Regular;
     width: 60%;
     text-align: left;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical
   }
   .white-icon{
     color: #FFFFFF;
