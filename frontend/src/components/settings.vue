@@ -601,7 +601,8 @@ export default {
     background-attachment: fixed;
     background-repeat: no-repeat;
     border-style: solid;
-    border-color: #FFFFFF
+    border-color: #FFFFFF;
+    border: 0rem;
   }
   /*input 样式*/
    .normal-input-style{
