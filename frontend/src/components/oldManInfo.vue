@@ -21,7 +21,7 @@
         width="200"
         trigger="click"
         :content="this.info.medical_history">
-        <i slot="reference"  class="el-icon-arrow-right" v-show="this.info.medical_history.length >= 12" />
+        <i slot="reference"  class="el-icon-arrow-right white-icon" v-show="this.info.medical_history.length >= 12" />
       </el-popover>
     </el-row>
 
@@ -145,6 +145,10 @@ export default {
     font-family: PingFangSC-Regular;
     width: 60%;
     text-align: left;
+  }
+  .white-icon{
+    color: #FFFFFF;
+    font-size: 2rem;
   }
 
 </style>
