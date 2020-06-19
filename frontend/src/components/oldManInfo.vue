@@ -11,6 +11,14 @@
     <el-row class="info-item">
       <span class="info-key">地址</span>
       <span class="long-info-value">{{this.info.address}}</span>
+      <el-popover
+        placement="bottom"
+        title="地址"
+        width="200"
+        trigger="click"
+        :content="this.info.address">
+        <i slot="reference"  class="el-icon-arrow-right white-icon" v-show="this.info.address.length >= 10" />
+      </el-popover>
     </el-row>
     <el-row class="info-item">
       <span class="info-key">病史</span>
@@ -28,6 +36,14 @@
     <el-row class="info-item">
       <span class="info-key">过敏史</span>
       <span class="long-info-value">{{this.info.allergy}}</span>
+      <el-popover
+        placement="bottom"
+        title="过敏史"
+        width="200"
+        trigger="click"
+        :content="this.info.allergy">
+        <i slot="reference"  class="el-icon-arrow-right white-icon" v-show="this.info.allergy.length >= 10" />
+      </el-popover>
     </el-row>
 
     <el-row class="info-item">
@@ -38,6 +54,14 @@
     <el-row class="info-item">
       <span class="long-info-key">正在吃的药</span>
       <span class="long-info-value">{{this.info.drugs}}</span>
+      <el-popover
+        placement="bottom"
+        title="正在吃的药"
+        width="200"
+        trigger="click"
+        :content="this.info.drugs">
+        <i slot="reference"  class="el-icon-arrow-right white-icon" v-show="this.info.drugs.length >= 10" />
+      </el-popover>
     </el-row>
 
     <el-row class="info-item item-margin-top">
