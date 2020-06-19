@@ -136,11 +136,9 @@ export default {
     font-family: PingFangSC-Regular;
     width: 60%;
     text-align: left;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 1;
-    -webkit-box-orient: horizontal;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+    overflow:hidden;
   }
   .white-icon{
     color: #FFFFFF;
