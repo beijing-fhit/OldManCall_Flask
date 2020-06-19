@@ -14,14 +14,14 @@
     </el-row>
     <el-row class="info-item">
       <span class="info-key">病史</span>
-      <span class="long-info-value">{{this.info.medical_history.substring(0,10)}}</span>
+      <span class="long-info-value">{{this.info.medical_history.substring(0,18)}}</span>
       <el-popover
         placement="bottom"
         title="病史"
         width="200"
         trigger="click"
         :content="this.info.medical_history">
-        <i slot="reference"  class="el-icon-arrow-right white-icon" v-show="this.info.medical_history.length >= 12" />
+        <i slot="reference"  class="el-icon-arrow-right white-icon" v-show="this.info.medical_history.length >= 18" />
       </el-popover>
     </el-row>
 
@@ -67,15 +67,6 @@ export default {
         blood_type: '预设内容',
         drugs: '预设内容',
         treatment: '预设内容'
-      }
-    }
-  },
-  methods: {
-    showMoreD: function () {
-      if (this.info.medical_history.size >= 12) {
-        return true
-      } else {
-        return false
       }
     }
   }
