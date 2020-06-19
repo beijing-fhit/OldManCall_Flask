@@ -94,11 +94,11 @@
         </el-select>
       </el-row>
     <div class="info-fill-panel leftpadding ">
-      <el-row class="info-item border-bottom">
+      <el-row class="info-item-height-wrap-content border-bottom">
         <span class="long-info-name">正在吃的药</span>
         <el-input v-model="manInfo.drugs" maxlength=30 type="textarea" autosize class="long-info-content normal-input-style no-border-input" placeholder="预设内容" clearable></el-input>
       </el-row>
-      <el-row class="info-item">
+      <el-row class="info-item-height-wrap-content">
         <span class="long-info-name">正在进行的治疗</span>
         <el-input v-model="manInfo.treatment" maxlength=30 type="textarea" autosize class="long-info-content normal-input-style no-border-input" placeholder="预设内容" clearable></el-input>
       </el-row>
