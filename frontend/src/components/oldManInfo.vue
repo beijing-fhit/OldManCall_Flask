@@ -67,6 +67,14 @@
     <el-row class="info-item item-margin-top">
       <span class="long-info-key">正在进行的治疗</span>
       <span class="long-info-value">{{this.info.treatment}}</span>
+       <el-popover
+        placement="bottom"
+        title="正在进行的治疗"
+        width="200"
+        trigger="click"
+        :content="this.info.treatment">
+        <i slot="reference"  class="el-icon-arrow-right white-icon" v-show="this.info.treatment.length >= 10" />
+      </el-popover>
     </el-row>
   </div>
 
