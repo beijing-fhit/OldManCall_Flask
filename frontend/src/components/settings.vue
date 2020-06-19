@@ -96,11 +96,11 @@
     <div class="info-fill-panel leftpadding ">
       <el-row class="info-item-height-wrap-content border-bottom">
         <span class="long-info-name">正在吃的药</span>
-        <el-input v-model="manInfo.drugs" maxlength=30 type="textarea" autosize class="long-info-content normal-input-style no-border-input" placeholder="预设内容" clearable></el-input>
+        <el-input v-model="manInfo.drugs" maxlength=30 type="textarea" autosize class="long-info-content normal-input-style no-border-textarea" placeholder="预设内容" clearable></el-input>
       </el-row>
       <el-row class="info-item-height-wrap-content">
         <span class="long-info-name">正在进行的治疗</span>
-        <el-input v-model="manInfo.treatment"  type="textarea" autosize class="long-info-content normal-input-style no-border-input" placeholder="预设内容" clearable></el-input>
+        <el-input v-model="manInfo.treatment" maxlength=30 type="textarea" autosize class="long-info-content normal-input-style no-border-textarea" placeholder="预设内容" clearable></el-input>
       </el-row>
     </div>
     <el-button type="success" class="wide-button" @click="saveInfo">保存</el-button>
@@ -594,6 +594,14 @@ export default {
     flex-direction: row;
     justify-content: left;
     align-items: center;
+  }
+
+  .no-border-textarea {
+    overflow: auto;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    border-style: solid;
+    border-color: #FFFFFF
   }
   /*input 样式*/
    .normal-input-style{
