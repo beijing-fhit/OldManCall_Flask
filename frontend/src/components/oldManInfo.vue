@@ -16,12 +16,12 @@
       <span class="info-key">病史</span>
       <span class="long-info-value">{{this.info.medical_history.substring(0,10)}}</span>
       <el-popover
-        placement="bottom"
-        title="标题"
+        placement="right"
+        title="病史"
         width="200"
         trigger="click"
         content="{{this.info.medical_history}}">
-        <i class="el-icon-arrow-right" v-show="showMoreD"/>
+        <i class="el-icon-arrow-right" :hidden="!showMoreD"/>
       </el-popover>
     </el-row>
 
