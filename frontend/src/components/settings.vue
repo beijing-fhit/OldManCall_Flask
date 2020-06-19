@@ -100,7 +100,7 @@
       </el-row>
       <el-row class="info-item-height-wrap-content">
         <span class="long-info-name">正在进行的治疗</span>
-        <el-input v-model="manInfo.treatment" maxlength=30 type="textarea" autosize class="long-info-content normal-input-style no-border-input" placeholder="预设内容" clearable></el-input>
+        <el-input v-model="manInfo.treatment"  type="textarea" autosize class="long-info-content normal-input-style no-border-input" placeholder="预设内容" clearable></el-input>
       </el-row>
     </div>
     <el-button type="success" class="wide-button" @click="saveInfo">保存</el-button>
