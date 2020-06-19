@@ -31,7 +31,7 @@ def depoly():
 
         '''首先下本地需要执行pip freeze > requirements.txt然后在远端将这里面的包安装'''
         # 1.启动python虚拟环境并切换到仓库目录
-        os.system('/bin/bash --rcfile /home/OldManInfo_env/bin/activate')
+        os.system('/bin/bash --rcfile /home/OldManInfo_Flask_env/bin/activate')
         # 2.从远程仓库pull最新代码
         # 由于切换到另一个工作目录是在子进程中完成的，不会影响主进程的目录，故需要在切换后使用其他命令
         cmd0 ='cd /home/OldManInfo_Flask'

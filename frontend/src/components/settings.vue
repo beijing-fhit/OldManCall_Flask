@@ -77,7 +77,7 @@
       </el-row>
       <el-row class="info-item border-bottom">
         <span class="info-name">过敏史</span>
-        <el-input v-model="manInfo.allergy" class="info-content normal-input-style no-border-input" placeholder="预设内容" clearable></el-input>
+        <el-input v-model="manInfo.allergy"  class="info-content normal-input-style no-border-input" placeholder="预设内容" clearable></el-input>
       </el-row>
     </div>
 
@@ -247,7 +247,7 @@ export default {
         oldManInfo3.name = t3.name
         oldManInfo3.age = t3.age.toString()
         oldManInfo3.address = t3.address
-        if (!t3.medical_history instanceof Array) { // 如果不是列表对象
+        if (!(t3.medical_history instanceof Array)) { // 如果不是列表对象
           if (t3.medical_history.trim() === '') {
             oldManInfo3.medical_history = []
           } else {
