@@ -139,8 +139,8 @@ export default {
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
-    /*-webkit-line-clamp: 1;*/
-    /*-webkit-box-orient: horizontal;*/
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: horizontal;
   }
   .white-icon{
     color: #FFFFFF;
