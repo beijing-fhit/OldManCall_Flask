@@ -5,7 +5,7 @@
       <span class="info-key">姓名</span>
       <span class="info-value">{{this.info.name}}</span>
 
-      <span class="info-key">年纪</span>
+      <span class="info-key">出生年份</span>
       <span class="info-value">{{this.info.age}}</span>
     </el-row>
     <el-row class="info-item">
@@ -139,8 +139,8 @@ export default {
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
-    -webkit-line-clamp: 1;
-    -webkit-box-orient: vertical
+    /*-webkit-line-clamp: 1;*/
+    /*-webkit-box-orient: horizontal;*/
   }
   .white-icon{
     color: #FFFFFF;
