@@ -135,7 +135,7 @@ export default {
     color: #48534A;
     font-size: 1.8rem;
     font-family: PingFangSC-Regular;
-    width: 20%;
+    width: 23%;
     text-align: left;
     margin-left: 5%;
   }
