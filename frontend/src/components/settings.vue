@@ -51,11 +51,11 @@
     <div class="info-fill-panel leftpadding">
       <el-row class="info-item border-bottom ">
         <span class="info-name">姓名*</span>
-        <el-input v-model="manInfo.name" class="info-content normal-input-style no-border-input" placeholder="预设内容(必填)" clearable></el-input>
+        <el-input v-model="manInfo.name" maxlength=10 class="info-content normal-input-style no-border-input" placeholder="预设内容(必填)" clearable></el-input>
       </el-row>
       <el-row class="info-item border-bottom ">
         <span class="info-name">地址</span>
-        <el-input v-model="manInfo.address" class="info-content normal-input-style no-border-input" placeholder="预设内容" clearable></el-input>
+        <el-input v-model="manInfo.address" maxlength=30 class="info-content normal-input-style no-border-input" placeholder="预设内容" clearable></el-input>
       </el-row>
     </div>
       <el-row class="info-item border-bottom leftpadding white-bg">
@@ -96,11 +96,11 @@
     <div class="info-fill-panel leftpadding ">
       <el-row class="info-item border-bottom">
         <span class="long-info-name">正在吃的药</span>
-        <el-input v-model="manInfo.drugs" maxlength=8 class="long-info-content normal-input-style no-border-input" placeholder="预设内容" clearable></el-input>
+        <el-input v-model="manInfo.drugs" maxlength=30 class="long-info-content normal-input-style no-border-input" placeholder="预设内容" clearable></el-input>
       </el-row>
       <el-row class="info-item">
         <span class="long-info-name">正在进行的治疗</span>
-        <el-input v-model="manInfo.treatment" maxlength=8 class="long-info-content normal-input-style no-border-input" placeholder="预设内容" clearable></el-input>
+        <el-input v-model="manInfo.treatment" maxlength=30 class="long-info-content normal-input-style no-border-input" placeholder="预设内容" clearable></el-input>
       </el-row>
     </div>
     <el-button type="success" class="wide-button" @click="saveInfo">保存</el-button>
@@ -129,7 +129,7 @@ export default {
   data () {
     return {
       diseases: ['无', '高血压', '高血脂', '冠心病', '脑中风', '支气管哮喘', '慢性支气管炎', '老年痴呆', '其他'],
-      blood_select: ['A', 'B', 'AB', 'O'],
+      blood_select: ['A', 'B', 'AB', 'O', '其他'],
       manInfo: this.getManInfo(),
       text1: '请输入手机号码',
       text2: '请输入手机号码',
