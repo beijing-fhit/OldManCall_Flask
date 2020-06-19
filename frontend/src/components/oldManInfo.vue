@@ -6,7 +6,7 @@
       <span class="info-value">{{this.info.name}}</span>
 
       <span class="info-key">出生年份</span>
-      <span class="info-value">{{this.info.age}}</span>
+      <span class="info-value">{{this.info.age}}年</span>
     </el-row>
     <el-row class="info-item">
       <span class="info-key">地址</span>
