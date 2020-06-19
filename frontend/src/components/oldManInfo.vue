@@ -5,7 +5,7 @@
       <span class="info-key">姓名</span>
       <span class="info-value">{{this.info.name}}</span>
 
-      <span class="info-key">出生年份</span>
+      <span class="info-key">出生年</span>
       <span class="info-value">{{this.info.age}}年</span>
     </el-row>
     <el-row class="info-item">
@@ -135,7 +135,7 @@ export default {
     color: #48534A;
     font-size: 1.8rem;
     font-family: PingFangSC-Regular;
-    width: 23%;
+    width: 20%;
     text-align: left;
     margin-left: 5%;
   }
