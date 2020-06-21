@@ -51,21 +51,21 @@
     <div class="info-fill-panel leftpadding">
       <el-row class="info-item border-bottom ">
         <span class="info-name">姓名*</span>
-        <el-input v-model="manInfo.name" maxlength=10 class="info-content normal-input-style no-border-input" placeholder="预设内容(必填)" clearable></el-input>
+        <el-input v-model="manInfo.name" maxlength=10 class="info-content normal-input-style " placeholder="预设内容(必填)" clearable></el-input>
       </el-row>
       <el-row class="info-item border-bottom ">
         <span class="info-name">地址</span>
-        <el-input v-model="manInfo.address" maxlength=30 class="info-content normal-input-style no-border-input" placeholder="预设内容" clearable></el-input>
+        <el-input v-model="manInfo.address" maxlength=30 class="info-content normal-input-style " placeholder="预设内容" clearable></el-input>
       </el-row>
     </div>
       <el-row class="info-item border-bottom leftpadding white-bg">
         <span class="info-name">出生年份</span>
-        <el-date-picker  type="year" v-model="manInfo.age" format="yyyy年" value-format="yyyy"  class="info-content normal-input-style no-border-input" placeholder="请选择年份" ></el-date-picker>
+        <el-date-picker  type="year" v-model="manInfo.age" format="yyyy年" value-format="yyyy"  class="info-content normal-input-style " placeholder="请选择年份" ></el-date-picker>
       </el-row>
     <div class="info-fill-panel leftpadding">
       <el-row  class="info-item-height-wrap-content border-bottom">
         <span class="info-name">病史</span>
-        <el-select v-model="manInfo.medical_history"   allow-create filterable multiple  class="info-content normal-input-style no-border-input" placeholder="请输入病史" >
+        <el-select v-model="manInfo.medical_history"   allow-create filterable multiple  class="info-content normal-input-style " placeholder="请输入病史" >
           <el-option
             v-for="d in diseases"
             :key="d"
@@ -77,13 +77,13 @@
       </el-row>
       <el-row class="info-item border-bottom">
         <span class="info-name">过敏史</span>
-        <el-input v-model="manInfo.allergy"  class="info-content normal-input-style no-border-input" placeholder="预设内容" clearable></el-input>
+        <el-input v-model="manInfo.allergy"  class="info-content normal-input-style " placeholder="预设内容" clearable></el-input>
       </el-row>
     </div>
 
       <el-row class="info-item border-bottom leftpadding white-bg">
         <span class="info-name">血型</span>
-        <el-select v-model="manInfo.blood_type" class="info-content normal-input-style no-border-input" placeholder="请选择血型" clearable>
+        <el-select v-model="manInfo.blood_type" class="info-content normal-input-style " placeholder="请选择血型" clearable>
           <el-option
             v-for="b in blood_select"
             :key="b"
@@ -96,11 +96,11 @@
     <div class="info-fill-panel leftpadding ">
       <el-row class="info-item-height-wrap-content border-bottom">
         <span class="long-info-name">正在吃的药</span>
-        <el-input v-model="manInfo.drugs" maxlength=30 type="textarea" autosize class="long-info-content normal-input-style no-border-textarea" placeholder="预设内容" clearable></el-input>
+        <el-input v-model="manInfo.drugs" maxlength=30 type="textarea" autosize class="long-info-content normal-input-style" placeholder="预设内容" clearable></el-input>
       </el-row>
       <el-row class="info-item-height-wrap-content">
         <span class="long-info-name">正在进行的治疗</span>
-        <el-input v-model="manInfo.treatment" maxlength=30 type="textarea" autosize class="long-info-content normal-input-style no-border-textarea" placeholder="预设内容" clearable></el-input>
+        <el-input v-model="manInfo.treatment" maxlength=30 type="textarea" autosize class="long-info-content normal-input-style" placeholder="预设内容" clearable></el-input>
       </el-row>
     </div>
     <el-button type="success" class="wide-button" @click="saveInfo">保存</el-button>
@@ -595,15 +595,6 @@ export default {
     justify-content: left;
     align-items: center;
   }
-
-  .no-border-textarea {
-    overflow: auto;
-    background-attachment: fixed;
-    background-repeat: no-repeat;
-    border-style: solid;
-    border-color: #FFFFFF;
-    border: 0rem;
-  }
   /*input 样式*/
    .normal-input-style{
     font-family: PingFangSC-Regular;
@@ -611,7 +602,17 @@ export default {
     color: #B2B2B2;
     letter-spacing: 0;
   }
-  /deep/ .no-border-input .el-input__inner{
+  /deep/  .el-textarea__inner {
+    border: 0 none;
+    color: #48534A;
+    /*max-lines: 1;*/
+    /*padding: 0;*/
+    font-family: PingFangSC-Regular;
+    font-size: 2rem;
+    color: #B2B2B2;
+    letter-spacing: 0;
+  }
+  /deep/  .el-input__inner{
    border: 0 none;
     color: #48534A;
     max-lines: 1;
