@@ -120,10 +120,12 @@ export default {
         } else {
           qrcodeid = p
         }
+        var t = null
         api.weChatCalling(sessionStorage.getItem('openId'), this.phone_number, qrcodeid)
           .then(async (res) => {
-            console.log('呼叫成功:', res)
+            // console.log('呼叫成功:', res)
             if (res.data.Code === 0 && res.data.Caller !== '') {
+              t = res.data.Caller
               window.location.href = 'tel:' + res.data.Caller
               // 获取地理位置发送通知
               await this.getLocation()
@@ -138,7 +140,8 @@ export default {
             console.log('呼叫失败:', err)
             // this.error_msg = '请您稍后再拨!' + JSON.stringify(err)
             that.error_msg = '请您稍后再拨!'
-            that.centerDialogVisible = true
+            if (t === null || t === '')
+              that.centerDialogVisible = true
             // this.$toast('error:' + err)
             // alert('error:' + JSON.stringify(err))
           })
