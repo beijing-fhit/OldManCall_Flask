@@ -247,6 +247,8 @@ export default {
         oldManInfo3.name = t3.name
         if (t3.age !== null && t3.age !== 'null' && t3.age !== undefined && t3.age !== 'undefined' && t3.age !== '') {
           oldManInfo3.age = t3.age.toString()
+        } else {
+          oldManInfo3.age = ''
         }
         oldManInfo3.address = t3.address
         if (!(t3.medical_history instanceof Array)) { // 如果不是列表对象
