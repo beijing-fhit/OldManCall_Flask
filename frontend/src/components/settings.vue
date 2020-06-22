@@ -13,7 +13,7 @@
     <div class="contact-panel">
       <el-row class="contact-item border-bottom">
         <span class="contact-name">联系人1</span>
-        <span class="contact-number" @click="modifyContact(0)">{{contact[0]=== undefined||contact[0]=== "undefined"||contact[0]=== null||contact[0]=== ""?text1:contact[0]}}</span>
+        <span class="contact-number">{{contact[0]=== undefined||contact[0]=== "undefined"||contact[0]=== null||contact[0]=== ""?text1:contact[0]}}</span>
         <span class="delete-img"/>
       </el-row>
       <el-row class="contact-item border-bottom">
@@ -245,8 +245,9 @@ export default {
       if (temp3 !== null && temp3 !== undefined && temp3 !== '' && temp3 !== 'undefined') {
         var t3 = JSON.parse(temp3)
         oldManInfo3.name = t3.name
-        if(t3.age !== null || t3.age !== undefined)
+        if(t3.age !== null || t3.age !== undefined) {
           oldManInfo3.age = t3.age.toString()
+        }
         oldManInfo3.address = t3.address
         if (!(t3.medical_history instanceof Array)) { // 如果不是列表对象
           if (t3.medical_history.trim() === '') {

@@ -140,8 +140,9 @@ export default {
             console.log('呼叫失败:', err)
             // this.error_msg = '请您稍后再拨!' + JSON.stringify(err)
             that.error_msg = '请您稍后再拨!'
-            if (t === null || t === '')
+            if (t === null || t === '') {
               that.centerDialogVisible = true
+            }
             // this.$toast('error:' + err)
             // alert('error:' + JSON.stringify(err))
           })
