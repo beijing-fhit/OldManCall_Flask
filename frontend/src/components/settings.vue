@@ -245,7 +245,8 @@ export default {
       if (temp3 !== null && temp3 !== undefined && temp3 !== '' && temp3 !== 'undefined') {
         var t3 = JSON.parse(temp3)
         oldManInfo3.name = t3.name
-        oldManInfo3.age = t3.age.toString()
+        if(t3.age !== null || t3.age !== undefined)
+          oldManInfo3.age = t3.age.toString()
         oldManInfo3.address = t3.address
         if (!(t3.medical_history instanceof Array)) { // 如果不是列表对象
           if (t3.medical_history.trim() === '') {
