@@ -60,7 +60,7 @@
     </div>
       <el-row class="info-item border-bottom leftpadding white-bg">
         <span class="info-name">出生年份</span>
-        <el-date-picker  type="year" v-model="manInfo.age" format="yyyy" value-format="yyyy"  class="info-content normal-input-style " placeholder="请选择年份" ></el-date-picker>
+        <el-date-picker  type="year" default-value="2020" v-model="manInfo.age" format="yyyy" value-format="yyyy"  class="info-content normal-input-style " placeholder="请选择年份" ></el-date-picker>
       </el-row>
     <div class="info-fill-panel leftpadding">
       <el-row  class="info-item-height-wrap-content border-bottom">
