@@ -245,7 +245,7 @@ export default {
       if (temp3 !== null && temp3 !== undefined && temp3 !== '' && temp3 !== 'undefined') {
         var t3 = JSON.parse(temp3)
         oldManInfo3.name = t3.name
-        if (t3.age !== null || t3.age !== 'null' || t3.age !== undefined || t3.age !== 'undefined' || t3.age !== '') {
+        if (t3.age !== null && t3.age !== 'null' && t3.age !== undefined && t3.age !== 'undefined' && t3.age !== '') {
           oldManInfo3.age = t3.age.toString()
         }
         oldManInfo3.address = t3.address
