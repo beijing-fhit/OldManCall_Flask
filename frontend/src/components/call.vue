@@ -111,7 +111,7 @@ export default {
       // 显示loading
       const loading = this.showLoading('正在发送呼叫请求...')
       try {
-        // var that = this
+        var that = this
         var qrcodeid = sessionStorage.getItem('qrCodeId')
         var temp = qrcodeid.split('?') // xxx?qrcodeid=xxx?qrcodeid=xxx
         var p = temp[temp.length - 1]
@@ -130,15 +130,15 @@ export default {
               window.location.reload()
             } else {
               // this.$toast('呼叫失败!')
-              this.error_msg = '请您稍后再拨!' + JSON.stringify(res.data)
-              this.centerDialogVisible = true
+              that.error_msg = '请您稍后再拨!' + JSON.stringify(res.data)
+              that.centerDialogVisible = true
             }
           })
           .catch(err => {
             console.log('呼叫失败:', err)
             // this.error_msg = '请您稍后再拨!' + JSON.stringify(err)
-            this.error_msg = '请您稍后再拨!'
-            this.centerDialogVisible = true
+            that.error_msg = '请您稍后再拨!'
+            that.centerDialogVisible = true
             // this.$toast('error:' + err)
             // alert('error:' + JSON.stringify(err))
           })
