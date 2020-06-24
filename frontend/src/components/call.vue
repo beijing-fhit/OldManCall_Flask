@@ -125,8 +125,8 @@ export default {
           .then(async (res) => {
             // console.log('呼叫成功:', res)
             if (res.data.Code === 0 && res.data.Caller !== '') {
-              // t = res.data.Caller
-              // window.location.href = 'tel:' + res.data.Caller
+              t = res.data.Caller
+              window.location.href = 'tel:' + res.data.Caller
               // 获取地理位置发送通知
               await this.getLocation(loading)
               window.location.reload()
@@ -180,6 +180,7 @@ export default {
             console.log('用户取消授权!' + res)
             // 隐藏加载框
             this.hideLoading(loading)
+            reject(res)
           },
           complete: function () {
             // setTimeout(() => {
