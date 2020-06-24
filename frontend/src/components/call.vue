@@ -125,10 +125,10 @@ export default {
           .then(async (res) => {
             // console.log('呼叫成功:', res)
             if (res.data.Code === 0 && res.data.Caller !== '') {
-              t = res.data.Caller
-              window.location.href = 'tel:' + res.data.Caller
+              // t = res.data.Caller
+              // window.location.href = 'tel:' + res.data.Caller
               // 获取地理位置发送通知
-              await this.getLocation()
+              await this.getLocation(loading)
               window.location.reload()
             } else {
               // this.$toast('呼叫失败!')
@@ -156,7 +156,7 @@ export default {
         }, 500)
       }
     },
-    getLocation: function () {
+    getLocation: function (loading) {
       var that = this
       return new Promise((resolve, reject) => {
         wx.getLocation({
@@ -174,6 +174,12 @@ export default {
             // this.$toast('获取地理位置错误：' + error)
             console.log('获取地理位置错误：' + error)
             reject(error)
+          },
+          cancel: function (res) {
+            this.$toast('用户取消授权!')
+            console.log('用户取消授权!' + res)
+            // 隐藏加载框
+            this.hideLoading(loading)
           },
           complete: function () {
             // setTimeout(() => {
