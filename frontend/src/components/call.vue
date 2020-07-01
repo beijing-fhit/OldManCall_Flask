@@ -41,7 +41,8 @@ export default {
       },
       phone_number: [],
       centerDialogVisible: false,
-      error_msg: ''
+      error_msg: '',
+      address: ''
     }
   },
   mounted () {
@@ -58,8 +59,9 @@ export default {
       }
     }
     console.log('created---')
-    wx.ready(function () {
+    wx.ready(() => {
       console.log('ready-----')
+      this.getLocation()
     })
     wx.error(function (res) {
       console.log('error-----')
@@ -109,7 +111,7 @@ export default {
   methods: {
     startCall: function () {
       // 显示loading
-      const loading = this.showLoading('正在发送呼叫请求...')
+      const loading = this.showLoading('正在发送呼叫请求..')
       try {
         var that = this
         var qrcodeid = sessionStorage.getItem('qrCodeId')
@@ -123,23 +125,33 @@ export default {
         var t = null
         api.weChatCalling(sessionStorage.getItem('openId'), this.phone_number, qrcodeid)
           .then(async (res) => {
-            // console.log('呼叫成功:', res)
+            // this.hideLoading(loading)
+            console.log('呼叫成功:', res)
             if (res.data.Code === 0 && res.data.Caller !== '') {
+              // 获取地理位置发送通知
+              // await that.getLocation()
+              // 只发送地理位置
+              console.log('地理位置：', that.address)
+              if (that.address !== null && that.address !== ''){
+                await api.sendMsgNotification(that.phone_number, that.address)
+              }
               t = res.data.Caller
               window.location.href = 'tel:' + res.data.Caller
-              // 获取地理位置发送通知
-              await this.getLocation(loading)
-              window.location.reload()
+              setTimeout(() => {
+                window.location.reload()
+              }, 500)
             } else {
-              // this.$toast('呼叫失败!')
+              console.log('呼叫失败1:', res)
+              that.$toast('呼叫失败!')
               that.error_msg = '请您稍后再拨!' + JSON.stringify(res.data)
               that.centerDialogVisible = true
             }
           })
           .catch(err => {
-            console.log('呼叫失败:', err)
+            // this.hideLoading(loading)
+            console.log('呼叫失败2:', err)
             // this.error_msg = '请您稍后再拨!' + JSON.stringify(err)
-            that.error_msg = '请您稍后再拨!'
+            that.error_msg = '请您稍后再拨!' + JSON.stringify(err)
             if (t === null || t === '') {
               that.centerDialogVisible = true
             }
@@ -147,16 +159,17 @@ export default {
             // alert('error:' + JSON.stringify(err))
           })
           .finally(() => {
-            this.hideLoading(loading)
+            that.hideLoading(loading)
           })
       } catch (e) {
-        this.hideLoading(loading)
+        console.log('全局异常:', e)
+        that.hideLoading(loading)
         setTimeout(() => {
           window.location.reload()
         }, 500)
       }
     },
-    getLocation: function (loading) {
+    getLocation: function () {
       var that = this
       return new Promise((resolve, reject) => {
         wx.getLocation({
@@ -167,26 +180,20 @@ export default {
             let {data} = await api.getLocationDesc(latitude, longitude)
             var address = data.result.formatted_addresses.recommend
             // that.$toast('地理位置:' + address)
-            var result = await api.sendMsgNotification(that.phone_number, address)
-            resolve(result)
+            // var result = await api.sendMsgNotification(that.phone_number, address)
+            // resolve(result)
+            that.address = address
+            resolve(address)
           },
           fail: function (error) {
             // this.$toast('获取地理位置错误：' + error)
-            console.log('获取地理位置错误：' + error)
-            reject(error)
+            console.log('获取地理位置错误：' + JSON.stringify(error))
+            resolve(error)
           },
           cancel: function (res) {
-            this.$toast('用户取消授权!')
+            that.$toast('用户取消授权!')
             console.log('用户取消授权!' + res)
-            // 隐藏加载框
-            this.hideLoading(loading)
-            reject(res)
-          },
-          complete: function () {
-            // setTimeout(() => {
-            //   this.$toast('获取地理位置完成')
-            //   window.location.reload()
-            // }, 3000)
+            resolve(res) // 取消授权，但是是正常返回
           }
         })
       })
