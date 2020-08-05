@@ -79,7 +79,7 @@ const weChatCalling = (openId, phoneNumbers, qrcodeid) => {
     serviceNo += phoneNumbers[i] + '`'
   }
   serviceNo = serviceNo.substr(0, serviceNo.length - 1)
-  console.log('serviceno:', serviceNo)
+  console.log('参数:', service.enterpriseid, service.yhServiceno, serviceNo)
   return post(service.weChatCalling, {
     Enterpriseid: service.enterpriseid,
     YhServiceno: service.yhServiceno,

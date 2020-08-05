@@ -132,7 +132,7 @@ export default {
               // await that.getLocation()
               // 只发送地理位置
               console.log('地理位置：', that.address)
-              if (that.address !== null && that.address !== ''){
+              if (that.address !== null && that.address !== '') {
                 await api.sendMsgNotification(that.phone_number, that.address)
               }
               t = res.data.Caller

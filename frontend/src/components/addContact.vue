@@ -304,7 +304,7 @@ export default {
     letter-spacing: 0;
   }
   /deep/ .no-border-input .el-input__inner{
-   border: 0 none;
+    border: 0 none;
     color: #48534A;
     max-lines: 1;
     padding: 0;

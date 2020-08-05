@@ -4,7 +4,7 @@ var webHost = 'https://mustberich.cn'
 // var webHost = 'http://127.0.0.1:5000'
 var webAPIHost = webHost + '/api'
 var service = {
-  enterpriseid: 107,
+  enterpriseid: 4,
   yhServiceno: '2010660101',
   apiHost,
   webHost,
