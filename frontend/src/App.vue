@@ -25,12 +25,12 @@ export default {
   created () {
   },
   methods: {
-  },
-  reload () {
+    reload () {
     this.isRouterAlive = false
     this.$nextTick(function () {
       this.isRouterAlive = true
     })
+  }
   }
 }
 </script>

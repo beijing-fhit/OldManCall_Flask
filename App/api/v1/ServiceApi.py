@@ -61,6 +61,7 @@ class MsgNotification(Resource):
 parser = reqparse.RequestParser()
 parser.add_argument('qrcodeid', required=True, help='qrcodeid参数不能为空，{error_msg}')
 
+
 class QRCodeInfo(Resource):
     def get(self):
         args = parser.parse_args()
@@ -111,15 +112,15 @@ class QRCodeInfo(Resource):
                 # 更新数据
                 db.session.query(OldManInfo).filter(OldManInfo.id == qrCode.old_man_info) \
                     .update({
-                    "name": old_man_info['name'],
-                    "address": old_man_info['address'],
-                    "age": old_man_info['age'] if old_man_info['age'] else 0,
-                    "medical_history": old_man_info['medical_history'],
-                    "allergy": old_man_info['allergy'],
-                    "blood_type": old_man_info['blood_type'],
-                    "drugs": old_man_info['drugs'],
-                    "treatment": old_man_info['treatment']
-                })
+                        "name": old_man_info['name'],
+                        "address": old_man_info['address'],
+                        "age": old_man_info['age'] if old_man_info['age'] else 0,
+                        "medical_history": old_man_info['medical_history'],
+                        "allergy": old_man_info['allergy'],
+                        "blood_type": old_man_info['blood_type'],
+                        "drugs": old_man_info['drugs'],
+                        "treatment": old_man_info['treatment']
+                    })
                 db.session.commit()
                 # OldManInfo.query.filter_by(id=qrCode.old_man_info) \
                 #     .update({
@@ -156,7 +157,7 @@ class QRCodeInfo(Resource):
                         f.write('\ncreate OldManInfo info :%s' % (oldManInfo))
                         f.close()
 
-                    if QrCode.query.get(qrcodeid) is  None:
+                    if QrCode.query.get(qrcodeid) is None:
                         qrCode1 = QrCode(qr_code_id=qrcodeid, old_man_info=oldManInfo.id)
                         qrCode1.save()
                     else:

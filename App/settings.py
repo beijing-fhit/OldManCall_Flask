@@ -31,12 +31,11 @@ class Config:
 
     # JSON_AS_ASCII = False
 
-    GITHUB_WEBHOOK_KEY='ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDenBQYR9OGH+98RA9LL68M2EqKKcSA5NhLQ38JDOd2JzPOBKy34y2oKprRhp/33noPfTCiigns84akCHDoBIZ9jtd/zYVmfMifsWrMgOZMGT5I+yGVzDb3QAXemyE1eCJoPIEWmvZut7Nbz2CsxBZZKxFV0SLOo5lnpHMYL5jtNOsZe+V+g6fxcjy391BtdlHw1NT712ltibLvGi810Paklxn80jmG0LUwECjo25ylCUQ7+0S4v216JCB4IDd8LHgwhAltjvWiXZuNbwegYxKW9QPO/Wv6/mokOS1cbeSoWWftna8+R1Eq8o9VU95ofEPwthjI8oXMvc0AK3EpTe5n summer@DESKTOP-IPUF6C0'
+    GITHUB_WEBHOOK_KEY = 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDenBQYR9OGH+98RA9LL68M2EqKKcSA5NhLQ38JDOd2JzPOBKy34y2oKprRhp/33noPfTCiigns84akCHDoBIZ9jtd/zYVmfMifsWrMgOZMGT5I+yGVzDb3QAXemyE1eCJoPIEWmvZut7Nbz2CsxBZZKxFV0SLOo5lnpHMYL5jtNOsZe+V+g6fxcjy391BtdlHw1NT712ltibLvGi810Paklxn80jmG0LUwECjo25ylCUQ7+0S4v216JCB4IDd8LHgwhAltjvWiXZuNbwegYxKW9QPO/Wv6/mokOS1cbeSoWWftna8+R1Eq8o9VU95ofEPwthjI8oXMvc0AK3EpTe5n summer@DESKTOP-IPUF6C0'
     # 需要数据库初始化时，设为True
-    INIT_DB=False
+    INIT_DB = False
     # 需要数据库迁移时，设为True
-    MIGRATE_DB=False
-
+    MIGRATE_DB = False
 
 
 # 开发环境参数配置
@@ -97,6 +96,7 @@ class ProductConfig(Config):
         'NAME': 'OldManInfoFlaskProduct'
     }
     SQLALCHEMY_DATABASE_URI = parse_db_uri(DATABASE)
+
 
 # linux上的docker环境参数配置
 class DockerConfig(Config):

@@ -1,5 +1,4 @@
 import axios from 'axios'
-// import router from './router/index'
 
 axios.defaults.timeout = 5000 // 请求超时5秒
 // 创建axios实例
