@@ -5,8 +5,8 @@ import requests
 from flask import session
 import json
 from flask_restful import Resource, reqparse, request
-from App.models import QrCode, OldManInfo, PhoneNumber, db
-from App.utils import ORMUtils, CommonUtils, Constants
+from App.models import QrCode, OldManInfo, PhoneNumber, db, UCallFreeId
+from App.utils import ORMUtils, CommonUtils, Constants, dbutils
 
 
 class OpenIdFromSession(Resource):
@@ -101,6 +101,8 @@ class QRCodeInfo(Resource):
             qrcodeid = data['qr_code_id']
             old_man_info = data['old_man_info']
             phone_numbers = data['phone_number']
+            ucallFreeId = data['ucallFreeId']
+
             # with open('flask.log', 'a+') as f:
             #     f.write('\n[%s] request data is :%s,%s,%s' % (time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time())),qrcodeid,old_man_info,phone_numbers))
             #     f.close()
@@ -158,14 +160,21 @@ class QRCodeInfo(Resource):
                         f.close()
 
                     if QrCode.query.get(qrcodeid) is None:
-                        qrCode1 = QrCode(qr_code_id=qrcodeid, old_man_info=oldManInfo.id)
+                        # 将ucall和qrCode绑定
+                        # 如果已存在UCallFreeId则直接关联，若不存在，则创建一个新的UCallFreeId
+                        if not dbutils.isRecordExist(UCallFreeId, "ucallFreeId = '{}'".format(ucallFreeId)):
+                            ucall = UCallFreeId(ucallFreeId=ucallFreeId)
+                            ucall.save()
+                        qrCode1 = QrCode(qr_code_id=qrcodeid, uId=ucallFreeId, old_man_info=oldManInfo.id)
                         qrCode1.save()
+
                     else:
                         qrCode2 = QrCode.query.get(qrcodeid)
                         qrCode2.old_man_info=oldManInfo.id
                         qrCode2.save()
 
                 except Exception as e:
+                    db.session.rollback()
                     with open('flask.log', 'a+') as f:
                         f.write('\ncreate OldManInfo exception :%s' % (e))
                         f.close()

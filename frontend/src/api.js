@@ -55,6 +55,10 @@ const verifyNumber = (openId, number, verifyNumber) => {
   }, getHeader(openId))
 }
 
+const getInfoByUCallId = (ucallFreeId) => {
+  return get(service.ucall, {ucallFreeId})
+}
+
 const getInfo = (qrCodeId) => {
   return get(service.qrCodeInfo, {qrcodeid: qrCodeId})
 }
@@ -64,9 +68,10 @@ const getInfo = (qrCodeId) => {
  * @param oldManInfo 老人信息，类型：{}
  * @param phone_number 联系人，类型：[]
  */
-const saveInfo = (qrCodeId, oldManInfo, phoneNnumber) => {
+const saveInfo = (qrCodeId, ucallFreeId, oldManInfo, phoneNnumber) => {
   return post(service.qrCodeInfo, {
     qr_code_id: qrCodeId,
+    ucallFreeId: ucallFreeId,
     old_man_info: oldManInfo,
     phone_number: phoneNnumber
   }, {
@@ -137,6 +142,7 @@ export default {
   activateQrCode,
   getVerifyCode,
   verifyNumber,
+  getInfoByUCallId,
   getInfo,
   saveInfo,
   weChatCalling,

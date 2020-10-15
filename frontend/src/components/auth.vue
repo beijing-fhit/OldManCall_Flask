@@ -45,8 +45,7 @@ export default {
       var openid = getUrlParam('openid')
       var ucallfreeid = getUrlParam('ucallfreeid')
       var qrcodeid = getUrlParam('qrcodeid')
-      // console.log('参数：', openid, ucallfreeid, qrcodeid)
-      // this.$alert('参数：' + openid + ucallfreeid + qrcodeid)
+
       if (openid && ucallfreeid && qrcodeid) {
         // 来自小程序，则不用请求参数,跳转到call页面
         sessionStorage.setItem('openId', openid)
@@ -92,10 +91,20 @@ export default {
           // 获取用户状态，保存其中的ucallfreeid
           api.weChatState(openId).then(async res => {
             // console.log('weChatState', res)
-            sessionStorage.setItem('UcallFreeId', res.data.UcallFreeId)
             sessionStorage.setItem('Tel', res.data.Tel[0])
+            sessionStorage.setItem('UcallFreeId', res.data.UcallFreeId)
             await api.modifyOpenid(openId, res.data.UcallFreeId, res.data.NickName, '', res.data.Headurl)
-            this.$router.push('/scan')
+            // 查询是否有二维码，若没有，进入申请页面，若有则进入scan
+            this.showLoading()
+            api.getInfoByUCallId(res.data.UcallFreeId)
+              .then(({data: {statusCode, data}}) => {
+                if (statusCode === 0 && data !== null && data !== undefined && data.length !== 0) {
+                  this.$router.push('/scan')
+                } else {
+                  this.$router.replace('/applycard')
+                }
+                this.hideLoading()
+              })
           }).catch(res => {
             console.log('webChatState error', res)
           })

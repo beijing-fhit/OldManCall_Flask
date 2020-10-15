@@ -8,6 +8,7 @@ import addContact from '@/components/addContact'
 import settings from '@/components/settings'
 import updateNumber from '@/components/updateNumber'
 import call from '@/components/call'
+import applyCard from '@/components/ApplyCard'
 import InfoDisplay from '../components/InfoDisplay'
 
 Vue.use(Router)
@@ -86,6 +87,14 @@ export default new Router({
       component: call,
       meta: {
         title: '呼叫'
+      }
+    },
+    {
+      path: '/applycard',
+      name: 'applycard',
+      component: applyCard,
+      meta: {
+        title: '申请'
       }
     }
   ]

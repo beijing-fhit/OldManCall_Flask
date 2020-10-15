@@ -41,6 +41,7 @@ class Base:
             db.session.rollback()
             raise Exception('删除model异常：'+e)
 
+
 class OldManInfo(db.Model,Base):
     __tablename__='oldmaninfo'
     id = db.Column(db.Integer,primary_key=True,autoincrement=True)
@@ -94,12 +95,26 @@ class PhoneNumber(db.Model,Base):
 class QrCode(db.Model,Base):
     __tablename__='qrcode'
     qr_code_id = db.Column(db.String(50),primary_key=True)
+    uId = db.Column(db.Integer, db.ForeignKey('ucallfreeid.uCallFreeId'))
     phone_number = db.relationship('PhoneNumber',backref='qrcode',lazy='dynamic')
     old_man_info = db.Column(db.Integer, db.ForeignKey('oldmaninfo.id',ondelete='CASCADE'))# 这里的old_man_info是OldManInfo的表名，可以在__tablename__中指定表名
 
-    def __init__(self,qr_code_id,old_man_info):
+    def __init__(self, qr_code_id, uId, old_man_info):
         self.qr_code_id=qr_code_id
+        self.uId = uId
         self.old_man_info=old_man_info
 
     def __repr__(self):
         return self.qr_code_id
+
+
+class UCallFreeId(db.Model, Base):
+    __tablename__ = "ucallfreeid"
+    uCallFreeId = db.Column(db.Integer, primary_key=True)
+    qrCode = db.relationship('QrCode', backref='ucallfreeid', lazy='dynamic')
+
+    def __init__(self, ucallFreeId):
+        self.uCallFreeId = ucallFreeId
+
+    def __repr__(self):
+        return self.uCallFreeId

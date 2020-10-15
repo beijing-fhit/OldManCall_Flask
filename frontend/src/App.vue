@@ -26,11 +26,11 @@ export default {
   },
   methods: {
     reload () {
-    this.isRouterAlive = false
-    this.$nextTick(function () {
-      this.isRouterAlive = true
-    })
-  }
+      this.isRouterAlive = false
+      this.$nextTick(function () {
+        this.isRouterAlive = true
+      })
+    }
   }
 }
 </script>
@@ -89,7 +89,7 @@ export default {
 
   /*.my-el-custom-spinner {*/
   /*    background: url("./assets/images/loading.gif");//这个图自己百度"loading gif"，肯定能找到*/
-  /*    background-size: 40px 40px; //长宽自己设置*/
+   /*    background-size: 40px 40px; //长宽自己设置*/
   /*    width: 40px;*/
   /*    height: 40px;*/
   /*    display: inline-block;*/

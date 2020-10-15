@@ -350,6 +350,7 @@ export default {
       }
       // qrCodeId, oldManInfo, phone_number
       var qrCodeId = sessionStorage.getItem('qrCodeId')
+      var ucallFreeId = sessionStorage.getItem('UcallFreeId')
       // 利用JSON的stringify和parse进行深拷贝
       var temp = JSON.stringify(this.manInfo)
       var info = JSON.parse(temp)
@@ -362,7 +363,7 @@ export default {
       // this.$toast(info)
       // this.$toast(phoneNumber)
 
-      api.saveInfo(qrCodeId, info, phoneNumber).then(res => {
+      api.saveInfo(qrCodeId, ucallFreeId, info, phoneNumber).then(res => {
         // 保存信息成功
         // console.log('保存信息成功:', res)
         if (res.data.status_code === 0) {
