@@ -20,7 +20,8 @@ var service = {
   weChatCalling: `${apiHost}/api/v4/wechatcalling`,
   locationDesc: `${webAPIHost}/locationDesc`,
   msgNotification: `${webAPIHost}/msgNotification`,
-  modifyOpenid: `${apiHost}/api/v1/ModifyOpenid`
+  modifyOpenid: `${apiHost}/api/v1/ModifyOpenid`,
+  applyCard: `${webAPIHost}/applyCard`
   // getURLFrom: `${webHost}/getUrlFrom`,
   // getCode: `${webHost}/code`
 }

@@ -118,3 +118,23 @@ class UCallFreeId(db.Model, Base):
 
     def __repr__(self):
         return self.uCallFreeId
+
+
+class ApplyCard(db.Model, Base):
+    __tablename__ = "applycard"
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    uCallFreeId = db.Column(db.String(10))
+    phoneNumber = db.Column(db.String(30))
+    address = db.Column(db.String(50))
+    postCode = db.Column(db.String(15))
+    name = db.Column(db.String(15))
+
+    def __init__(self, ucallFreeId, phoneNumber, address, postCode, name):
+        self.uCallFreeId = ucallFreeId
+        self.phoneNumber = phoneNumber
+        self.address = address
+        self.postCode = postCode
+        self.name = name
+
+    def __repr__(self):
+        return self.name

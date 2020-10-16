@@ -5,7 +5,7 @@ import requests
 from flask import session
 import json
 from flask_restful import Resource, reqparse, request
-from App.models import QrCode, OldManInfo, PhoneNumber, db, UCallFreeId
+from App.models import QrCode, OldManInfo, PhoneNumber, db, UCallFreeId, ApplyCard
 from App.utils import ORMUtils, CommonUtils, Constants, dbutils
 
 
@@ -216,3 +216,76 @@ class QRCodeInfo(Resource):
             with open('flask.log', 'a+') as f:
                 f.write('\nfinal  exception :%s' % (e))
                 f.close()
+
+
+def parse_post_parmas():
+    parser_post = reqparse.RequestParser()
+    parser_post.add_argument('ucallFreeId', required=True, help='ucallFreeId参数不能为空，{error_msg}')
+    parser_post.add_argument('phoneNumber', required=True, help='phoneNumber参数不能为空，{error_msg}')
+    parser_post.add_argument('address', required=True, help='address参数不能为空，{error_msg}')
+    parser_post.add_argument('postCode', required=True, help='postCode参数不能为空，{error_msg}')
+    parser_post.add_argument('name', required=True, help='name参数不能为空，{error_msg}')
+    return parser_post.parse_args()
+
+
+def parse_get_params():
+    parser_get = reqparse.RequestParser()
+    parser_get.add_argument('ucallFreeId',required=True, help='ucallFreeId参数不能为空，{error_msg}')
+    return parser_get.parse_args()
+
+
+# 申请老年卡
+class ApplyCardResource(Resource):
+    def get(self):
+        parse_get = parse_get_params()
+        ucallFreeId = parse_get['ucallFreeId']
+        try:
+            applyCards = ApplyCard.query.filter_by(uCallFreeId=ucallFreeId)
+            if applyCards is not None:
+                return {
+                    "statusCode": 0,
+                    "data": [ORMUtils.serialize(applyCard) for applyCard in applyCards],
+                    "message": "查询成功!"
+                        }
+            else:
+                return {
+                    "statusCode": -1,
+                    "data": None,
+                    "message": "未找到相关信息!"
+                }
+        except Exception as e:
+            with open('flask.log', 'a+') as f:
+                f.write('\nget apply card info exception:%s \n' % e)
+                f.close()
+            return {
+                    "statusCode": -1,
+                    "data": None,
+                    "message": "未找到相关信息!"
+                }
+    def post(self):
+        parser_post = parse_post_parmas()
+        try:
+            ucallFreeId = parser_post['ucallFreeId']
+            phoneNumber = parser_post['phoneNumber']
+            name = parser_post['name']
+            postCode = parser_post['postCode']
+            address = parser_post['address']
+            applyCard = ApplyCard(ucallFreeId=ucallFreeId,
+                                  phoneNumber=phoneNumber,
+                                  name=name,
+                                  postCode=postCode,
+                                  address=address)
+            applyCard.save()
+            return {
+                "statusCode": 0,
+                "message": "申请成功!"
+            }
+        except Exception as e:
+            with open('flask.log', 'a+') as f:
+                f.write('\napply card exception:%s \n' % e)
+                f.close()
+
+            return {
+                "statusCode": 0,
+                "message": "申请失败!"
+            }

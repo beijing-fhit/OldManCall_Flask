@@ -10,14 +10,37 @@
 </template>
 
 <script>
+import api from '../api'
 export default {
   name: 'ApplyCard',
+  data () {
+    return {
+      canApplycard: true
+    }
+  },
   methods: {
-    applyCard: function () {
-      this.$router.push('/registerApplyInfo')
+    applyCard: async function () {
+      await this.getApplyCardInfo()
+      if (this.canApplycard) {
+        await this.$router.push('/registerApplyInfo')
+      } else {
+        this.$toast('你已经申请过了!')
+      }
     },
     toScan: function () {
       this.$router.push('/scan')
+    },
+    getApplyCardInfo: function () {
+      api.getApplyCardInfo(sessionStorage.getItem('UcallFreeId'))
+        .then(({data: {statusCode, data}}) => {
+          if (statusCode === 0 && data !== null) {
+            if (data.length === 0) {
+              this.canApplycard = true
+            } else {
+              this.canApplycard = false
+            }
+          }
+        })
     }
   }
 }

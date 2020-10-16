@@ -55,6 +55,22 @@ const verifyNumber = (openId, number, verifyNumber) => {
   }, getHeader(openId))
 }
 
+const applyCard = (ucallFreeId, phoneNumber, address, name, postCode) => {
+  return post(service.applyCard, {
+    ucallFreeId,
+    phoneNumber,
+    address,
+    name,
+    postCode
+  }, {
+    'Content-Type': 'application/json'
+  })
+}
+
+const getApplyCardInfo = (ucallFreeId) => {
+  return get(service.applyCard, {ucallFreeId})
+}
+
 const getInfoByUCallId = (ucallFreeId) => {
   return get(service.ucall, {ucallFreeId})
 }
@@ -148,5 +164,7 @@ export default {
   weChatCalling,
   getLocationDesc,
   sendMsgNotification,
-  modifyOpenid
+  modifyOpenid,
+  applyCard,
+  getApplyCardInfo
 }

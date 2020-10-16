@@ -83,6 +83,7 @@ export default {
       }
     },
     getOpenId: function (code) {
+      let that = this
       api.getOpenId(code).then(res => {
         console.log('在app.vue中获取openid成功:', res)
         if (res.data.status_code === 0) {
@@ -95,7 +96,7 @@ export default {
             sessionStorage.setItem('UcallFreeId', res.data.UcallFreeId)
             await api.modifyOpenid(openId, res.data.UcallFreeId, res.data.NickName, '', res.data.Headurl)
             // 查询是否有二维码，若没有，进入申请页面，若有则进入scan
-            this.showLoading()
+            let loading = that.showLoading()
             api.getInfoByUCallId(res.data.UcallFreeId)
               .then(({data: {statusCode, data}}) => {
                 if (statusCode === 0 && data !== null && data !== undefined && data.length !== 0) {
@@ -103,7 +104,7 @@ export default {
                 } else {
                   this.$router.replace('/applycard')
                 }
-                this.hideLoading()
+                that.hideLoading(loading)
               })
           }).catch(res => {
             console.log('webChatState error', res)
@@ -115,6 +116,20 @@ export default {
       }).catch(res => {
         console.log('在app.vue中获取openid失败:', res)
       })
+    },
+    showLoading: function (text) {
+      const loading = this.$loading({
+        lock: true,
+        customClass: 'create-isLoading', //  *这里设置他的class名称,这里最重要
+        text: text,
+        spinner: 'el-icon-loading',
+        background: 'rgba(0, 0, 0, 0)'
+      })
+      return loading
+    },
+    hideLoading: function (loading) {
+      loading.close()
+      // this.reload()
     }
   }
 }
