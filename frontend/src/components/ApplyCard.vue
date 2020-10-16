@@ -14,14 +14,12 @@ import api from '../api'
 export default {
   name: 'ApplyCard',
   data () {
-    return {
-      canApplycard: true
-    }
+    return {}
   },
   methods: {
     applyCard: async function () {
-      await this.getApplyCardInfo()
-      if (this.canApplycard) {
+      let canApplycard = await this.getApplyCardInfo()
+      if (canApplycard) {
         await this.$router.push('/registerApplyInfo')
       } else {
         this.$toast('你已经申请过了!')
@@ -31,15 +29,20 @@ export default {
       this.$router.push('/scan')
     },
     getApplyCardInfo: function () {
-      api.getApplyCardInfo(sessionStorage.getItem('UcallFreeId'))
+      return api.getApplyCardInfo(sessionStorage.getItem('UcallFreeId'))
         .then(({data: {statusCode, data}}) => {
+          console.log('getApplyCardInfo正确:', data)
           if (statusCode === 0 && data !== null) {
             if (data.length === 0) {
-              this.canApplycard = true
+              return Promise.resolve(true)
             } else {
-              this.canApplycard = false
+              return Promise.resolve(false)
             }
           }
+          return Promise.resolve(true)
+        }).catch(err => {
+          console.log('getApplyCardInfo错误:', err)
+          return Promise.resolve(true)
         })
     }
   }
