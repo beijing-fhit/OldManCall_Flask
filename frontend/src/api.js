@@ -140,6 +140,20 @@ const sendMsgNotification = (mobile, content) => {
   })
 }
 
+// 查询某个电话号码是否在家属联系人列表中
+const isFamilyMember = (qrCodeId, phoneNumber) => {
+  return get(service.isFamilyMember, {
+    qrCodeId: qrCodeId,
+    phoneNumber: phoneNumber
+  })
+}
+
+const updateQrcodeOwner = (qrCodeId) => {
+  return post(service.updateQrcodeOwner, {
+    QrcodeId: qrCodeId
+  })
+}
+
 const modifyOpenid = (openId, ucallfreeid, nickname, unionid, headurl) => {
   return post(service.modifyOpenid, {
     'ucallfreeid': ucallfreeid,
@@ -166,5 +180,7 @@ export default {
   sendMsgNotification,
   modifyOpenid,
   applyCard,
-  getApplyCardInfo
+  isFamilyMember,
+  getApplyCardInfo,
+  updateQrcodeOwner
 }

@@ -21,7 +21,9 @@ var service = {
   locationDesc: `${webAPIHost}/locationDesc`,
   msgNotification: `${webAPIHost}/msgNotification`,
   modifyOpenid: `${apiHost}/api/v1/ModifyOpenid`,
-  applyCard: `${webAPIHost}/applyCard`
+  updateQrcodeOwner: `${apiHost}/api/v5/updatequrcodeowner`,
+  applyCard: `${webAPIHost}/applyCard`,
+  isFamilyMember: `${webAPIHost}/isFamilyMember`
   // getURLFrom: `${webHost}/getUrlFrom`,
   // getCode: `${webHost}/code`
 }

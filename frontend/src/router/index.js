@@ -6,6 +6,7 @@ import ScanSuccess from '@/components/ScanSuccess'
 import alreadyBindInfo from '@/components/alreadyBindInfo'
 import addContact from '@/components/addContact'
 import settings from '@/components/settings'
+import SettingsForAdmin from '@/components/SettingsForAdmin'
 import updateNumber from '@/components/updateNumber'
 import call from '@/components/call'
 import applyCard from '../components/ApplyCard'
@@ -72,6 +73,15 @@ export default new Router({
       meta: {
         keepAlive: false, // 该字段表示该页面需要缓存
         title: '设置'
+      }
+    },
+    {
+      path: '/settingsForAdmin',
+      name: 'settingsForAdmin',
+      component: SettingsForAdmin,
+      meta: {
+        keepAlive: false, // 该字段表示该页面需要缓存
+        title: '管理员设置'
       }
     },
     {

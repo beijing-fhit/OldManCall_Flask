@@ -19,8 +19,8 @@ export default {
   },
   mounted () {
     // 这部分代码是为了解决在ios上页面返回时不刷新的问题--start
-    var u = navigator.userAgent
-    var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/) // ios终端
+    let u = navigator.userAgent
+    let isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/) // ios终端
     if (isiOS) {
       window.onpageshow = function (e) {
         if (
@@ -41,11 +41,13 @@ export default {
       sessionStorage.clear()
       // 截取路径上的参数，若含有openID和ucallfreeid和qrcodeid则表示从小程序过来的，
       // 若没有openID这些参数，则表示从微信网页打开，则需要获取code和openID(判断参数中是否有code这个参数，若有则用来换取openID，若没有则先获取code)
-      // var params = window.location.search
-      var openid = getUrlParam('openid')
-      var ucallfreeid = getUrlParam('ucallfreeid')
-      var qrcodeid = getUrlParam('qrcodeid')
-
+      // let params = window.location.search
+      let openid = getUrlParam('openid')
+      let ucallfreeid = getUrlParam('ucallfreeid')
+      let qrcodeid = getUrlParam('qrcodeid')
+      let from = getUrlParam('from')
+      // 记录是否是管理员登录
+      sessionStorage.setItem('from', from)
       if (openid && ucallfreeid && qrcodeid) {
         // 来自小程序，则不用请求参数,跳转到call页面
         sessionStorage.setItem('openId', openid)
@@ -67,17 +69,17 @@ export default {
         })
       } else {
         // 来自网页
-        var code = getUrlParam('code')
+        let code = getUrlParam('code')
         if (code) {
           // 若参数中有code，直接来换取openID
           console.log('code' + code)
           this.getOpenId(code)
         } else {
           // 若没有参数，则先获取code，回掉地址填本地址
-          var url = 'https://agency.ucallclub.com/wechart/Oauth2?'
-          var redirectUrl = service.webHost
-          var a = 'redirect_uri='
-          var encodeUrl = encodeURI(redirectUrl)
+          let url = 'https://agency.ucallclub.com/wechart/Oauth2?'
+          let redirectUrl = service.webHost
+          let a = 'redirect_uri='
+          let encodeUrl = encodeURI(redirectUrl)
           window.location.href = url + a + encodeUrl
         }
       }
@@ -102,7 +104,11 @@ export default {
                 if (statusCode === 0 && data !== null && data !== undefined && data.length !== 0) {
                   this.$router.push('/scan')
                 } else {
-                  this.$router.replace('/applycard')
+                  if (sessionStorage.getItem('from') === 'admin') {
+                    this.$router.replace('/scan')
+                  } else {
+                    this.$router.replace('/applycard')
+                  }
                 }
                 that.hideLoading(loading)
               })
@@ -118,14 +124,13 @@ export default {
       })
     },
     showLoading: function (text) {
-      const loading = this.$loading({
+      return this.$loading({
         lock: true,
         customClass: 'create-isLoading', //  *这里设置他的class名称,这里最重要
         text: text,
         spinner: 'el-icon-loading',
         background: 'rgba(0, 0, 0, 0)'
       })
-      return loading
     },
     hideLoading: function (loading) {
       loading.close()

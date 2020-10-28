@@ -8,6 +8,18 @@
       <el-image :src="img_url" class="img-style"></el-image>
     </div>
     <el-button type="success" class="wide-button" v-on:click.prevent="routeToScanSuccess">扫码</el-button>
+    <el-dialog
+      :lock-scroll="false"
+      :visible.sync="showVerifyDialog"
+      title="验证电话号码"
+      width="80%"
+      :show-close="false"
+      :modal="true"
+      center>
+      <span class="dialog-info">只有家属才能修改信息,需要验证你是否是家属联系人</span>
+      <el-input placeholder="请输入电话号码" v-model="phoneNumber"></el-input>
+      <el-button @click="verify">验证</el-button>
+    </el-dialog>
   </div>
 </template>
 
@@ -20,6 +32,8 @@ export default {
   components: {topbar},
   data () {
     return {
+      phoneNumber: '',
+      showVerifyDialog: false,
       tip: '请您拿起家属联络卡，如下<span class="black-text">红色正面</span>朝上。点击下方“扫码”按钮，扫描卡上二维码绑定手机。',
       img_url: require('../assets/yellow_card.png')
     }
@@ -58,6 +72,37 @@ export default {
     }, 1000)
   },
   methods: {
+    verify: function () {
+      if (!this.phoneNumber) {
+        this.$toast('电话号码不能为空!')
+        return
+      }
+      let qrCodeId = sessionStorage.getItem('qrCodeId')
+      api.isFamilyMember(qrCodeId, this.phoneNumber)
+        .then(({data: {status_code: statusCode, isFamilyMember}}) => {
+          console.log('status_code, isFamilyMember', statusCode, isFamilyMember)
+          if (statusCode === 0) {
+            if (isFamilyMember) {
+              // 修改二维码的拥有者
+              api.updateQrcodeOwner(qrCodeId)
+                .then(({data: {Code, Message}}) => {
+                  console.log('修改二维码拥有者:', Code, Message)
+                  if (Code === 0) {
+                    // 修改成功
+                    console.log('修改二维码拥有者成功!')
+                    this.$router.push('/settings')
+                  }
+                })
+            } else {
+              console.log('你不是家属联系人，不能修改!')
+            }
+          } else {
+            console.log('验证家属联系人失败!')
+          }
+        }).catch(err => {
+          console.log('出现错误:', err)
+      })
+    },
     routeToScanSuccess: function () {
       try {
         this.startScan()
@@ -99,18 +144,28 @@ export default {
               case 0:
                 // 未激活
                 sessionStorage.setItem('isQrCodeActive', 0)
-                that.$router.push('/addContact')
+                if (sessionStorage.getItem('from') === 'admin') {
+                  // 管理员扫码
+                  this.$router.push('/settingsForAdmin')
+                } else {
+                  that.$router.push('/addContact')
+                }
                 break
               case 1:
                 // 已激活
                 sessionStorage.setItem('isQrCodeActive', 1)
                 // 判断owner和自己是否相等
                 if (data.Owner === UcallFreeId) {
+                  if (sessionStorage.getItem('from') === 'admin') {
+                    // 管理员扫码
+                    this.$router.push('/settingsForAdmin')
+                  }
                   // 此二维码属于自己
                   that.$router.push('/settings')
                 } else {
                   // 此二维码属于别人
-                  that.$router.push('/alreadyBindInfo')
+                  // that.$router.push('/alreadyBindInfo')
+                  that.showVerifyDialog = true
                 }
                 break
               default:
@@ -173,7 +228,16 @@ export default {
     position: absolute;
     z-index: 2;
   }
-
+  .dialog-info{
+    width: 100%;
+    font-size: 1.3rem;
+    letter-spacing: 1px;
+    font-family: "PingFang SC";
+    color: black;
+    word-break: break-all;
+    text-align: center;
+  ;
+  }
   .label-style{
     font-size:1.5rem;
     font-family: "PingFang SC";

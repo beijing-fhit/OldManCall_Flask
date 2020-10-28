@@ -218,6 +218,44 @@ class QRCodeInfo(Resource):
                 f.close()
 
 
+def is_family_member_params():
+    parser = reqparse.RequestParser()
+    parser.add_argument('qrCodeId', required=True, help='qrcodeid参数不能为空，{error_msg}')
+    parser.add_argument('ucallFreeId', required=True, help='ucallFreeId参数不能为空，{error_msg}')
+    parser.add_argument('phoneNumber', required=True, help='phoneNumber参数不能为空，{error_msg}')
+    return parser.parse_args()
+
+
+# 查询某个电话号码是否在家属联系人列表中
+class IsFamilyMember(Resource):
+    def get(self):
+        args = is_family_member_params()
+        qrcodeid = args['qrCodeId']
+        phoneNumber = args['phoneNumber']
+        ucallFreeId = args['ucallFreeId']
+        try:
+            qrCode = QrCode.query.filter_by(qr_code_id=qrcodeid).first()
+            phone_number = [p.phone_number for p in qrCode.phone_number]
+            if phoneNumber in phone_number:
+                qrCode.uId = ucallFreeId
+                qrCode.save()
+            # phone_number = [ORMUtils.serialize(p) for p in qrCode.phone_number]
+            res = {
+                'status_code': 0,
+                'isFamilyMember': (phoneNumber in phone_number),
+                'message': '获取信息成功'
+            }
+            return res
+        except Exception as e:
+            db.session.rollback()
+            res = {
+                'status_code': -1,
+                'isFamilyMember': False,
+                'message': '未找到相应的绑定信息'
+            }
+            return res
+
+
 def parse_post_parmas():
     parser_post = reqparse.RequestParser()
     parser_post.add_argument('ucallFreeId', required=True, help='ucallFreeId参数不能为空，{error_msg}')
