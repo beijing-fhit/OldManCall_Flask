@@ -171,6 +171,7 @@ class QRCodeInfo(Resource):
                     else:
                         qrCode2 = QrCode.query.get(qrcodeid)
                         qrCode2.old_man_info=oldManInfo.id
+                        qrCode2.uId = ucallFreeId
                         qrCode2.save()
 
                 except Exception as e:

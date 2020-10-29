@@ -17,8 +17,10 @@
       :modal="true"
       center>
       <span class="dialog-info">只有家属才能修改信息,需要验证你是否是家属联系人</span>
-      <el-input placeholder="请输入电话号码" v-model="phoneNumber"></el-input>
-      <el-button @click="verify">验证</el-button>
+      <div class="dialog-btn">
+        <el-input placeholder="请输入电话号码" v-model="phoneNumber"></el-input>
+        <el-button @click="verify">验证</el-button>
+      </div>
     </el-dialog>
   </div>
 </template>
@@ -77,31 +79,41 @@ export default {
         this.$toast('电话号码不能为空!')
         return
       }
+      let loading = this.showLoading('验证中...')
+      let openId = sessionStorage.getItem('openId')
       let qrCodeId = sessionStorage.getItem('qrCodeId')
-      api.isFamilyMember(qrCodeId, this.phoneNumber)
+      let ucallFreeId = sessionStorage.getItem('UcallFreeId')
+      api.isFamilyMember(qrCodeId, ucallFreeId, this.phoneNumber)
         .then(({data: {status_code: statusCode, isFamilyMember}}) => {
           console.log('status_code, isFamilyMember', statusCode, isFamilyMember)
           if (statusCode === 0) {
             if (isFamilyMember) {
               // 修改二维码的拥有者
-              api.updateQrcodeOwner(qrCodeId)
+              api.updateQrcodeOwner(openId, qrCodeId)
                 .then(({data: {Code, Message}}) => {
                   console.log('修改二维码拥有者:', Code, Message)
                   if (Code === 0) {
                     // 修改成功
                     console.log('修改二维码拥有者成功!')
+                    this.hideLoading(loading)
                     this.$router.push('/settings')
                   }
                 })
             } else {
+              this.$toast('你不是家属联系人，不能修改!')
+              this.hideLoading(loading)
               console.log('你不是家属联系人，不能修改!')
             }
           } else {
+            this.$toast('验证家属联系人失败!')
+            this.hideLoading(loading)
             console.log('验证家属联系人失败!')
           }
         }).catch(err => {
+          this.$toast('验证家属联系人失败!')
+          this.hideLoading(loading)
           console.log('出现错误:', err)
-      })
+        })
     },
     routeToScanSuccess: function () {
       try {
@@ -159,9 +171,10 @@ export default {
                   if (sessionStorage.getItem('from') === 'admin') {
                     // 管理员扫码
                     this.$router.push('/settingsForAdmin')
+                  } else {
+                    // 此二维码属于自己
+                    that.$router.push('/settings')
                   }
-                  // 此二维码属于自己
-                  that.$router.push('/settings')
                 } else {
                   // 此二维码属于别人
                   // that.$router.push('/alreadyBindInfo')
@@ -236,7 +249,13 @@ export default {
     color: black;
     word-break: break-all;
     text-align: center;
-  ;
+  }
+  .dialog-btn{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
   .label-style{
     font-size:1.5rem;

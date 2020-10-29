@@ -164,7 +164,7 @@ export default {
     // 获取有无数据
     api.getInfo(sessionStorage.getItem('qrCodeId')).then(res => {
       //  获取数据
-      // console.log('settings 获取info:', res)
+      console.log('settings 获取info:', res.data)
       if (res.data.status_code === 0) {
         let data = res.data.data
         that.manInfo.name = data.old_man_info.name
@@ -179,10 +179,12 @@ export default {
         that.manInfo.blood_type = data.old_man_info.blood_type
         that.manInfo.drugs = data.old_man_info.drugs
         that.manInfo.treatment = data.old_man_info.treatment
-        let [phoneNum1, phoneNum2, phoneNum3] = data.phone_number.split(',')
-        that.phoneNumber1 = phoneNum1
-        that.phoneNumber2 = phoneNum2
-        that.phoneNumber3 = phoneNum3
+        console.log('电话号码:', data.phone_number)
+        let [phoneNumber1, phoneNumber2, phoneNumber3] = data.phone_number
+        that.phoneNumber1 = phoneNumber1
+        that.phoneNumber2 = phoneNumber2
+        that.phoneNumber3 = phoneNumber3
+        console.log('电话号码:', that.phoneNumber1, that.phoneNumber2, that.phoneNumber3)
         // this.contact = data.phone_number
         sessionStorage.setItem('manInfo', JSON.stringify(that.manInfo))
         // sessionStorage.setItem('contact', that.generatePhoneStr(data.phone_number))

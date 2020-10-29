@@ -46,8 +46,6 @@ export default {
       let ucallfreeid = getUrlParam('ucallfreeid')
       let qrcodeid = getUrlParam('qrcodeid')
       let from = getUrlParam('from')
-      // 记录是否是管理员登录
-      sessionStorage.setItem('from', from)
       if (openid && ucallfreeid && qrcodeid) {
         // 来自小程序，则不用请求参数,跳转到call页面
         sessionStorage.setItem('openId', openid)
@@ -71,13 +69,17 @@ export default {
         // 来自网页
         let code = getUrlParam('code')
         if (code) {
+          // 记录是否是管理员登录
+          if (from) {
+            sessionStorage.setItem('from', from)
+          }
           // 若参数中有code，直接来换取openID
           console.log('code' + code)
           this.getOpenId(code)
         } else {
           // 若没有参数，则先获取code，回掉地址填本地址
           let url = 'https://agency.ucallclub.com/wechart/Oauth2?'
-          let redirectUrl = service.webHost
+          let redirectUrl = service.webHost + (from ? '?from=' + from : '')
           let a = 'redirect_uri='
           let encodeUrl = encodeURI(redirectUrl)
           window.location.href = url + a + encodeUrl

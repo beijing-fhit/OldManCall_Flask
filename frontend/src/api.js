@@ -141,17 +141,18 @@ const sendMsgNotification = (mobile, content) => {
 }
 
 // 查询某个电话号码是否在家属联系人列表中
-const isFamilyMember = (qrCodeId, phoneNumber) => {
+const isFamilyMember = (qrCodeId, ucallFreeId, phoneNumber) => {
   return get(service.isFamilyMember, {
     qrCodeId: qrCodeId,
+    ucallFreeId: ucallFreeId,
     phoneNumber: phoneNumber
   })
 }
 
-const updateQrcodeOwner = (qrCodeId) => {
+const updateQrcodeOwner = (openId, qrCodeId) => {
   return post(service.updateQrcodeOwner, {
     QrcodeId: qrCodeId
-  })
+  }, getHeader(openId))
 }
 
 const modifyOpenid = (openId, ucallfreeid, nickname, unionid, headurl) => {
