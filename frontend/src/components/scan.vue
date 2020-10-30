@@ -19,7 +19,7 @@
       <span class="dialog-info">只有家属才能修改信息,需要验证你是否是家属联系人</span>
       <div class="dialog-btn">
         <el-input placeholder="请输入电话号码" v-model="phoneNumber"></el-input>
-        <el-button @click="verify">验证</el-button>
+        <el-button @click="verify" class="verify-btn">验证</el-button>
       </div>
     </el-dialog>
   </div>
@@ -256,6 +256,7 @@ export default {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin-top: 1rem;
   }
   .label-style{
     font-size:1.5rem;
@@ -270,6 +271,16 @@ export default {
     letter-spacing: 0.01rem;
     font-style: normal;
     font-weight: bold;
+  }
+  .verify-btn{
+    width: 100%;
+    font-size: 1.5rem;
+    font-weight: bold;
+    letter-spacing: 2px;
+    margin-top: 1rem;
+    background-color: #02BB00;
+    color: white;
+    border-style: none;
   }
   .wide-button{
     width: 80%;

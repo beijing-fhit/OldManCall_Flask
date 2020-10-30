@@ -23,6 +23,8 @@ class MsgNotification(Resource):
             content = data['content']
             # mobiles = str(mobile).split(',')
             for m in mobile:
+                if m is '' or m is None:
+                    continue
                 msg = {
                     "orgid": "123",
                     "password": "123",

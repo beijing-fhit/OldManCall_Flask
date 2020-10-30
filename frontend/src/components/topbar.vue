@@ -29,15 +29,14 @@ export default {
     goHome: function () {
       if (sessionStorage.getItem('from') === 'admin') {
         this.$router.push({
-         path: '/',
-         query: {
-           from: 'admin'
-         }
+          path: '/',
+          query: {
+            from: 'admin'
+          }
         })
       } else {
         this.$router.push('/')
       }
-
     }
   },
   props: {
