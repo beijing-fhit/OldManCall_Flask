@@ -176,5 +176,4 @@ export default {
     color: #FFFFFF;
     font-size: 2rem;
   }
-
 </style>

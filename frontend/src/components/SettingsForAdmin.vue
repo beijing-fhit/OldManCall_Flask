@@ -83,6 +83,11 @@
         <span class="long-info-name">正在进行的治疗</span>
         <el-input v-model="manInfo.treatment" maxlength=30 type="textarea" autosize class="long-info-content normal-input-style" placeholder="预设内容" clearable></el-input>
       </el-row>
+      <el-row class="info-item-height-wrap-content">
+        <span class="info-name">重要提醒</span>
+        <el-input type="textarea" autosize maxlength=100 minline=2 class="input-style-textarea"
+                  placeholder="请填写一些比较紧急的注意事项" v-model="manInfo.message"></el-input>
+      </el-row>
     </div>
     <el-button type="success" class="wide-button" @click="saveInfo">保存</el-button>
     <el-dialog
@@ -179,6 +184,7 @@ export default {
         that.manInfo.blood_type = data.old_man_info.blood_type
         that.manInfo.drugs = data.old_man_info.drugs
         that.manInfo.treatment = data.old_man_info.treatment
+        that.manInfo.message = data.old_man_info.message
         console.log('电话号码:', data.phone_number)
         let [phoneNumber1, phoneNumber2, phoneNumber3] = data.phone_number
         that.phoneNumber1 = phoneNumber1
@@ -225,7 +231,8 @@ export default {
         allergy: '',
         blood_type: '',
         drugs: '',
-        treatment: ''
+        treatment: '',
+        message: ''
       }
       let temp3 = sessionStorage.getItem('manInfo')
       if (temp3 !== null && temp3 !== undefined && temp3 !== '' && temp3 !== 'undefined') {
@@ -250,6 +257,7 @@ export default {
         oldManInfo3.blood_type = t3.blood_type
         oldManInfo3.drugs = t3.drugs
         oldManInfo3.treatment = t3.treatment
+        oldManInfo3.message = t3.message
       }
       // this.$toast('当前数据:' + oldManInfo3)
       return oldManInfo3
@@ -515,6 +523,17 @@ export default {
     flex-direction: row;
     justify-content: left;
     align-items: center;
+  }
+  .input-style-textarea {
+    width: 65%;
+    height: fit-content;
+    min-height: 5rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 10px 0;
+    color: #B2B2B2;
   }
   /*input 样式*/
    .normal-input-style{

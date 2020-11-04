@@ -1,3 +1,5 @@
+import datetime
+
 from .ext import db
 
 
@@ -45,6 +47,7 @@ class Base:
 class OldManInfo(db.Model,Base):
     __tablename__='oldmaninfo'
     id = db.Column(db.Integer,primary_key=True,autoincrement=True)
+    created_time = db.Column(db.DateTime, default=datetime.datetime.now())
     name = db.Column(db.String(10))
     address = db.Column(db.String(30),nullable=True)
     age = db.Column(db.Integer,nullable=True) # 注意不传的话，会是个空字符串，会报错
@@ -53,8 +56,9 @@ class OldManInfo(db.Model,Base):
     blood_type = db.Column(db.String(10),nullable=True)
     drugs = db.Column(db.String(30),nullable=True)
     treatment = db.Column(db.String(30),nullable=True)
+    message = db.Column(db.String(150), nullable=True)
 
-    def __init__(self,name,address=None,age=None,medical_history=None,allergy=None,blood_type=None,drugs=None,treatment=None):
+    def __init__(self,name,address=None,age=None,medical_history=None,allergy=None,blood_type=None,drugs=None,treatment=None,message=None):
         self.name=name
         self.address=address
         self.age=age
@@ -63,6 +67,8 @@ class OldManInfo(db.Model,Base):
         self.blood_type=blood_type
         self.drugs=drugs
         self.treatment=treatment
+        self.message=message
+
     def __repr__(self):
         return self.name
 

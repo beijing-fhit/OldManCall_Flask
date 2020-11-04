@@ -15,6 +15,18 @@
           <span type="primary" @click="dialogConfirm" class="confirm-btn">确定</span>
         </span>
       </el-dialog>
+      <el-dialog
+        :lock-scroll="false"
+        :visible.sync="showMessage"
+        title="重要提醒"
+        width="80%"
+        :show-close="false"
+        center>
+       <span class="dialog-info">{{this.info.message}}</span>
+       <div class="dialog-btn">
+        <el-button @click="confirm" class="verify-btn">确定</el-button>
+      </div>
+    </el-dialog>
     </div>
 </template>
 
@@ -29,6 +41,7 @@ export default {
   data () {
     return {
       call_img: require('../assets/call.png'),
+      showMessage: false,
       info: {
         name: '预设内容',
         age: '预设内容',
@@ -99,6 +112,11 @@ export default {
         if (data.status_code === 0) {
           that.info = data.data.old_man_info
           that.phone_number = data.data.phone_number
+          console.log('重要提醒1，message:', that.info.message)
+          if (that.info.message) {
+            that.showMessage = true
+            console.log('重要提醒2，message:', that.info.message)
+          }
         }
       })
       .catch(err => {
@@ -109,6 +127,9 @@ export default {
     document.title = this.$route.meta.title
   },
   methods: {
+    confirm: function () {
+      this.showMessage = false
+    },
     startCall: function () {
       // 显示loading
       const loading = this.showLoading('正在发送呼叫请求..')
@@ -268,5 +289,32 @@ export default {
   }
   /deep/ .el-dialog__footer{
     padding: 0;
+  }
+  .dialog-info{
+    width: 100%;
+    font-size: 1.6rem;
+    letter-spacing: 1px;
+    font-family: "PingFang SC";
+    color: black;
+    word-break: break-all;
+    text-align: center;
+  }
+  .dialog-btn{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
+  }
+  .verify-btn{
+    width: 100%;
+    font-size: 1.5rem;
+    font-weight: bold;
+    letter-spacing: 2px;
+    margin-top: 1rem;
+    background-color: #02BB00;
+    color: white;
+    border-style: none;
   }
 </style>

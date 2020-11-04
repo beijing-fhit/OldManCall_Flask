@@ -123,7 +123,8 @@ class QRCodeInfo(Resource):
                         "allergy": old_man_info['allergy'],
                         "blood_type": old_man_info['blood_type'],
                         "drugs": old_man_info['drugs'],
-                        "treatment": old_man_info['treatment']
+                        "treatment": old_man_info['treatment'],
+                        "message": old_man_info['message']
                     })
                 db.session.commit()
                 # OldManInfo.query.filter_by(id=qrCode.old_man_info) \
@@ -153,7 +154,8 @@ class QRCodeInfo(Resource):
                                             allergy=old_man_info['allergy'],
                                             blood_type=old_man_info['blood_type'],
                                             drugs=old_man_info['drugs'],
-                                            treatment=old_man_info['treatment'])
+                                            treatment=old_man_info['treatment'],
+                                            message=old_man_info['message'])
                     # print("*"*100)
                     oldManInfo.save()
                     # print("oldManInfo:",oldManInfo)
