@@ -74,7 +74,8 @@ class QRCodeInfo(Resource):
             phone_number = [p.phone_number for p in qrCode.phone_number]
 
             old_man_info_id = qrCode.old_man_info
-            old_man_info = ORMUtils.serialize(OldManInfo.query.filter_by(id=old_man_info_id).first())
+            temp = OldManInfo.query.filter_by(id=old_man_info_id).first()
+            old_man_info = temp.__str__()
 
             data = {'qr_code_id': qrcodeid, 'old_man_info': old_man_info, 'phone_number': phone_number}
             res = {
@@ -84,6 +85,9 @@ class QRCodeInfo(Resource):
             }
             return res
         except Exception as e:
+            with open('flask.log', 'a+') as f:
+                f.write('\nget OldManInfo exception :%s' % e)
+                f.close()
             print('获取绑定信息失败', e)
             res = {
                 'status_code': -1,

@@ -72,6 +72,19 @@ class OldManInfo(db.Model,Base):
     def __repr__(self):
         return self.name
 
+    def __str__(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "address":self.address,
+            "age":self.age,
+            "medical_history":self.medical_history,
+            "allergy":self.allergy,
+            "blood_type":self.blood_type,
+            "drugs":self.drugs,
+            "treatment":self.treatment,
+            "message":self.message,
+        }
 
 # 一个二维码id对应多个电话号码
 class PhoneNumber(db.Model,Base):
