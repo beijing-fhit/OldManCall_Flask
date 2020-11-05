@@ -1,17 +1,18 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import scan from '@/components/scan'
-import auth from '@/components/auth'
-import ScanSuccess from '@/components/ScanSuccess'
-import alreadyBindInfo from '@/components/alreadyBindInfo'
-import addContact from '@/components/addContact'
-import settings from '@/components/settings'
-import SettingsForAdmin from '@/components/SettingsForAdmin'
-import updateNumber from '@/components/updateNumber'
-import call from '@/components/call'
-import applyCard from '../components/ApplyCard'
-import registerApplyInfo from '../components/RegisterApplyInfo'
-import InfoDisplay from '../components/InfoDisplay'
+const scan = () => import('@/components/scan')
+// import scan from '@/components/scan'
+const auth = () => import('@/components/auth')
+const ScanSuccess = () => import('@/components/ScanSuccess')
+const alreadyBindInfo = () => import('@/components/alreadyBindInfo')
+const addContact = () => import('@/components/addContact')
+const settings = () => import('@/components/settings')
+const SettingsForAdmin = () => import('@/components/SettingsForAdmin')
+const updateNumber = () => import('@/components/updateNumber')
+const call = () => import('@/components/call')
+const applyCard = () => import('../components/ApplyCard')
+const registerApplyInfo = () => import('../components/RegisterApplyInfo')
+const InfoDisplay = () => import('../components/InfoDisplay')
 
 Vue.use(Router)
 
