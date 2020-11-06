@@ -55,9 +55,9 @@ class DevelopConfig(Config):
     SQLALCHEMY_DATABASE_URI = parse_db_uri(DATABASE)
 
 
-# 测试环境参数配置
+# 测试环境参数配置(但是在公司的阿里云服务器上，这是正式环境的配置，所以下面的StagingConfig才是测试服务器的配置)
 class TestingConfig(Config):
-    TESTING = True
+    TESTING = False
     DATABASE = {
         'ENGINE': 'mysql',
         'DRIVER': 'pymysql',
@@ -70,13 +70,13 @@ class TestingConfig(Config):
     SQLALCHEMY_DATABASE_URI = parse_db_uri(DATABASE)
 
 
-# 演示环境参数配置
+# 演示环境参数配置(测试服务器的配置)
 class StagingConfig(Config):
     DATABASE = {
         'ENGINE': 'mysql',
         'DRIVER': 'pymysql',
         'USER': 'root',
-        'PASSWORD': '123456',
+        'PASSWORD': 'Fhit123!@#',
         'HOST': 'localhost',
         'PORT': '3306',
         'NAME': 'OldManInfoFlaskStaging'

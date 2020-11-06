@@ -163,9 +163,9 @@ class QRCodeInfo(Resource):
                     # print("*"*100)
                     oldManInfo.save()
                     # print("oldManInfo:",oldManInfo)
-                    with open('flask.log', 'a+') as f:
-                        f.write('\ncreate OldManInfo info :%s' % (oldManInfo))
-                        f.close()
+                    # with open('flask.log', 'a+') as f:
+                    #     f.write('\ncreate OldManInfo info :%s' % (str(oldManInfo)))
+                    #     f.close()
 
                     if QrCode.query.get(qrcodeid) is None:
                         # 将ucall和qrCode绑定

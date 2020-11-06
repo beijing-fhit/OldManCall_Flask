@@ -103,9 +103,9 @@
         <el-input v-model="manInfo.treatment" maxlength=30 type="textarea" autosize class="long-info-content normal-input-style" placeholder="预设内容" clearable></el-input>
       </el-row>
       <el-row class="info-item-height-wrap-content">
-        <span class="info-name">重要提醒</span>
+        <span class="info-name">弹窗提醒</span>
         <el-input type="textarea" autosize maxlength=100 minline=2 class="input-style-textarea"
-                  placeholder="请填写一些比较紧急的注意事项" v-model="manInfo.message"></el-input>
+                  placeholder="此信息用于弹窗提醒，请填写一些救助预案" v-model="manInfo.message"></el-input>
       </el-row>
     </div>
     <el-button type="success" class="wide-button" @click="saveInfo">保存</el-button>

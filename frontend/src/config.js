@@ -1,6 +1,10 @@
 var apiHost = 'https://ucallfree-tecent.ucallclub.com'
 // var webHost = 'https://mustberich.cn'
+// 正式环境
 var webHost = 'https://oldmancard.ucallclub.com'
+// 测试环境
+// var webHost = 'https://oldmancard-test.ucallclub.com'
+// 本地环境
 // var webHost = 'http://127.0.0.1:5000'
 var webAPIHost = webHost + '/api'
 var service = {

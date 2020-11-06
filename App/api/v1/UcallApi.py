@@ -50,7 +50,7 @@ class UCallApi(Resource):
                 phoneNumber = ",".join(p)  # 将list转成str
                 qrCodeInfo.append({
                     "qrCodeId": qrCode.qr_code_id,
-                    "oldManInfo": dbutils.serialize(oldManInfo),
+                    "oldManInfo": oldManInfo.__str__(),
                     "phoneNumber": phoneNumber
                 })
 
