@@ -5,6 +5,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 TEMPLATE_FOLDER = os.path.join(BASE_DIR, 'frontend/dist')
 STATIC_FOLDER = os.path.join(BASE_DIR, 'frontend/dist/static')
+# 运行端口号
+RUN_PORT = 5002
 
 
 # 将json格式的数据库参数转化为标准的数据库URI
@@ -33,9 +35,9 @@ class Config:
 
     GITHUB_WEBHOOK_KEY = 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDenBQYR9OGH+98RA9LL68M2EqKKcSA5NhLQ38JDOd2JzPOBKy34y2oKprRhp/33noPfTCiigns84akCHDoBIZ9jtd/zYVmfMifsWrMgOZMGT5I+yGVzDb3QAXemyE1eCJoPIEWmvZut7Nbz2CsxBZZKxFV0SLOo5lnpHMYL5jtNOsZe+V+g6fxcjy391BtdlHw1NT712ltibLvGi810Paklxn80jmG0LUwECjo25ylCUQ7+0S4v216JCB4IDd8LHgwhAltjvWiXZuNbwegYxKW9QPO/Wv6/mokOS1cbeSoWWftna8+R1Eq8o9VU95ofEPwthjI8oXMvc0AK3EpTe5n summer@DESKTOP-IPUF6C0'
     # 需要数据库初始化时，设为True
-    INIT_DB = False
+    INIT_DB = True
     # 需要数据库迁移时，设为True
-    MIGRATE_DB = False
+    MIGRATE_DB = True
 
 
 # 开发环境参数配置
