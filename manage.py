@@ -10,7 +10,7 @@ manager = Manager(app)
 
 # 重新定义端口,runserver其实就是用的这个命令
 # -----测试环境使用----start-----
-server = Server(port=settings.RUN_PORT)
+server = Server(port=settings.Config.RUN_PORT)
 manager.add_command('runserver', server)
 # -----测试环境使用----end-------
 

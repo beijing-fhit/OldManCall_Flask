@@ -15,7 +15,6 @@ def init_ext(app):
     # 初始化第三方插件
     db.init_app(app)
     migrate.init_app(app=app, db=db)
-
     # Bootstrap(app)
     # DebugToolbarExtension(app)
 
